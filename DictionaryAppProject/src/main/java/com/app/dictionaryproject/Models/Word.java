@@ -6,4 +6,5 @@ public class Word {
     String getWordTarget() {
         return word_target;
     }
+    String getPronunciation() {return pronunciation;}
 }
