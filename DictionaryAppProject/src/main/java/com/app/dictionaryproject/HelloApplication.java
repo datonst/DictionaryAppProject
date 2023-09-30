@@ -14,8 +14,8 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         DBRepository dbRepository = new DBRepository();
         dbRepository.insertWord("hello","hi","xinchao");
-        TextToSQL textToSQL = new TextToSQL();
-        textToSQL.convert(dbRepository);
+//        TextToSQL textToSQL = new TextToSQL();
+//        textToSQL.convert(dbRepository);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Hello!");
