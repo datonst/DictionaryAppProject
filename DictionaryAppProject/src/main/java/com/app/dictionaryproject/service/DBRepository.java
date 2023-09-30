@@ -14,7 +14,8 @@ public class DBRepository {
         try {
             PreparedStatement psCreateTable =
                     connection.prepareStatement("CREATE TABLE IF NOT EXISTS word_definition " +
-                            "(word VARCHAR(255) NOT NULL, phonetic VARCHAR(255),definitionWord VARCHAR(11000));"
+                            "(id INT AUTO_INCREMENT PRIMARY KEY, " +
+                            "word VARCHAR(255) NOT NULL, phonetic VARCHAR(255),definitionWord VARCHAR(15000));"
                     );
             psCreateTable.executeUpdate();
         } catch (SQLException e) {
@@ -27,6 +28,9 @@ public class DBRepository {
             PreparedStatement psInsert =
                     connection.prepareStatement("INSERT INTO " +
                             "word_definition (word, phonetic, definitionWord) VALUES (?,?,?)");
+            word =word.strip();
+            phonetic = phonetic.strip();
+            definitionWord =definitionWord.strip();
             psInsert.setString(1,word);
             psInsert.setString(2,phonetic);
             psInsert.setString(3,definitionWord);
@@ -38,4 +42,6 @@ public class DBRepository {
             throw new RuntimeException(e);
         }
     }
+
+
 }

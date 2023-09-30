@@ -1,9 +1,13 @@
 package com.app.dictionaryproject.service;
 
+import com.microsoft.playwright.*;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
@@ -38,9 +42,38 @@ public class TextToSQL {
         def = def.replace("+", "\n+");
         return List.of(eWord,pronounce,def);
     }
+    public Page routeAbort(Page page) {
+        List<String> excluded_resource_types = new ArrayList<>(Arrays.asList("stylesheet", "script", "image", "font"));
+        for (String types : excluded_resource_types) {
+            page.route("**/*", route -> {
+                if (types.equals(route.request().resourceType())){
+                    route.abort();
+                } else {
+                    route.fallback();
+                }
+            });
+        }
+        return page;
+    }
+    public String crawlPronounce(String eWord) {
+        String pronounce ="NONE";
+        try (Playwright playwright = Playwright.create()) {
+            Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(100));
+            Page page = browser.newPage();
+            page = routeAbort(page);
+            page.navigate("https://www.collinsdictionary.com/dictionary/english/"+eWord);
+            String text= page.waitForSelector("span.pron",new Page.WaitForSelectorOptions().setTimeout(1000)).textContent();
+            pronounce = '/' + text.strip() + '/';
+            System.out.println(pronounce);
+        } catch (TimeoutError e){
+            System.out.println("No have");
+        }
+        return pronounce;
+    }
 
     public void convert(DBRepository dbRepository) {
         Path path = Path.of("src/main/resources/data/EnglishData.txt");
+        CrawlData crawlData = new CrawlData();
         try {
             List<String> word_list = Files.readAllLines(path);
             StringBuilder definition= new StringBuilder();
@@ -63,6 +96,7 @@ public class TextToSQL {
                         } else {
                             eWord = line.substring(1);
                             pronounce = "none";
+                            pronounce = crawlData.crawlPronounce(eWord);
                         }
                         eWord = eWord.trim();
                     }
