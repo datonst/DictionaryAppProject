@@ -6,10 +6,11 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
     public Connection getConnection() {
-        String databaseName ="vocabulary"; // điền tên scheme
+        String databaseName ="dictionaryapp"; // điền tên scheme
         String port = "3306";
         String databaseUser = "root";
         String databasePassword = "04032004";
+
         String url="jdbc:mysql://localhost:"+port+"/"+databaseName;
         System.out.println(url);
         Connection databaseLink;
