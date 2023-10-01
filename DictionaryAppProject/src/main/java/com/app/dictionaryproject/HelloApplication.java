@@ -1,5 +1,6 @@
 package com.app.dictionaryproject;
 
+import com.app.dictionaryproject.Models.Word;
 import com.app.dictionaryproject.service.DBRepository;
 import com.app.dictionaryproject.service.TextToSQL;
 import javafx.application.Application;
@@ -10,12 +11,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class   HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         DBRepository dbRepository = new DBRepository();
 
-        dbRepository.insertWord("hello","hi","xinchao");
+        dbRepository.insertWord(new Word("hello","hi","xinchao"));
 //        TextToSQL textToSQL = new TextToSQL();
 //        textToSQL.convert(dbRepository);
 
