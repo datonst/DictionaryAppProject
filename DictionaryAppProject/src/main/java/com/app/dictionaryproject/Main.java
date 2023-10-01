@@ -30,4 +30,4 @@ public class Main extends Application {
         launch(args);
     }
 }
-
+//  Color blue = Color.rgb(99,122,242); đây là màu nền chủ đạo
