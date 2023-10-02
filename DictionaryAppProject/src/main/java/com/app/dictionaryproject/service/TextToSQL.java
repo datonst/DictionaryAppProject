@@ -1,5 +1,6 @@
 package com.app.dictionaryproject.service;
 
+import com.app.dictionaryproject.Models.Word;
 import com.microsoft.playwright.*;
 
 import java.io.IOException;
@@ -84,7 +85,7 @@ public class TextToSQL {
                         if (!eWord.isEmpty()) {
                             String def = definition.toString();
                             List<String> list = replaceElement(eWord,pronounce,def);
-                            dbRepository.insertWord(list.get(0),list.get(1),list.get(2));
+                            dbRepository.insertWord(new Word(list.get(0),list.get(1),list.get(2)));
                             definition.setLength(0);
                         }
                         //add vào đây

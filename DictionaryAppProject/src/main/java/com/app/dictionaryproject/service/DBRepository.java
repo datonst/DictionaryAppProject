@@ -1,7 +1,10 @@
 package com.app.dictionaryproject.service;
 
+import com.app.dictionaryproject.Models.Word;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBRepository {
@@ -23,25 +26,49 @@ public class DBRepository {
         }
 
     }
-    public void insertWord(String word, String phonetic, String definitionWord) {
+    public void insertWord(Word wordToInsert) {
         try {
             PreparedStatement psInsert =
                     connection.prepareStatement("INSERT INTO " +
                             "word_definition (word, phonetic, definitionWord) VALUES (?,?,?)");
-            word =word.strip();
-            phonetic = phonetic.strip();
-            definitionWord =definitionWord.strip();
+            String word = wordToInsert.getWordTarget().strip();
+            String phonetic = wordToInsert.getPhonetic().strip();
+            String definitionWord = wordToInsert.getDefinitionWord().strip();
             psInsert.setString(1,word);
             psInsert.setString(2,phonetic);
             psInsert.setString(3,definitionWord);
             psInsert.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("KHONG HOPLE "+word);
-            System.out.println("KHONG HOPLE "+phonetic);
-            System.out.println("KHONG HOPLE "+definitionWord);
+            System.out.println("KHONG HOPLE "+wordToInsert.getWordTarget());
+            System.out.println("KHONG HOPLE "+wordToInsert.getPhonetic());
+            System.out.println("KHONG HOPLE "+wordToInsert.getDefinitionWord());
             throw new RuntimeException(e);
         }
     }
 
-
+    public Word searchWord(String wordToSearch) {
+        String phonetic = "";
+        String definitionWord = "";
+        try {
+            String sql = "SELECT * FROM word_definition WHERE word = ?" ;
+            PreparedStatement psSearch = connection.prepareStatement(sql);
+            psSearch.setString(1, wordToSearch);
+            ResultSet resultSet = psSearch.executeQuery();
+            while (resultSet.next()) {
+                phonetic= resultSet.getNString("phonetic");
+                definitionWord = resultSet.getNString("definitionWord");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return new Word(wordToSearch, phonetic, definitionWord);
+    }
+//     public static void main(String[] args) {
+//        DBRepository db = new DBRepository();
+//        Word temp = db.searchWord("water");
+//        System.out.println(temp.getWordTarget());
+//        System.out.println(temp.getPhonetic());
+//        System.out.println(temp.getDefinitionWord());
+//    }
+//    }
 }
