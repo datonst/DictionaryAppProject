@@ -2,10 +2,8 @@ package com.app.dictionaryproject.service;
 
 import com.app.dictionaryproject.Models.Word;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class DBRepository {
 
@@ -62,6 +60,24 @@ public class DBRepository {
             throw new RuntimeException(e);
         }
         return new Word(wordToSearch, phonetic, definitionWord);
+    }
+
+    public ArrayList<String> searchListWord(String wordToSearch) {
+        ArrayList<String> listWord = new ArrayList<>();
+        String word = "";
+        try {
+            String sql = "SELECT * FROM word_definition WHERE word like ?" ;
+            PreparedStatement psSearch = connection.prepareStatement(sql);
+            psSearch.setString(1, wordToSearch + "%");
+            ResultSet resultSet = psSearch.executeQuery();
+            while (resultSet.next()) {
+                word = resultSet.getNString("word");
+                listWord.add(word);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listWord;
     }
 //     public static void main(String[] args) {
 //        DBRepository db = new DBRepository();

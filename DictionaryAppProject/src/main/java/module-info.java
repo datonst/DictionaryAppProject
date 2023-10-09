@@ -7,5 +7,6 @@ module com.app.dictionaryproject {
 
     opens com.app.dictionaryproject to javafx.fxml;
     exports com.app.dictionaryproject;
+    exports com.app.dictionaryproject.Controller;
 }
 

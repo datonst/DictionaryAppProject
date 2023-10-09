@@ -9,10 +9,10 @@ public class DatabaseConnection {
         String databaseName ="dictionaryapp"; // điền tên scheme
         String port = "3306";
         String databaseUser = "root";
-        String databasePassword = "123456";
+        String databasePassword = "04032004";
 
         String url="jdbc:mysql://localhost:"+port+"/"+databaseName;
-        System.out.println(url);
+        //System.out.println(url);
         Connection databaseLink;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
