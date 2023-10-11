@@ -6,12 +6,13 @@ public class Dictionary {
     protected WordCmd[] words = new WordCmd[1000];
     protected int size = 0;
     private static final int INITIAL_CAPACITY = 1000;
-
+    
     WordCmd[] getWords() {
         return words;
     }
 
     // Phương thức để thêm từ vào danh sách từ điển
+
     boolean addWord(WordCmd word) {
         //lấy word_target và nghĩa muốn thêm vào
         String word_target = word.getWord_target();

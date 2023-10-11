@@ -136,7 +136,9 @@ class DictionaryCommandLine extends DictionaryManagement {
                     }
                     break;
                 case "8":
-                    insertFromFile("dictionary.txt");
+                    // thay đổi theo từng máy của mọi người
+                    String path = "D:/Github/DictionaryAppProject/DictionaryAppProject/src/main/resources/data/dictionary.txt";
+                    insertFromFile(path);
                     System.out.println("imported successfully!");
                     break;
                 case "9":
