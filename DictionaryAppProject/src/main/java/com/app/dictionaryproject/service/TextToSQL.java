@@ -25,7 +25,8 @@ public class TextToSQL {
         eWord = eWord.replace("'", "`");
         pronounce = pronounce.replace("'", "`");
         def = def.replace("-", "\n-");
-        def = def.replace("'", "`");
+        def = def.
+    ("'", "`");
 
         eWord = eWord.replace("=", "\n=");
         eWord = eWord.replace("*", "\nLoai tu: ");

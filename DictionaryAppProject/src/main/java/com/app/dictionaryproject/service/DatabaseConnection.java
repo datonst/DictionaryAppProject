@@ -11,7 +11,7 @@ public class DatabaseConnection {
         String databaseUser = "root";
         String databasePassword = "04032004";
 
-        String url="jdbc:mysql://localhost:"+port+"/"+databaseName;
+        String url="jdbc:mysql://localhost:"+ port + "/"+databaseName;
         //System.out.println(url);
         Connection databaseLink;
         try {
