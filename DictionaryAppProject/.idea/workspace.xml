@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1cdb1d42-53e6-4109-a5ce-54bbf035c186" name="Changes" comment="update database">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Models/Translate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Models/Voice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/crawl_data/DatabaseDict/datas.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/crawl_data/DatabaseDict/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/crawl_data/DatabaseDict/test.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/DictionaryAppProject.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/lib.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/MainScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/MainScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/service/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/service/DatabaseConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/service/TextToSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/service/TextToSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2W1NPFOgCHhEqr77sexFS7dXH74" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "E:/java_project/JavaFX_learn/DictionaryAppProject/src/main/resources/data",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\java_project\JavaFX_learn\DictionaryAppProject\src\main\resources\data" />
+      <recent name="E:\java_project\JavaFX_learn\DictionaryAppProject\src\main\java\com\app\dictionaryproject\crawl_data" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\java_project\JavaFX_learn\DictionaryAppProject\src\main\resources\data" />
+      <recent name="E:\java_project\JavaFX_learn\DictionaryAppProject\src\main\java\com\app\dictionaryproject" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.app.dictionaryproject" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1cdb1d42-53e6-4109-a5ce-54bbf035c186" name="Changes" comment="" />
+      <created>1695896099515</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1695896099515</updated>
+      <workItem from="1695896100505" duration="3258000" />
+      <workItem from="1695901093247" duration="1109000" />
+      <workItem from="1695912215412" duration="1000" />
+      <workItem from="1695990519175" duration="231000" />
+      <workItem from="1695992429083" duration="16000" />
+      <workItem from="1695992729577" duration="1031000" />
+      <workItem from="1695993774800" duration="6353000" />
+      <workItem from="1696001767855" duration="7810000" />
+      <workItem from="1696031595708" duration="50000" />
+      <workItem from="1696034269185" duration="101000" />
+      <workItem from="1696040065308" duration="253000" />
+      <workItem from="1696041168149" duration="781000" />
+      <workItem from="1696050191975" duration="1721000" />
+      <workItem from="1696052963591" duration="1676000" />
+      <workItem from="1696060306336" duration="4558000" />
+      <workItem from="1696073362676" duration="10777000" />
+      <workItem from="1696093222470" duration="582000" />
+      <workItem from="1696111999041" duration="14000" />
+      <workItem from="1696168777120" duration="1163000" />
+      <workItem from="1696203817708" duration="24000" />
+      <workItem from="1696205008416" duration="2655000" />
+      <workItem from="1696210423460" duration="23000" />
+      <workItem from="1696210508852" duration="600000" />
+      <workItem from="1696233742100" duration="178000" />
+      <workItem from="1696233990341" duration="1607000" />
+      <workItem from="1696238248421" duration="23000" />
+      <workItem from="1696238285905" duration="71000" />
+      <workItem from="1696238367003" duration="28000" />
+      <workItem from="1696238400017" duration="47000" />
+      <workItem from="1696898980606" duration="330000" />
+      <workItem from="1696899315101" duration="287000" />
+      <workItem from="1696899635052" duration="23000" />
+      <workItem from="1696910633960" duration="599000" />
+      <workItem from="1696917539591" duration="4812000" />
+      <workItem from="1696927576171" duration="2519000" />
+      <workItem from="1697111133925" duration="94000" />
+      <workItem from="1697111265073" duration="128000" />
+      <workItem from="1697112293632" duration="62000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.nio.file.NoSuchFileException" package="java.nio.file" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
