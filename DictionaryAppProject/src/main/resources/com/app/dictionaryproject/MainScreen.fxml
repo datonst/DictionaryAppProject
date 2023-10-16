@@ -9,7 +9,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="736.0" styleClass="background" stylesheets="@../../../Style/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.dictionaryproject.Controller.MainScreenController">
 
     <children>
-        <Label layoutX="245.0" layoutY="33.0" prefHeight="108.0" prefWidth="279.0" styleClass="mainTitle" stylesheets="@../../../Style/style.css" text="Dictionary" textFill="WHITE">
+        <Label layoutX="194.0" layoutY="33.0" prefHeight="108.0" prefWidth="410.0" styleClass="mainTitle" stylesheets="@../../../Style/style.css" text="Dictionary" textFill="WHITE">
             <font>
                 <Font size="62.0" />
             </font></Label>
@@ -19,10 +19,11 @@
                <children>
                   <Circle fill="DODGERBLUE" layoutX="48.0" layoutY="299.0" opacity="0.09" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
                   <Circle blendMode="SRC_ATOP" cache="true" fill="DODGERBLUE" layoutX="691.0" layoutY="64.0" opacity="0.07" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Arc fill="#ad84f0" layoutX="750.0" layoutY="299.0" length="90.0" opacity="0.47" radiusX="100.0" radiusY="100.0" startAngle="135.0" stroke="WHITE" strokeType="INSIDE" type="ROUND" />
+                  <Circle blendMode="SRC_ATOP" cache="true" fill="DODGERBLUE" layoutX="184.0" layoutY="41.0" opacity="0.07" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle blendMode="SRC_ATOP" cache="true" fill="DODGERBLUE" layoutX="532.0" layoutY="308.0" opacity="0.07" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
                       <Button layoutX="232.0" layoutY="299.0" mnemonicParsing="false" onAction="#switchToGame" prefHeight="55.0" prefWidth="300.0" styleClass="word" stylesheets="@../../../Style/style.css" text="Game" />
                       <Button layoutX="232.0" layoutY="180.0" mnemonicParsing="false" onAction="#switchToAPI" prefHeight="55.0" prefWidth="300.0" styleClass="word" stylesheets="@../../../Style/style.css" text="API Google" />
-                      <Button layoutX="232.0" layoutY="54.0" mnemonicParsing="false" onAction="#switchToEdit" prefHeight="55.0" prefWidth="300.0" styleClass="word" stylesheets="@../../../Style/style.css" text="Add Word" />
+                      <Button layoutX="232.0" layoutY="54.0" mnemonicParsing="false" onAction="#switchToEdit" prefHeight="55.0" prefWidth="300.0" styleClass="word" stylesheets="@../../../Style/style.css" text="Edit Word " />
                </children>
             </AnchorPane>
             </children></Pane>
@@ -36,7 +37,7 @@
                 </ImageView>
             </graphic></Button>
         <ListView fx:id="listWord" layoutX="78.0" layoutY="239.0" prefHeight="452.0" prefWidth="734.0" styleClass="wordList" stylesheets="@../../../Style/style.css" visible="false" />
-        <Button blendMode="COLOR_BURN" layoutX="30.0" layoutY="93.0" mnemonicParsing="false" opacity="0.59" prefHeight="40.0" prefWidth="44.0">
+        <Button blendMode="COLOR_BURN" layoutX="30.0" layoutY="93.0" mnemonicParsing="false" onAction="#actionQA" opacity="0.59" prefHeight="40.0" prefWidth="44.0">
             <graphic>
                 <ImageView fitHeight="28.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
                     <image>

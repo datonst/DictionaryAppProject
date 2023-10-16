@@ -33,7 +33,7 @@ public class TextToSQL {
         eWord = eWord.replace("+", "\n+");
 
         pronounce = pronounce.replace("=", "\n=");
-        pronounce = pronounce.replace("*", "\nLoai tu: ");
+        pronounce = pronounce.replace("*", "\nLoại từ: ");
         //res = res.replace("-", "\n-");
         pronounce = pronounce.replace("+", "\n+");
 

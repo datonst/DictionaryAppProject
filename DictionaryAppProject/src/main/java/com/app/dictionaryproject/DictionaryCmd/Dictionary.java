@@ -6,7 +6,7 @@ public class Dictionary {
     protected WordCmd[] words = new WordCmd[1000];
     protected int size = 0;
     private static final int INITIAL_CAPACITY = 1000;
-    
+
     WordCmd[] getWords() {
         return words;
     }

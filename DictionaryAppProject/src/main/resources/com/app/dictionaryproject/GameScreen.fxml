@@ -3,9 +3,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="650.0" prefWidth="736.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.dictionaryproject.Controller.GameScreenController">
+<AnchorPane onKeyPressed="#handleKeyPress" prefHeight="650.0" prefWidth="736.0" stylesheets="@../../../Style/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.dictionaryproject.Controller.GameScreenController">
    <children>
-      <Button layoutX="22.0" layoutY="35.0" mnemonicParsing="false" onAction="#switchToMain" text="Button" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="174.0" layoutY="29.0" prefHeight="108.0" prefWidth="388.0" styleClass="mainTitle" stylesheets="@../../../Style/style.css" text="Find Word" />
+      <TextField fx:id="inputWord" layoutX="166.0" layoutY="219.0" prefHeight="36.0" prefWidth="430.0" />
+      <ProgressBar fx:id="progressBar" layoutX="132.0" layoutY="152.0" prefHeight="36.0" prefWidth="497.0" progress="0.0" />
+      <Button layoutX="41.0" layoutY="40.0" mnemonicParsing="false" onAction="#switchToMain" text="Back" />
+      <Button layoutX="348.0" layoutY="602.0" mnemonicParsing="false" onAction="#increaseProgress" prefHeight="26.0" prefWidth="66.0" text="Check" />
+      <ScrollPane fx:id="explain" layoutX="136.0" layoutY="278.0" prefHeight="316.0" prefWidth="490.0">
+         <content>
+            <Label fx:id="temp" alignment="CENTER" contentDisplay="CENTER" prefHeight="313.0" prefWidth="486.0" text="Label" />
+         </content></ScrollPane>
    </children>
 </AnchorPane>

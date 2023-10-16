@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8a524544-116e-4857-a9b7-ab02bc9db650" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/DictionaryAppProject/src/main/java/com/app/dictionaryproject/Controller/GameScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/DictionaryAppProject/src/main/java/com/app/dictionaryproject/Controller/GameScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DictionaryAppProject/src/main/java/com/app/dictionaryproject/Controller/MainScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/DictionaryAppProject/src/main/java/com/app/dictionaryproject/Controller/MainScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DictionaryAppProject/src/main/java/com/app/dictionaryproject/DictionaryCmd/Dictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/DictionaryAppProject/src/main/java/com/app/dictionaryproject/DictionaryCmd/Dictionary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DictionaryAppProject/src/main/java/com/app/dictionaryproject/service/TextToSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/DictionaryAppProject/src/main/java/com/app/dictionaryproject/service/TextToSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DictionaryAppProject/src/main/resources/Style/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/DictionaryAppProject/src/main/resources/Style/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DictionaryAppProject/src/main/resources/com/app/dictionaryproject/APIScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/DictionaryAppProject/src/main/resources/com/app/dictionaryproject/APIScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DictionaryAppProject/src/main/resources/com/app/dictionaryproject/EditScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/DictionaryAppProject/src/main/resources/com/app/dictionaryproject/EditScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DictionaryAppProject/src/main/resources/com/app/dictionaryproject/GameScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/DictionaryAppProject/src/main/resources/com/app/dictionaryproject/GameScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DictionaryAppProject/src/main/resources/com/app/dictionaryproject/MainScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/DictionaryAppProject/src/main/resources/com/app/dictionaryproject/MainScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DictionaryAppProject/src/main/resources/com/app/dictionaryproject/ResultSearch.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/DictionaryAppProject/src/main/resources/com/app/dictionaryproject/ResultSearch.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/DictionaryAppProject/src/main/resources/com/app/dictionaryproject/ResultSearch.fxml" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2W68lzuxPQPaotJHKYGd4C4iTiI" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/NHAT/Downloads/DictionaryAppProject-c373848ac1cd9d3e1b8b4c94716ec100802bce5c/DictionaryAppProject-c373848ac1cd9d3e1b8b4c94716ec100802bce5c",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Github\DictionaryAppProject\DictionaryAppProject\src\main\resources\Style" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.app.dictionaryproject.Dictionary" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8a524544-116e-4857-a9b7-ab02bc9db650" name="Changes" comment="" />
+      <created>1696041824461</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1696041824461</updated>
+      <workItem from="1696041825516" duration="388000" />
+      <workItem from="1696053650487" duration="865000" />
+      <workItem from="1696061021216" duration="869000" />
+      <workItem from="1696062359585" duration="152000" />
+      <workItem from="1696087393928" duration="583000" />
+      <workItem from="1696093765021" duration="3000" />
+      <workItem from="1696093945844" duration="768000" />
+      <workItem from="1696180076854" duration="133000" />
+      <workItem from="1696224591824" duration="2423000" />
+      <workItem from="1696228591408" duration="3494000" />
+      <workItem from="1696341440593" duration="1143000" />
+      <workItem from="1696352480267" duration="54000" />
+      <workItem from="1696406268111" duration="607000" />
+      <workItem from="1696435074291" duration="1975000" />
+      <workItem from="1696473257583" duration="47000" />
+      <workItem from="1696581772705" duration="2723000" />
+      <workItem from="1696607627831" duration="273000" />
+      <workItem from="1696666739343" duration="456000" />
+      <workItem from="1696667227913" duration="497000" />
+      <workItem from="1696667752538" duration="171000" />
+      <workItem from="1696772901026" duration="3154000" />
+      <workItem from="1696783340291" duration="2899000" />
+      <workItem from="1696825094872" duration="2505000" />
+      <workItem from="1696827879534" duration="49000" />
+      <workItem from="1696828289850" duration="948000" />
+      <workItem from="1696829254931" duration="1760000" />
+      <workItem from="1696831946905" duration="1366000" />
+      <workItem from="1696834072589" duration="20000" />
+      <workItem from="1696858589386" duration="1909000" />
+      <workItem from="1696998164152" duration="1004000" />
+      <workItem from="1696999176480" duration="524000" />
+      <workItem from="1697011503377" duration="103000" />
+      <workItem from="1697015132920" duration="2036000" />
+      <workItem from="1697026158517" duration="770000" />
+      <workItem from="1697031418910" duration="711000" />
+      <workItem from="1697034641485" duration="1034000" />
+      <workItem from="1697035776713" duration="2622000" />
+      <workItem from="1697079235098" duration="78000" />
+      <workItem from="1697430710999" duration="589000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IllegalStateException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

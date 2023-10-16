@@ -62,7 +62,7 @@ public class MainScreenController  {
 
     }
 
-    public void action(ActionEvent event) {
+    public void actionQA(ActionEvent event) {
         String name = Height.getText();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Name");
