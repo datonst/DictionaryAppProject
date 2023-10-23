@@ -4,6 +4,7 @@ import com.app.dictionaryproject.Models.Word;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class DBRepository {
 
@@ -28,45 +29,66 @@ public class DBRepository {
         try {
             PreparedStatement psInsert =
                     connection.prepareStatement("INSERT INTO " +
-                            "word_definition (word, phonetic, definitionWord) VALUES (?,?,?)");
-            String word = wordToInsert.getWordTarget().strip();
+                            "dict (word, pronunciation, wordtype, meaning, synonym, antonym) VALUES (?,?,?,?,?.?)");
+            String word = wordToInsert.getWord_target().strip();
             String phonetic = wordToInsert.getPhonetic().strip();
+            String wordType = wordToInsert.getWordType().strip();
+            String synonym = wordToInsert.getSynonym().strip();
+            String antonym = wordToInsert.getAntonym().strip();
             String definitionWord = wordToInsert.getDefinitionWord().strip();
-            psInsert.setString(1,word);
-            psInsert.setString(2,phonetic);
-            psInsert.setString(3,definitionWord);
+            psInsert.setString(2,word);
+            psInsert.setString(3,phonetic);
+            psInsert.setString(4,wordType);
+            psInsert.setString(5,definitionWord);
+            psInsert.setString(6,synonym);
+            psInsert.setString(7,antonym);
             psInsert.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("KHONG HOPLE "+wordToInsert.getWordTarget());
+            System.out.println("KHONG HOPLE "+wordToInsert.getWord_target());
             System.out.println("KHONG HOPLE "+wordToInsert.getPhonetic());
+            System.out.println("KHONG HOPLE "+wordToInsert.getWordType());
             System.out.println("KHONG HOPLE "+wordToInsert.getDefinitionWord());
+            System.out.println("KHONG HOPLE "+wordToInsert.getSynonym());
+            System.out.println("KHONG HOPLE "+wordToInsert.getAntonym());
+
             throw new RuntimeException(e);
         }
     }
 
-    public Word searchWord(String wordToSearch) {
+    public  Word searchWord(String wordToSearch) {
+        String word = "";
         String phonetic = "";
+        String wordType = "";
+        String synonym = "";
+        String antonym = "";
         String definitionWord = "";
         try {
-            String sql = "SELECT * FROM word_definition WHERE word = ?" ;
+            String sql = "SELECT * FROM dict WHERE word = ?" ;
             PreparedStatement psSearch = connection.prepareStatement(sql);
             psSearch.setString(1, wordToSearch);
             ResultSet resultSet = psSearch.executeQuery();
             while (resultSet.next()) {
-                phonetic= resultSet.getNString("phonetic");
-                definitionWord = resultSet.getNString("definitionWord");
+                word = resultSet.getNString("word");
+                phonetic= resultSet.getNString("pronunciation");
+                wordType = resultSet.getNString("wordtype");
+                synonym = resultSet.getNString("synonym");
+                antonym = resultSet.getNString("antonym");
+                definitionWord = resultSet.getNString("meaning");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return new Word(wordToSearch, phonetic, definitionWord);
+        if (word.isEmpty()){
+            return null;
+        };
+        return new Word(word, phonetic,wordType, synonym, antonym, definitionWord);
     }
 
     public ArrayList<String> searchListWord(String wordToSearch) {
         ArrayList<String> listWord = new ArrayList<>();
         String word = "";
         try {
-            String sql = "SELECT * FROM word_definition WHERE word like ?" ;
+            String sql = "SELECT word FROM dict WHERE word like ?" ;
             PreparedStatement psSearch = connection.prepareStatement(sql);
             psSearch.setString(1, wordToSearch + "%");
             ResultSet resultSet = psSearch.executeQuery();
@@ -79,12 +101,17 @@ public class DBRepository {
         }
         return listWord;
     }
-//     public static void main(String[] args) {
-//        DBRepository db = new DBRepository();
-//        Word temp = db.searchWord("water");
-//        System.out.println(temp.getWordTarget());
-//        System.out.println(temp.getPhonetic());
-//        System.out.println(temp.getDefinitionWord());
-//    }
-//    }
+     public static void main(String[] args) {
+        DBRepository db = new DBRepository();
+        String tmp;
+         Scanner sc = new Scanner(System.in);
+         tmp = sc.nextLine();
+        Word temp = db.searchWord(tmp);
+        System.out.println(temp.getWord_target());
+        System.out.println(temp.getPhonetic());
+        System.out.println(temp.getWordType().replace("\n ", ","));
+        System.out.println(temp.getAntonym());
+         System.out.println(temp.getSynonym());
+        System.out.println(temp.getDefinitionWord());
+    }
 }

@@ -2,8 +2,9 @@ package com.app.dictionaryproject.Controller;
 
 
 
-//import com.app.dictionaryproject.Model.Word;
+
 //import com.app.dictionaryproject.Controller.ResultSearchController;
+import com.app.dictionaryproject.Models.Word;
 import com.app.dictionaryproject.service.DBRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,20 +44,28 @@ public class MainScreenController  {
 //        alert.show();
 //
 //        String selectedValue = listWord.getSelectionModel().getSelectedItem();
-        if (!name.equals(null)) {
+        if (!Objects.equals(name, "")) {
             // Handle the selected item here
             try {
                 FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/ResultSearch.fxml"));
                 root = Loader.load();
-//                ResultSearchController controller = Loader.getController();
-//                controller.initialize(new Word(name,"/122/", "nvv"));
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
+
+                ResultSearchController controller = Loader.getController();
+                DBRepository search = new DBRepository();
+                if (search.searchWord(name) != null) {
+                    controller.initialize(search.searchWord(name));
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } else {
+                    // xử lý trường hợp không tìm thấy từ trong từ điển
+                }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        } else {
+            // xử lý trường hợp không nhập gì vào text Field
         }
 
 
@@ -111,8 +120,9 @@ public class MainScreenController  {
                 try {
                     FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/ResultSearch.fxml"));
                     root = Loader.load();
-//                    ResultSearchController controller = Loader.getController();
-//                    controller.initialize(new Word(selectedValue,"/122/", "nvv"));
+                    ResultSearchController controller = Loader.getController();
+                    DBRepository search = new DBRepository();
+                    controller.initialize(search.searchWord(selectedValue));
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     scene = new Scene(root);
                     stage.setScene(scene);

@@ -8,11 +8,11 @@
       <Button layoutX="31.0" layoutY="39.0" mnemonicParsing="false" onAction="#switchToMain" prefHeight="26.0" prefWidth="58.0" text="Back" />
       <AnchorPane layoutX="69.0" layoutY="264.0" prefHeight="360.0" prefWidth="622.0" styleClass="background1">
          <children>
-            <ScrollPane layoutX="25.0" layoutY="20.0" prefHeight="328.0" prefWidth="574.0" />
+            <ScrollPane fx:id="explain" layoutX="25.0" layoutY="20.0" prefHeight="328.0" prefWidth="574.0" />
          </children>
       </AnchorPane>
-      <Button layoutX="619.0" layoutY="201.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="58.0" stylesheets="@../../../Style/style.css" text="Speech" />
-      <Label alignment="CENTER" layoutX="69.0" layoutY="195.0" prefHeight="47.0" prefWidth="514.0" styleClass="background1" stylesheets="@../../../Style/style.css" text="Word                                                                                             Phonetic  /phonetic/" />
+      <Button layoutX="619.0" layoutY="201.0" mnemonicParsing="false" onAction="#speech" prefHeight="35.0" prefWidth="58.0" stylesheets="@../../../Style/style.css" text="Speech" />
+      <Label fx:id="words" alignment="CENTER" layoutX="69.0" layoutY="195.0" prefHeight="47.0" prefWidth="514.0" styleClass="background1" stylesheets="@../../../Style/style.css" />
       <Label alignment="CENTER" layoutX="133.0" layoutY="52.0" prefHeight="59.0" prefWidth="470.0" styleClass="mainTitle" stylesheets="@../../../Style/style.css" text="Result Word" textAlignment="CENTER" />
 
    </children>
