@@ -1,0 +1,40 @@
+
+.gameStyle {
+    -fx-background-color: rgb(99, 122, 242);
+    -fx-text-fill:white;
+    -fx-padding: 10px 15px;
+    -fx-text-transform: uppercase;
+    -fx-letter-spacing: 4px;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-effect: dropshadow(three-pass-box, #03e9f4, 10, 0, 0, 0);
+    -fx-background-radius: 25px;
+}
+
+.search {
+    -fx-background-color: white;
+    -fx-text-fill:rgb(99, 122, 242);
+    -fx-padding: 10px 15px;
+    -fx-letter-spacing: 4px;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-background-radius: 10px;
+}
+.submit {
+    -fx-background-color: white;
+    -fx-text-fill:rgb(99, 122, 242);
+    -fx-padding: 10px 15px;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+
+}
+.showWordEx {
+    -fx-background-color: white;
+    -fx-text-fill:rgb(99, 122, 242);
+    -fx-padding: 10px 15px;
+    -fx-letter-spacing: 4px;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-background-radius: 10px;
+}

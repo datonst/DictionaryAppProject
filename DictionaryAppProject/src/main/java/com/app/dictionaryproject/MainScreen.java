@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -17,8 +18,11 @@ public class MainScreen extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainScreen.class.getResource("MainScreen.fxml"));
+        String iconPath = "D:\\DictionaryAppProject\\DictionaryAppProject\\src\\main\\resources\\Style\\icon.png";
+        Image icon = new Image(iconPath);
+        primaryStage.getIcons().add(icon);
         Scene scene = new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
-        primaryStage.setTitle("Dictionary");
+        primaryStage.setTitle("");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

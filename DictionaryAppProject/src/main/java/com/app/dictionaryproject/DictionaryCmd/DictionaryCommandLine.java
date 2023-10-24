@@ -1,5 +1,6 @@
 package com.app.dictionaryproject.DictionaryCmd;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,9 +138,10 @@ class DictionaryCommandLine extends DictionaryManagement {
                     break;
                 case "8":
                     // thay đổi theo từng máy của mọi người
-                    String path = "D:/Github/DictionaryAppProject/DictionaryAppProject/src/main/resources/data/dictionary.txt";
+                    String path = "C:\\Users\\Admin\\Documents\\GitHub\\DictionaryAppProject\\DictionaryAppProject\\src\\main\\resources\\data\\dictionary.txt";
                     insertFromFile(path);
                     System.out.println("imported successfully!");
+
                     break;
                 case "9":
                     System.out.print("Input file path: ");

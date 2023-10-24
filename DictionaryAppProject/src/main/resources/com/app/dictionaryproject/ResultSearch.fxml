@@ -1,19 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="650.0" prefWidth="736.0" stylesheets="@../../../Style/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.dictionaryproject.Controller.ResultSearchController">
    <children>
-      <Button layoutX="31.0" layoutY="39.0" mnemonicParsing="false" onAction="#switchToMain" prefHeight="26.0" prefWidth="58.0" text="Back" />
-      <AnchorPane layoutX="69.0" layoutY="264.0" prefHeight="360.0" prefWidth="622.0" styleClass="background1">
+      <Button layoutX="23.0" layoutY="40.0" mnemonicParsing="false" onAction="#switchToMain" prefHeight="42.0" prefWidth="64.0" styleClass="submit" stylesheets="@../../../Style/ButtonStyles.css" text="Back" />
+      <AnchorPane layoutY="263.0" prefHeight="393.0" prefWidth="747.0" styleClass="explain" stylesheets="@../../../Style/style.css">
          <children>
-            <ScrollPane layoutX="25.0" layoutY="20.0" prefHeight="328.0" prefWidth="574.0" />
+            <ScrollPane fx:id="explain" layoutX="28.0" layoutY="19.0" prefHeight="354.0" prefWidth="691.0" styleClass="explain" stylesheets="@../../../Style/style.css" />
          </children>
       </AnchorPane>
-      <Button layoutX="619.0" layoutY="201.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="58.0" stylesheets="@../../../Style/style.css" text="Speech" />
-      <Label alignment="CENTER" layoutX="69.0" layoutY="195.0" prefHeight="47.0" prefWidth="514.0" styleClass="background1" stylesheets="@../../../Style/style.css" text="Word                                                                                             Phonetic  /phonetic/" />
-      <Label alignment="CENTER" layoutX="133.0" layoutY="52.0" prefHeight="59.0" prefWidth="470.0" styleClass="mainTitle" stylesheets="@../../../Style/style.css" text="Result Word" textAlignment="CENTER" />
+      <Button layoutX="668.0" layoutY="190.0" mnemonicParsing="false" onAction="#speech" prefHeight="48.0" prefWidth="31.0" styleClass="background" stylesheets="@../../../Style/style.css">
+         <graphic>
+            <ImageView fitHeight="33.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Style/sound.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Label fx:id="words" layoutX="55.0" layoutY="188.0" prefHeight="51.0" prefWidth="369.0" styleClass="showWordEx">
+         <stylesheets>
+            <URL value="@../../../Style/style.css" />
+            <URL value="@../../../Style/ButtonStyles.css" />
+         </stylesheets></Label>
+      <Label alignment="CENTER" layoutX="138.0" layoutY="61.0" prefHeight="59.0" prefWidth="470.0" styleClass="mainTitle" stylesheets="@../../../Style/style.css" text="Explain" textAlignment="CENTER" />
+      <Label fx:id="phonetic" alignment="CENTER_RIGHT" layoutX="405.0" layoutY="188.0" prefHeight="51.0" prefWidth="264.0" styleClass="showWordEx">
+         <stylesheets>
+            <URL value="@../../../Style/style.css" />
+            <URL value="@../../../Style/ButtonStyles.css" />
+         </stylesheets>
+      </Label>
 
    </children>
 </AnchorPane>

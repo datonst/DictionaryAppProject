@@ -9,7 +9,7 @@ public class DatabaseConnection {
         String databaseName ="dictionaryapp"; // điền tên scheme
         String port = "3306";
         String databaseUser = "root";
-        String databasePassword = "04032004";
+        String databasePassword = "123456";
 
         String url="jdbc:mysql://localhost:"+ port + "/"+databaseName;
         //System.out.println(url);

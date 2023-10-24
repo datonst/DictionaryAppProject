@@ -1,6 +1,7 @@
 package com.app.dictionaryproject.DictionaryCmd;
 
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -113,7 +114,7 @@ class DictionaryManagement extends Dictionary {
     }
     public void textToSpeech(String textToSpeak) {
         // thay đổi theo từng máy của mọi người
-        String command = "cscript.exe /nologo  D:\\Github\\DictionaryAppProject\\DictionaryAppProject\\src\\main\\resources\\data\\TTSAPI.vbs \"" + textToSpeak + "\"";
+        String command = "cscript.exe /nologo  C:\\Users\\Admin\\Documents\\GitHub\\DictionaryAppProject\\DictionaryAppProject\\src\\main\\resources\\data\\TTSAPI.vbs \"" + textToSpeak + "\"";
 
         try {
             Process process = Runtime.getRuntime().exec(command);

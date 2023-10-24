@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1cdb1d42-53e6-4109-a5ce-54bbf035c186" name="Changes" comment="change database" />
+    <list default="true" id="1cdb1d42-53e6-4109-a5ce-54bbf035c186" name="Changes" comment="change database">
+      <change afterPath="$PROJECT_DIR$/../.idea/DictionaryAppProject.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/lib.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Style/ButtonStyles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Controller/GameScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Controller/GameScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Controller/MainScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Controller/MainScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/MainScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/MainScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Models/SpeechToText.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Models/SpeechToText.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Models/TextToText.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Models/TextToText.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Style/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Style/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/app/dictionaryproject/GameScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/app/dictionaryproject/GameScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/app/dictionaryproject/MainScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/app/dictionaryproject/MainScreen.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +32,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -42,7 +61,8 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/java_project/JavaFX_learn/DictionaryAppProject/src/main/resources/data&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Programming/OOP/OASIS&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -66,6 +86,21 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.app.dictionaryproject" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="DictionaryAppProject" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="DictionaryAppProject" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -117,6 +152,20 @@
       <workItem from="1697167597199" duration="24000" />
       <workItem from="1697194696607" duration="148000" />
       <workItem from="1697287984996" duration="105000" />
+      <workItem from="1697437375625" duration="806000" />
+      <workItem from="1697438661157" duration="34000" />
+      <workItem from="1697440966687" duration="708000" />
+      <workItem from="1697620325717" duration="681000" />
+      <workItem from="1697772263121" duration="672000" />
+      <workItem from="1697774382113" duration="167000" />
+      <workItem from="1697774984864" duration="24000" />
+      <workItem from="1697878874184" duration="557000" />
+      <workItem from="1697882764851" duration="24000" />
+      <workItem from="1697982916996" duration="131000" />
+      <workItem from="1697983081548" duration="5715000" />
+      <workItem from="1698034699381" duration="4846000" />
+      <workItem from="1698045251789" duration="99000" />
+      <workItem from="1698050104920" duration="26000" />
     </task>
     <task id="LOCAL-00001" summary="update database">
       <option name="closed" value="true" />
