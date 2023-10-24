@@ -1,0 +1,357 @@
+Index: src/main/java/com/app/dictionaryproject/Models/TextToText.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.jademo.Model;\r\n\r\nimport org.apache.http.HttpEntity;\r\nimport org.apache.http.HttpResponse;\r\nimport org.apache.http.client.methods.HttpGet;\r\nimport org.apache.http.impl.client.CloseableHttpClient;\r\nimport org.apache.http.util.EntityUtils;\r\nimport org.json.JSONArray;\r\nimport org.json.JSONException;\r\n\r\nimport java.io.IOException;\r\nimport java.net.URLEncoder;\r\nimport java.nio.charset.StandardCharsets;\r\n\r\npublic class TextToText {\r\n    public  String translate(CloseableHttpClient httpClient, String textToTranslate, String sourceLanguage, String targetLanguage) throws IOException {\r\n        String encodedText = URLEncoder.encode(textToTranslate, StandardCharsets.UTF_8);\r\n        String apiUrl = \"https://translate.googleapis.com/translate_a/single?client=gtx&sl=\"\r\n                + sourceLanguage + \"&tl=\" + targetLanguage + \"&dt=t&text=\" + encodedText + \"&op=translate\";\r\n        // System.out.println(apiUrl);\r\n        HttpGet httpGet = new HttpGet(apiUrl);\r\n        HttpResponse response = httpClient.execute(httpGet);\r\n        HttpEntity entity = response.getEntity();\r\n        if (entity != null) {\r\n            String jsonResponse = EntityUtils.toString(entity);\r\n            return parseTranslationResponse(jsonResponse);\r\n        }\r\n        return \"Error: Unable to get translation response.\";\r\n    }\r\n\r\n    public String parseTranslationResponse(String response) {\r\n        try {\r\n            JSONArray jsonArray = new JSONArray(response);\r\n            // System.out.println(jsonArray.toString());\r\n            JSONArray translationArray = jsonArray.getJSONArray(0);\r\n\r\n            StringBuilder translatedTextBuilder = new StringBuilder();\r\n            for (int i = 0; i < translationArray.length(); i++) {\r\n                String translationSegment = translationArray.getJSONArray(i).getString(0);\r\n                translatedTextBuilder.append(translationSegment);\r\n            }\r\n            return translatedTextBuilder.toString();\r\n        } catch (JSONException e) {\r\n            e.printStackTrace();\r\n            return \"Error: Unable to parse the translation response.\";\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/app/dictionaryproject/Models/TextToText.java b/src/main/java/com/app/dictionaryproject/Models/TextToText.java
+--- a/src/main/java/com/app/dictionaryproject/Models/TextToText.java	(revision 293123d01e2f5efcef130a169a2bd7694b404c5f)
++++ b/src/main/java/com/app/dictionaryproject/Models/TextToText.java	(date 1698164836363)
+@@ -1,4 +1,4 @@
+-package com.example.jademo.Model;
++package com.app.dictionaryproject.Models;
+ 
+ import org.apache.http.HttpEntity;
+ import org.apache.http.HttpResponse;
+Index: src/main/java/com/app/dictionaryproject/Controller/APIScreenController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.app.dictionaryproject.Controller;\r\n\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.Node;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.stage.Stage;\r\n\r\nimport java.io.IOException;\r\n\r\npublic class APIScreenController {\r\n    @FXML\r\n    public Scene scene;\r\n    public Stage stage;\r\n    public Parent root;\r\n\r\n    public void  switchToMain(ActionEvent event) throws IOException {\r\n\r\n        FXMLLoader Loader = new FXMLLoader(getClass().getResource(\"/com/app/dictionaryproject/MainScreen.fxml\"));\r\n        stage = (Stage)((Node)event.getSource()).getScene().getWindow();\r\n        scene = new Scene(Loader.load());\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/app/dictionaryproject/Controller/APIScreenController.java b/src/main/java/com/app/dictionaryproject/Controller/APIScreenController.java
+--- a/src/main/java/com/app/dictionaryproject/Controller/APIScreenController.java	(revision 293123d01e2f5efcef130a169a2bd7694b404c5f)
++++ b/src/main/java/com/app/dictionaryproject/Controller/APIScreenController.java	(date 1698046892768)
+@@ -1,5 +1,7 @@
+ package com.app.dictionaryproject.Controller;
+ 
++import com.app.dictionaryproject.service.RecordService;
++import com.app.dictionaryproject.service.TranslateService;
+ import javafx.event.ActionEvent;
+ import javafx.fxml.FXML;
+ import javafx.fxml.FXMLLoader;
+@@ -16,12 +18,19 @@
+     public Stage stage;
+     public Parent root;
+ 
++    public static final String PATH =  System.getProperty("user.dir")
++            + "\\src\\main\\resources\\record\\talk.wav";
++    public static final RecordService RECORD_SERVICE = new RecordService(PATH);
++
++
++
+     public void  switchToMain(ActionEvent event) throws IOException {
+-
+         FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/MainScreen.fxml"));
+         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+         scene = new Scene(Loader.load());
+         stage.setScene(scene);
+         stage.show();
+     }
++
++
+ }
+Index: src/main/java/com/app/dictionaryproject/service/TranslateService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.jademo;\r\n\r\nimport com.example.jademo.Model.SpeechToText;\r\nimport com.example.jademo.Model.TextToText;\r\nimport org.apache.http.impl.client.CloseableHttpClient;\r\nimport org.apache.http.impl.client.HttpClients;\r\n\r\nimport java.io.IOException;\r\n\r\n\r\npublic class TranslateService {\r\n\r\n    private static final CloseableHttpClient httpClient = HttpClients.createDefault();\r\n    private static final TextToText textToText = new TextToText();\r\n    private static final SpeechToText speechToText = new SpeechToText();\r\n\r\n    public String getVietnameseText(String englishWord) throws IOException {\r\n        return textToText.translate(httpClient,englishWord,\"en\",\"vi\");\r\n    }\r\n\r\n    public String getEnglishText(String vietnameseWord) throws IOException {\r\n        return textToText.translate(httpClient,vietnameseWord,\"vi\",\"en\");\r\n    }\r\n\r\n    public String getSpeechToText(String path, String sourceLanguage) throws IOException {\r\n        return speechToText.translate(httpClient,sourceLanguage, path);\r\n    }\r\n\r\n//    public static void main(String[] args) throws IOException {\r\n//        System.out.println(textToText(\"hello i love you very much\", \"en\", \"vi\"));\r\n//    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/app/dictionaryproject/service/TranslateService.java b/src/main/java/com/app/dictionaryproject/service/TranslateService.java
+--- a/src/main/java/com/app/dictionaryproject/service/TranslateService.java	(revision 293123d01e2f5efcef130a169a2bd7694b404c5f)
++++ b/src/main/java/com/app/dictionaryproject/service/TranslateService.java	(date 1697990521199)
+@@ -1,7 +1,8 @@
+-package com.example.jademo;
++package com.app.dictionaryproject.service;
+ 
+-import com.example.jademo.Model.SpeechToText;
+-import com.example.jademo.Model.TextToText;
++
++import com.app.dictionaryproject.Models.SpeechToText;
++import com.app.dictionaryproject.Models.TextToText;
+ import org.apache.http.impl.client.CloseableHttpClient;
+ import org.apache.http.impl.client.HttpClients;
+ 
+Index: src/main/java/com/app/dictionaryproject/service/RecordService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.jademo;\r\n\r\nimport javax.sound.sampled.*;\r\nimport java.io.File;\r\nimport java.io.IOException;\r\nimport java.io.InputStream;\r\n\r\npublic class RecordService {\r\n//    public static RecordService INSTANCE;\r\n    public TargetDataLine targetDataLine;\r\n    private Thread thread;\r\n    private boolean isRecording;\r\n\r\n    private String path;\r\n    public RecordService(String path) {\r\n        this.path = path;\r\n        // Specify the audio format\r\n        AudioFormat audioFormat = new AudioFormat(\r\n                AudioFormat.Encoding.PCM_SIGNED,\r\n                44100,\r\n                16,\r\n                2,\r\n                4,\r\n                44100,\r\n                false\r\n        );\r\n        DataLine.Info dataInfo = new DataLine.Info(TargetDataLine.class,audioFormat);\r\n        if (!AudioSystem.isLineSupported(dataInfo)) {\r\n            System.out.println(\"Not supported\");\r\n        }\r\n\r\n\r\n        try {\r\n            targetDataLine = (TargetDataLine) AudioSystem.getLine(dataInfo);\r\n            targetDataLine.open();\r\n//            targetDataLine = AudioSystem.getTargetDataLine(audioFormat);\r\n//            targetDataLine.open(audioFormat);\r\n        } catch (LineUnavailableException e) {\r\n            e.printStackTrace();\r\n        }\r\n        isRecording = false;\r\n    }\r\n\r\n//    public static RecordService getInstance() {\r\n//        if (INSTANCE == null) {\r\n//            INSTANCE = new RecordService();\r\n//        }\r\n//        return INSTANCE;\r\n//    }\r\n\r\n    public void startRecording() {\r\n        if (!isRecording && targetDataLine != null) {\r\n            isRecording = true;\r\n            targetDataLine.start();\r\n            this.thread = new Thread(() -> {\r\n                AudioInputStream audioInputStream = new AudioInputStream(targetDataLine);\r\n                //    System.out.println(path);\r\n                File outputFile = new File(path);\r\n                try {\r\n                    AudioSystem.write(audioInputStream,AudioFileFormat.Type.WAVE,outputFile);\r\n                } catch (IOException e) {\r\n                    throw new RuntimeException(e);\r\n                }\r\n                System.out.println(\"STOP record\");\r\n            });\r\n            this.thread.start();\r\n            this.thread.interrupt();\r\n        }\r\n    }\r\n\r\n    public void stopRecording() {\r\n\r\n        if( thread!=null) {\r\n            targetDataLine.stop();\r\n            targetDataLine.close();\r\n            this.thread.interrupt();\r\n        }\r\n        isRecording = false;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/app/dictionaryproject/service/RecordService.java b/src/main/java/com/app/dictionaryproject/service/RecordService.java
+--- a/src/main/java/com/app/dictionaryproject/service/RecordService.java	(revision 293123d01e2f5efcef130a169a2bd7694b404c5f)
++++ b/src/main/java/com/app/dictionaryproject/service/RecordService.java	(date 1697990525640)
+@@ -1,9 +1,8 @@
+-package com.example.jademo;
++package com.app.dictionaryproject.service;
+ 
+ import javax.sound.sampled.*;
+ import java.io.File;
+ import java.io.IOException;
+-import java.io.InputStream;
+ 
+ public class RecordService {
+ //    public static RecordService INSTANCE;
+Index: src/main/java/com/app/dictionaryproject/Models/SpeechToText.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.jademo.Model;\r\n\r\n\r\nimport org.apache.http.HttpEntity;\r\nimport org.apache.http.client.ClientProtocolException;\r\nimport org.apache.http.client.ResponseHandler;\r\nimport org.apache.http.client.methods.HttpUriRequest;\r\nimport org.apache.http.client.methods.RequestBuilder;\r\nimport org.apache.http.entity.ContentType;\r\nimport org.apache.http.entity.mime.HttpMultipartMode;\r\nimport org.apache.http.entity.mime.MultipartEntityBuilder;\r\nimport org.apache.http.impl.client.CloseableHttpClient;\r\nimport org.apache.http.util.EntityUtils;\r\nimport org.json.JSONException;\r\nimport org.json.JSONObject;\r\n\r\nimport java.io.File;\r\nimport java.io.IOException;\r\n\r\npublic class SpeechToText {\r\n    // whisperAPI.com\r\n    private static final String KEY_API = \"XZSQBEZ4P4SSPIIG1AIFHAG2MMTTTDIZ\";\r\n\r\n    public String parseTranslationResponse(String response) {\r\n        String result = \"\";\r\n        try {\r\n            JSONObject jsonObject = new JSONObject(response);\r\n            if (!jsonObject.isEmpty()) {\r\n                try {\r\n                    result = jsonObject.getString(\"text\");\r\n                } catch (JSONException e) {\r\n                    result = \"Error: Unable to parse the translation response.\";\r\n                }\r\n            }\r\n\r\n        } catch (JSONException e) {\r\n            result = \"Error: Unable to parse the translation response.\";\r\n        }\r\n        return result;\r\n    }\r\n\r\n    public String translate(CloseableHttpClient httpClient, String sourceLanguage, String path) throws IOException {\r\n        //Create file\r\n        File file = new File(path);\r\n        // Create a MultipartEntityBuilder object.\r\n        final MultipartEntityBuilder builder = MultipartEntityBuilder.create();\r\n        // build multipart upload request\r\n        HttpEntity data = builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE)\r\n                .addBinaryBody(\"file\", file, ContentType.DEFAULT_BINARY, file.getName())\r\n                .addTextBody(\"fileType\", \"wav\")\r\n                .addTextBody(\"diarization\", \"false\")\r\n                .addTextBody(\"numSpeakers\", \"1\")\r\n                .addTextBody(\"language\", sourceLanguage)\r\n                .addTextBody(\"task\", \"transcribe\")\r\n                .build();\r\n\r\n        // build http request and assign multipart upload data\r\n        HttpUriRequest request = RequestBuilder.post(\"https://transcribe.whisperapi.com\")\r\n                .setEntity(data)\r\n                .setHeader(\"Authorization\", \"Bearer \" + KEY_API)\r\n                .build();\r\n\r\n        //Create a custom response handler\r\n        ResponseHandler<String> responseHandler = response -> {\r\n            int status = response.getStatusLine().getStatusCode();\r\n            if (status >= 200 && status < 300) {\r\n                HttpEntity entity = response.getEntity();\r\n                return entity != null ? EntityUtils.toString(entity) : null;\r\n            } else {\r\n                throw new ClientProtocolException(\"Unexpected response status: \" + status);\r\n            }\r\n        };\r\n        String responseBody = httpClient.execute(request, responseHandler);\r\n        return parseTranslationResponse(responseBody);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/app/dictionaryproject/Models/SpeechToText.java b/src/main/java/com/app/dictionaryproject/Models/SpeechToText.java
+--- a/src/main/java/com/app/dictionaryproject/Models/SpeechToText.java	(revision 293123d01e2f5efcef130a169a2bd7694b404c5f)
++++ b/src/main/java/com/app/dictionaryproject/Models/SpeechToText.java	(date 1697990240324)
+@@ -1,4 +1,4 @@
+-package com.example.jademo.Model;
++package com.app.dictionaryproject.Models;
+ 
+ 
+ import org.apache.http.HttpEntity;
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xmlns=\"http://maven.apache.org/POM/4.0.0\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n    <modelVersion>4.0.0</modelVersion>\r\n\r\n    <groupId>com.app</groupId>\r\n    <artifactId>DictionaryProject</artifactId>\r\n    <version>1.0-SNAPSHOT</version>\r\n    <name>DictionaryAppProject</name>\r\n\r\n    <properties>\r\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\r\n        <junit.version>5.9.2</junit.version>\r\n    </properties>\r\n\r\n    <dependencies>\r\n        <dependency>\r\n            <groupId>org.openjfx</groupId>\r\n            <artifactId>javafx-controls</artifactId>\r\n            <version>20.0.1</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.openjfx</groupId>\r\n            <artifactId>javafx-fxml</artifactId>\r\n            <version>20.0.1</version>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>org.junit.jupiter</groupId>\r\n            <artifactId>junit-jupiter-api</artifactId>\r\n            <version>${junit.version}</version>\r\n            <scope>test</scope>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.junit.jupiter</groupId>\r\n            <artifactId>junit-jupiter-engine</artifactId>\r\n            <version>${junit.version}</version>\r\n            <scope>test</scope>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>com.mysql</groupId>\r\n            <artifactId>mysql-connector-j</artifactId>\r\n            <version>8.1.0</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>mysql</groupId>\r\n            <artifactId>mysql-connector-java</artifactId>\r\n            <version>8.0.33</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>com.microsoft.playwright</groupId>\r\n            <artifactId>playwright</artifactId>\r\n            <version>1.38.0</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.apache.httpcomponents</groupId>\r\n            <artifactId>httpclient</artifactId>\r\n            <version>4.5.13</version>\r\n            <scope>compile</scope>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.json</groupId>\r\n            <artifactId>json</artifactId>\r\n            <version>20230618</version>\r\n        </dependency>\r\n    </dependencies>\r\n\r\n    <build>\r\n        <plugins>\r\n            <plugin>\r\n                <groupId>org.apache.maven.plugins</groupId>\r\n                <artifactId>maven-compiler-plugin</artifactId>\r\n                <version>3.11.0</version>\r\n                <configuration>\r\n                    <source>20</source>\r\n                    <target>20</target>\r\n                </configuration>\r\n            </plugin>\r\n            \r\n            <plugin>\r\n                <groupId>org.openjfx</groupId>\r\n                <artifactId>javafx-maven-plugin</artifactId>\r\n                <version>0.0.8</version>\r\n                <executions>\r\n                    <execution>\r\n                        <!-- Default configuration for running with: mvn clean javafx:run -->\r\n                        <id>default-cli</id>\r\n                        <configuration>\r\n                            <mainClass>com.app.dictionaryproject/com.app.dictionaryproject.HelloApplication</mainClass>\r\n                            <launcher>app</launcher>\r\n                            <jlinkZipName>app</jlinkZipName>\r\n                            <jlinkImageName>app</jlinkImageName>\r\n                            <noManPages>true</noManPages>\r\n                            <stripDebug>true</stripDebug>\r\n                            <noHeaderFiles>true</noHeaderFiles>\r\n                        </configuration>\r\n\r\n                    </execution>\r\n                </executions>\r\n            </plugin>\r\n        </plugins>\r\n    </build>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+--- a/pom.xml	(revision 293123d01e2f5efcef130a169a2bd7694b404c5f)
++++ b/pom.xml	(date 1697990342834)
+@@ -16,6 +16,21 @@
+ 
+     <dependencies>
+         <dependency>
++            <groupId>com.fasterxml.jackson.core</groupId>
++            <artifactId>jackson-databind</artifactId>
++            <version>2.15.3</version>
++        </dependency>
++        <dependency>
++            <groupId>com.fasterxml.jackson.core</groupId>
++            <artifactId>jackson-annotations</artifactId>
++            <version>2.15.3</version>
++        </dependency>
++        <dependency>
++            <groupId>org.apache.httpcomponents</groupId>
++            <artifactId>httpmime</artifactId>
++            <version>4.5.14</version>
++        </dependency>
++        <dependency>
+             <groupId>org.openjfx</groupId>
+             <artifactId>javafx-controls</artifactId>
+             <version>20.0.1</version>
+@@ -54,15 +69,9 @@
+             <version>1.38.0</version>
+         </dependency>
+         <dependency>
+-            <groupId>org.apache.httpcomponents</groupId>
+-            <artifactId>httpclient</artifactId>
+-            <version>4.5.13</version>
+-            <scope>compile</scope>
+-        </dependency>
+-        <dependency>
+             <groupId>org.json</groupId>
+             <artifactId>json</artifactId>
+-            <version>20230618</version>
++            <version>20231013</version>
+         </dependency>
+     </dependencies>
+ 
+Index: src/main/java/com/app/dictionaryproject/service/DBRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.app.dictionaryproject.service;\r\n\r\nimport com.app.dictionaryproject.Models.Word;\r\n\r\nimport java.sql.*;\r\nimport java.util.ArrayList;\r\n\r\npublic class DBRepository {\r\n\r\n    DatabaseConnection databaseConnection ;\r\n    Connection connection;\r\n    public DBRepository() {\r\n        databaseConnection = new DatabaseConnection();\r\n        connection = databaseConnection.getConnection();\r\n        try {\r\n            PreparedStatement psCreateTable =\r\n                    connection.prepareStatement(\"CREATE TABLE IF NOT EXISTS word_definition \" +\r\n                            \"(id INT AUTO_INCREMENT PRIMARY KEY, \" +\r\n                            \"word VARCHAR(255) NOT NULL, phonetic VARCHAR(255),definitionWord VARCHAR(15000));\"\r\n                    );\r\n            psCreateTable.executeUpdate();\r\n        } catch (SQLException e) {\r\n            throw new RuntimeException(e);\r\n        }\r\n\r\n    }\r\n    public void insertWord(Word wordToInsert) {\r\n        try {\r\n            PreparedStatement psInsert =\r\n                    connection.prepareStatement(\"INSERT INTO \" +\r\n                            \"word_definition (word, phonetic, definitionWord) VALUES (?,?,?)\");\r\n            String word = wordToInsert.getWordTarget().strip();\r\n            String phonetic = wordToInsert.getPhonetic().strip();\r\n            String definitionWord = wordToInsert.getDefinitionWord().strip();\r\n            psInsert.setString(1,word);\r\n            psInsert.setString(2,phonetic);\r\n            psInsert.setString(3,definitionWord);\r\n            psInsert.executeUpdate();\r\n        } catch (SQLException e) {\r\n            System.out.println(\"KHONG HOPLE \"+wordToInsert.getWordTarget());\r\n            System.out.println(\"KHONG HOPLE \"+wordToInsert.getPhonetic());\r\n            System.out.println(\"KHONG HOPLE \"+wordToInsert.getDefinitionWord());\r\n            throw new RuntimeException(e);\r\n        }\r\n    }\r\n\r\n    public Word searchWord(String wordToSearch) {\r\n        String phonetic = \"\";\r\n        String definitionWord = \"\";\r\n        try {\r\n            String sql = \"SELECT * FROM word_definition WHERE word = ?\" ;\r\n            PreparedStatement psSearch = connection.prepareStatement(sql);\r\n            psSearch.setString(1, wordToSearch);\r\n            ResultSet resultSet = psSearch.executeQuery();\r\n            while (resultSet.next()) {\r\n                phonetic= resultSet.getNString(\"phonetic\");\r\n                definitionWord = resultSet.getNString(\"definitionWord\");\r\n            }\r\n        } catch (SQLException e) {\r\n            throw new RuntimeException(e);\r\n        }\r\n        return new Word(wordToSearch, phonetic, definitionWord);\r\n    }\r\n\r\n    public ArrayList<String> searchListWord(String wordToSearch) {\r\n        ArrayList<String> listWord = new ArrayList<>();\r\n        String word = \"\";\r\n        try {\r\n            String sql = \"SELECT * FROM word_definition WHERE word like ?\" ;\r\n            PreparedStatement psSearch = connection.prepareStatement(sql);\r\n            psSearch.setString(1, wordToSearch + \"%\");\r\n            ResultSet resultSet = psSearch.executeQuery();\r\n            while (resultSet.next()) {\r\n                word = resultSet.getNString(\"word\");\r\n                listWord.add(word);\r\n            }\r\n        } catch (SQLException e) {\r\n            throw new RuntimeException(e);\r\n        }\r\n        return listWord;\r\n    }\r\n//     public static void main(String[] args) {\r\n//        DBRepository db = new DBRepository();\r\n//        Word temp = db.searchWord(\"water\");\r\n//        System.out.println(temp.getWordTarget());\r\n//        System.out.println(temp.getPhonetic());\r\n//        System.out.println(temp.getDefinitionWord());\r\n//    }\r\n//    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/app/dictionaryproject/service/DBRepository.java b/src/main/java/com/app/dictionaryproject/service/DBRepository.java
+--- a/src/main/java/com/app/dictionaryproject/service/DBRepository.java	(revision 293123d01e2f5efcef130a169a2bd7694b404c5f)
++++ b/src/main/java/com/app/dictionaryproject/service/DBRepository.java	(date 1698045290149)
+@@ -66,7 +66,7 @@
+         ArrayList<String> listWord = new ArrayList<>();
+         String word = "";
+         try {
+-            String sql = "SELECT * FROM word_definition WHERE word like ?" ;
++            String sql = "SELECT word FROM word_definition WHERE word like ?" ;
+             PreparedStatement psSearch = connection.prepareStatement(sql);
+             psSearch.setString(1, wordToSearch + "%");
+             ResultSet resultSet = psSearch.executeQuery();
+@@ -79,6 +79,7 @@
+         }
+         return listWord;
+     }
++
+ //     public static void main(String[] args) {
+ //        DBRepository db = new DBRepository();
+ //        Word temp = db.searchWord("water");
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"1cdb1d42-53e6-4109-a5ce-54bbf035c186\" name=\"Changes\" comment=\"change database\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/..\" />\r\n  </component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHome\" value=\"Use Maven wrapper\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 2\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2W1NPFOgCHhEqr77sexFS7dXH74\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;main&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;E:/java_project/JavaFX_learn/DictionaryAppProject/src/main/resources/data&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"E:\\java_project\\JavaFX_learn\\DictionaryAppProject\\src\\main\\resources\\data\" />\r\n      <recent name=\"E:\\java_project\\JavaFX_learn\\DictionaryAppProject\\src\\main\\java\\com\\app\\dictionaryproject\\crawl_data\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"E:\\java_project\\JavaFX_learn\\DictionaryAppProject\\src\\main\\resources\\data\" />\r\n      <recent name=\"E:\\java_project\\JavaFX_learn\\DictionaryAppProject\\src\\main\\java\\com\\app\\dictionaryproject\" />\r\n    </key>\r\n    <key name=\"MoveClassesOrPackagesDialog.RECENTS_KEY\">\r\n      <recent name=\"com.app.dictionaryproject\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"1cdb1d42-53e6-4109-a5ce-54bbf035c186\" name=\"Changes\" comment=\"\" />\r\n      <created>1695896099515</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1695896099515</updated>\r\n      <workItem from=\"1695896100505\" duration=\"3258000\" />\r\n      <workItem from=\"1695901093247\" duration=\"1109000\" />\r\n      <workItem from=\"1695912215412\" duration=\"1000\" />\r\n      <workItem from=\"1695990519175\" duration=\"231000\" />\r\n      <workItem from=\"1695992429083\" duration=\"16000\" />\r\n      <workItem from=\"1695992729577\" duration=\"1031000\" />\r\n      <workItem from=\"1695993774800\" duration=\"6353000\" />\r\n      <workItem from=\"1696001767855\" duration=\"7810000\" />\r\n      <workItem from=\"1696031595708\" duration=\"50000\" />\r\n      <workItem from=\"1696034269185\" duration=\"101000\" />\r\n      <workItem from=\"1696040065308\" duration=\"253000\" />\r\n      <workItem from=\"1696041168149\" duration=\"781000\" />\r\n      <workItem from=\"1696050191975\" duration=\"1721000\" />\r\n      <workItem from=\"1696052963591\" duration=\"1676000\" />\r\n      <workItem from=\"1696060306336\" duration=\"4558000\" />\r\n      <workItem from=\"1696073362676\" duration=\"10777000\" />\r\n      <workItem from=\"1696093222470\" duration=\"582000\" />\r\n      <workItem from=\"1696111999041\" duration=\"14000\" />\r\n      <workItem from=\"1696168777120\" duration=\"1163000\" />\r\n      <workItem from=\"1696203817708\" duration=\"24000\" />\r\n      <workItem from=\"1696205008416\" duration=\"2655000\" />\r\n      <workItem from=\"1696210423460\" duration=\"23000\" />\r\n      <workItem from=\"1696210508852\" duration=\"600000\" />\r\n      <workItem from=\"1696233742100\" duration=\"178000\" />\r\n      <workItem from=\"1696233990341\" duration=\"1607000\" />\r\n      <workItem from=\"1696238248421\" duration=\"23000\" />\r\n      <workItem from=\"1696238285905\" duration=\"71000\" />\r\n      <workItem from=\"1696238367003\" duration=\"28000\" />\r\n      <workItem from=\"1696238400017\" duration=\"47000\" />\r\n      <workItem from=\"1696898980606\" duration=\"330000\" />\r\n      <workItem from=\"1696899315101\" duration=\"287000\" />\r\n      <workItem from=\"1696899635052\" duration=\"23000\" />\r\n      <workItem from=\"1696910633960\" duration=\"599000\" />\r\n      <workItem from=\"1696917539591\" duration=\"4812000\" />\r\n      <workItem from=\"1696927576171\" duration=\"2519000\" />\r\n      <workItem from=\"1697111133925\" duration=\"94000\" />\r\n      <workItem from=\"1697111265073\" duration=\"128000\" />\r\n      <workItem from=\"1697112293632\" duration=\"62000\" />\r\n      <workItem from=\"1697113066302\" duration=\"1219000\" />\r\n      <workItem from=\"1697167597199\" duration=\"24000\" />\r\n      <workItem from=\"1697194696607\" duration=\"148000\" />\r\n      <workItem from=\"1697287984996\" duration=\"105000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"update database\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1697113082303</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1697113082303</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"update database\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1697113115839</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1697113115839</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"change database\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1697288057863</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1697288057863</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"4\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"update database\" />\r\n    <MESSAGE value=\"change database\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"change database\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <breakpoint enabled=\"true\" type=\"java-exception\">\r\n          <properties class=\"java.nio.file.NoSuchFileException\" package=\"java.nio.file\" />\r\n          <option name=\"timeStamp\" value=\"1\" />\r\n        </breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 293123d01e2f5efcef130a169a2bd7694b404c5f)
++++ b/.idea/workspace.xml	(date 1698164836525)
+@@ -4,7 +4,18 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="1cdb1d42-53e6-4109-a5ce-54bbf035c186" name="Changes" comment="change database" />
++    <list default="true" id="1cdb1d42-53e6-4109-a5ce-54bbf035c186" name="Changes" comment="update database">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Controller/APIScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Controller/APIScreenController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Models/SpeechToText.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Models/SpeechToText.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Models/TextToText.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Models/TextToText.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/service/DBRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/service/DBRepository.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/service/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/service/DatabaseConnection.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/service/RecordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/service/RecordService.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/service/TranslateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/service/TranslateService.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -60,6 +71,8 @@
+       <recent name="E:\java_project\JavaFX_learn\DictionaryAppProject\src\main\java\com\app\dictionaryproject\crawl_data" />
+     </key>
+     <key name="MoveFile.RECENT_KEYS">
++      <recent name="E:\java_project\JavaFX_learn\DictionaryAppProject\src\main\java\com\app\dictionaryproject\service" />
++      <recent name="E:\java_project\JavaFX_learn\DictionaryAppProject\src\main\java\com\app\dictionaryproject\Models" />
+       <recent name="E:\java_project\JavaFX_learn\DictionaryAppProject\src\main\resources\data" />
+       <recent name="E:\java_project\JavaFX_learn\DictionaryAppProject\src\main\java\com\app\dictionaryproject" />
+     </key>
+@@ -67,6 +80,26 @@
+       <recent name="com.app.dictionaryproject" />
+     </key>
+   </component>
++  <component name="RunManager">
++    <configuration name="MainScreen" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="com.app.dictionaryproject.MainScreen" />
++      <module name="DictionaryProject" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="com.app.dictionaryproject.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <recent_temporary>
++      <list>
++        <item itemvalue="Application.MainScreen" />
++      </list>
++    </recent_temporary>
++  </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+@@ -117,6 +150,34 @@
+       <workItem from="1697167597199" duration="24000" />
+       <workItem from="1697194696607" duration="148000" />
+       <workItem from="1697287984996" duration="105000" />
++      <workItem from="1697288104059" duration="228000" />
++      <workItem from="1697524848364" duration="1286000" />
++      <workItem from="1697535200238" duration="390000" />
++      <workItem from="1697535607094" duration="6000" />
++      <workItem from="1697595339469" duration="1815000" />
++      <workItem from="1697684962780" duration="118000" />
++      <workItem from="1697694471988" duration="21000" />
++      <workItem from="1697969332163" duration="5000" />
++      <workItem from="1697982883389" duration="70000" />
++      <workItem from="1697982955754" duration="1000" />
++      <workItem from="1697984026582" duration="13000" />
++      <workItem from="1697984049336" duration="3000" />
++      <workItem from="1697984054247" duration="8000" />
++      <workItem from="1697984079153" duration="3000" />
++      <workItem from="1697984093344" duration="3000" />
++      <workItem from="1697990011101" duration="100000" />
++      <workItem from="1697990127969" duration="83000" />
++      <workItem from="1697990216889" duration="55000" />
++      <workItem from="1697990293745" duration="132000" />
++      <workItem from="1697990432583" duration="440000" />
++      <workItem from="1697991115278" duration="125000" />
++      <workItem from="1697991768549" duration="26000" />
++      <workItem from="1698024410444" duration="14000" />
++      <workItem from="1698041761187" duration="848000" />
++      <workItem from="1698043996107" duration="2392000" />
++      <workItem from="1698046414266" duration="479000" />
++      <workItem from="1698075926450" duration="639000" />
++      <workItem from="1698164630712" duration="207000" />
+     </task>
+     <task id="LOCAL-00001" summary="update database">
+       <option name="closed" value="true" />
+@@ -142,7 +203,23 @@
+       <option name="project" value="LOCAL" />
+       <updated>1697288057863</updated>
+     </task>
+-    <option name="localTasksCounter" value="4" />
++    <task id="LOCAL-00004" summary="change database">
++      <option name="closed" value="true" />
++      <created>1697288135983</created>
++      <option name="number" value="00004" />
++      <option name="presentableId" value="LOCAL-00004" />
++      <option name="project" value="LOCAL" />
++      <updated>1697288135983</updated>
++    </task>
++    <task id="LOCAL-00005" summary="change database">
++      <option name="closed" value="true" />
++      <created>1697288237388</created>
++      <option name="number" value="00005" />
++      <option name="presentableId" value="LOCAL-00005" />
++      <option name="project" value="LOCAL" />
++      <updated>1697288237388</updated>
++    </task>
++    <option name="localTasksCounter" value="6" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+Index: src/main/java/module-info.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>module com.app.dictionaryproject {\r\n    requires javafx.controls;\r\n    requires javafx.fxml;\r\n    requires java.sql;\r\n    requires mysql.connector.j;\r\n    requires playwright;\r\n    requires org.apache.httpcomponents.httpclient;\r\n    requires org.apache.httpcomponents.httpcore;\r\n    requires org.json;\r\n\r\n    opens com.app.dictionaryproject to javafx.fxml;\r\n    exports com.app.dictionaryproject;\r\n    exports com.app.dictionaryproject.Controller;\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/module-info.java b/src/main/java/module-info.java
+--- a/src/main/java/module-info.java	(revision 293123d01e2f5efcef130a169a2bd7694b404c5f)
++++ b/src/main/java/module-info.java	(date 1697990521304)
+@@ -7,6 +7,8 @@
+     requires org.apache.httpcomponents.httpclient;
+     requires org.apache.httpcomponents.httpcore;
+     requires org.json;
++    requires org.apache.httpcomponents.httpmime;
++    requires java.desktop;
+ 
+     opens com.app.dictionaryproject to javafx.fxml;
+     exports com.app.dictionaryproject;
+Index: src/main/java/com/app/dictionaryproject/service/DatabaseConnection.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.app.dictionaryproject.service;\r\n\r\nimport java.sql.Connection;\r\nimport java.sql.DriverManager;\r\nimport java.sql.SQLException;\r\n\r\npublic class DatabaseConnection {\r\n    public Connection getConnection() {\r\n        String databaseName =\"dictionaryapp\"; // điền tên scheme\r\n        String port = \"3306\";\r\n        String databaseUser = \"root\";\r\n        String databasePassword = \"04032004\";\r\n\r\n        String url=\"jdbc:mysql://localhost:\"+ port + \"/\"+databaseName;\r\n        //System.out.println(url);\r\n        Connection databaseLink;\r\n        try {\r\n            Class.forName(\"com.mysql.cj.jdbc.Driver\");\r\n            try {\r\n                databaseLink = DriverManager.getConnection(url,databaseUser,databasePassword);\r\n            } catch (SQLException e) {\r\n                throw new RuntimeException(e);\r\n            }\r\n        } catch (ClassNotFoundException e) {\r\n            throw new RuntimeException(e);\r\n        }\r\n        return databaseLink;\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/app/dictionaryproject/service/DatabaseConnection.java b/src/main/java/com/app/dictionaryproject/service/DatabaseConnection.java
+--- a/src/main/java/com/app/dictionaryproject/service/DatabaseConnection.java	(revision 293123d01e2f5efcef130a169a2bd7694b404c5f)
++++ b/src/main/java/com/app/dictionaryproject/service/DatabaseConnection.java	(date 1697991778714)
+@@ -7,9 +7,9 @@
+ public class DatabaseConnection {
+     public Connection getConnection() {
+         String databaseName ="dictionaryapp"; // điền tên scheme
+-        String port = "3306";
++        String port = "3309";
+         String databaseUser = "root";
+-        String databasePassword = "04032004";
++        String databasePassword = "12345678";
+ 
+         String url="jdbc:mysql://localhost:"+ port + "/"+databaseName;
+         //System.out.println(url);
