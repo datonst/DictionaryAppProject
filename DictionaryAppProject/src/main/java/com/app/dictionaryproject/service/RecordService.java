@@ -1,4 +1,4 @@
-package com.example.jademo;
+package com.app.dictionaryproject.service;
 
 import javax.sound.sampled.*;
 import java.io.File;

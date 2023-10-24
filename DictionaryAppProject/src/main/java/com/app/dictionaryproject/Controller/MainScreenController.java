@@ -2,7 +2,6 @@ package com.app.dictionaryproject.Controller;
 
 
 
-
 //import com.app.dictionaryproject.Controller.ResultSearchController;
 import com.app.dictionaryproject.Models.Word;
 import com.app.dictionaryproject.service.DBRepository;
@@ -56,53 +55,32 @@ public class MainScreenController {
     // chuyển khi chọn nút tìm kiếm
     public void Submit(ActionEvent event) {
         String name = Height.getText();
+            if (!name.isEmpty()) {
 
-//        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//        alert.setTitle("Name");
-//        alert.setContentText("Your name: " + name);
-//        alert.show();
-//
-//        String selectedValue = listWord.getSelectionModel().getSelectedItem();
-        if (!Objects.equals(name, "")) {
-
-        if (!name.isEmpty()) {
-
-            // Handle the selected item here
-            try {
-                FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/ResultSearch.fxml"));
-                root = Loader.load();
+                // Handle the selected item here
+                try {
+                    FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/ResultSearch.fxml"));
+                    root = Loader.load();
 
 
-                ResultSearchController controller = Loader.getController();
-                DBRepository search = new DBRepository();
-                if (search.searchWord(name) != null) {
+                    ResultSearchController controller = Loader.getController();
+                    DBRepository search = new DBRepository();
                     controller.initialize(search.searchWord(name));
+
+                    // Lấy từ khi search
+//                ResultSearchController controller = Loader.getController();
+//                controller.initialize(new Word(name,"/122/", "nvv"));
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     scene = new Scene(root);
                     stage.setScene(scene);
                     stage.show();
-                } else {
-                    // xử lý trường hợp không tìm thấy từ trong từ điển
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
-
-                // Lấy từ khi search
-//                ResultSearchController controller = Loader.getController();
-//                controller.initialize(new Word(name,"/122/", "nvv"));
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-
-            } catch (IOException e) {
-                throw new RuntimeException(e);
             }
-        } else {
-            // xử lý trường hợp không nhập gì vào text Field
-        }
-
 
     }
-
     public void SubmitEnter(KeyEvent event) {
         String name = Height.getText();
 
@@ -111,9 +89,11 @@ public class MainScreenController {
             try {
                 FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/ResultSearch.fxml"));
                 root = Loader.load();
-                // Lấy từ khi search
-//                ResultSearchController controller = Loader.getController();
-//                controller.initialize(new Word(name,"/122/", "nvv"));
+
+                ResultSearchController controller = Loader.getController();
+                DBRepository search = new DBRepository();
+
+                controller.initialize(search.searchWord(name));
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
@@ -210,7 +190,7 @@ public class MainScreenController {
 
     public void handleKeyPress(KeyEvent event) throws IOException {
         if (event.getCode() == KeyCode.ENTER) {
-           // Submit(event);
+            SubmitEnter(event);
         }
     }
 

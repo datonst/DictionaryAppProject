@@ -57,11 +57,11 @@ public class DBRepository {
 
     public  Word searchWord(String wordToSearch) {
         String word = "";
-        String phonetic = "";
-        String wordType = "";
-        String synonym = "";
-        String antonym = "";
-        String definitionWord = "";
+        String phonetic = "/null/";
+        String wordType = "N/A";
+        String synonym = "N/A";
+        String antonym = "N/A";
+        String definitionWord = "N/A";
         try {
             String sql = "SELECT * FROM dict WHERE word = ?" ;
             PreparedStatement psSearch = connection.prepareStatement(sql);
@@ -79,7 +79,7 @@ public class DBRepository {
             throw new RuntimeException(e);
         }
         if (word.isEmpty()){
-            return null;
+            return new Word(wordToSearch, phonetic,wordType, synonym, antonym, definitionWord);
         };
         return new Word(word, phonetic,wordType, synonym, antonym, definitionWord);
     }
@@ -101,17 +101,17 @@ public class DBRepository {
         }
         return listWord;
     }
-     public static void main(String[] args) {
-        DBRepository db = new DBRepository();
-        String tmp;
-         Scanner sc = new Scanner(System.in);
-         tmp = sc.nextLine();
-        Word temp = db.searchWord(tmp);
-        System.out.println(temp.getWord_target());
-        System.out.println(temp.getPhonetic());
-        System.out.println(temp.getWordType().replace("\n ", ","));
-        System.out.println(temp.getAntonym());
-         System.out.println(temp.getSynonym());
-        System.out.println(temp.getDefinitionWord());
-    }
+//     public static void main(String[] args) {
+//        DBRepository db = new DBRepository();
+//        String tmp;
+//         Scanner sc = new Scanner(System.in);
+//         tmp = sc.nextLine();
+//        Word temp = db.searchWord(tmp);
+//        System.out.println(temp.getWord_target());
+//        System.out.println(temp.getPhonetic());
+//        System.out.println(temp.getWordType().replace("\n ", ","));
+//        System.out.println(temp.getAntonym());
+//         System.out.println(temp.getSynonym());
+//        System.out.println(temp.getDefinitionWord());
+//    }
 }

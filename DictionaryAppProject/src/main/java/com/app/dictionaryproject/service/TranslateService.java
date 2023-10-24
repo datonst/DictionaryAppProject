@@ -1,7 +1,7 @@
-package com.example.jademo;
+package com.app.dictionaryproject.service;
 
-import com.example.jademo.Model.SpeechToText;
-import com.example.jademo.Model.TextToText;
+import com.app.dictionaryproject.Models.SpeechToText;
+import com.app.dictionaryproject.Models.TextToText;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 

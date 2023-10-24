@@ -29,21 +29,24 @@ public class ResultSearchController {
     }
     @FXML
     public Label words = new Label();
+    @FXML
+    public Label phonetic = new Label();
     public ScrollPane explain = new ScrollPane();
     @FXML
     public void initialize (Word word) {
         if (word != null) {
-            words.setText(word.getWord_target() + word.getPhonetic());
-            String ex = "Loại từ: " + word.getWordType().replace("\n", ",") + "\n"
-                      + "Từ đồng nghĩa: " + word.getSynonym().replace(" ,", ", ") + "\n"
-                      + "Từ trái nghĩa: " + word.getAntonym().replace(" ,", ", ") + "\n";
-            Label temp = new Label(ex + word.getDefinitionWord());
+            words.setText(word.getWord_target());
+            phonetic.setText("Phonetic: " + word.getPhonetic());
+            String ex = "Loại từ: " + word.getWordType().replace("\n", ",") + "\n\n";
+            String other = "Từ đồng nghĩa: " + word.getSynonym().replace(" ,", ", ") + "\n\n"
+                      + "Từ trái nghĩa: " + word.getAntonym().replace(" ,", ", ") + "\n\n";
+            Label temp = new Label(ex + word.getDefinitionWord() + "\n\n" + other);
             explain.setContent(temp);
         }
     }
     public void textToSpeech(String textToSpeak) {
         // thay đổi theo từng máy của mọi người
-        String command = "cscript.exe /nologo  C:\\Users\\Admin\\Documents\\GitHub\\DictionaryAppProject\\DictionaryAppProject\\src\\main\\resources\\data\\TTSAPI.vbs \"" + textToSpeak + "\"";
+        String command = "cscript.exe /nologo  D:\\DictionaryAppProject\\DictionaryAppProject\\src\\main\\resources\\data\\TTSAPI.vbs \"" + textToSpeak + "\"";
 
         try {
             Process process = Runtime.getRuntime().exec(command);
@@ -60,7 +63,7 @@ public class ResultSearchController {
     }
     public void speech(ActionEvent event) throws IOException {
         String word = words.getText();
-        word = word.substring(0,word.indexOf("/"));
+        //word = word.substring(0,word.indexOf("\t"));
         textToSpeech(word);
     }
 }

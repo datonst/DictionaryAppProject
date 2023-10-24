@@ -24,5 +24,17 @@
     -fx-background-color: white;
     -fx-text-fill:rgb(99, 122, 242);
     -fx-padding: 10px 15px;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+
+}
+.showWordEx {
+    -fx-background-color: white;
+    -fx-text-fill:rgb(99, 122, 242);
+    -fx-padding: 10px 15px;
+    -fx-letter-spacing: 4px;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
     -fx-background-radius: 10px;
 }
