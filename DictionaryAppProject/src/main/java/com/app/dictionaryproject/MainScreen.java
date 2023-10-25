@@ -18,7 +18,8 @@ public class MainScreen extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainScreen.class.getResource("MainScreen.fxml"));
-        String iconPath = "D:\\DictionaryAppProject\\DictionaryAppProject\\src\\main\\resources\\Style\\icon.png";
+        String iconPath = System.getProperty("user.dir")
+                + "\\src\\main\\resources\\Style\\icon.png";
         Image icon = new Image(iconPath);
         primaryStage.getIcons().add(icon);
         Scene scene = new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
