@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import com.app.dictionaryproject.service.TranslateService;
+import com.app.dictionaryproject.Controller.ResultSearchController;
 
 import java.io.IOException;
 
@@ -21,6 +22,8 @@ public class APIScreenController {
     public Parent root;
 
     public Button back = new Button();
+    public Button speakerInput= new Button();
+    public Button speakerOutput = new Button();
     public TextArea inputText = new TextArea();
     public TextArea outputText = new TextArea();
     TranslateService translateService = new TranslateService();
@@ -38,19 +41,43 @@ public class APIScreenController {
             outputLanguage.setText(eng);
         }
     }
-    public void translateViToEng(ActionEvent event) {
+    public void translate(ActionEvent event) {
         String text = inputText.getText();
         try {
-//            outputText.setText(translateService.getVietnameseText(text));
-            System.out.println(translateService.getVietnameseText(text));
-            outputText.setText("translated");
+            if(inputLanguage.getText().equals(eng)) {
+                outputText.setText(translateService.getVietnameseText(text));
+            } else {
+                outputText.setText(translateService.getEnglishText(text));
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void translateEngToVi() {
+    public void TextToSpeech(String textToSpeak) {
+        // thay đổi theo từng máy của mọi người
+        String command = "cscript.exe /nologo  "
+                + System.getProperty("user.dir")
+                + "\\src\\main\\resources\\data\\TTSAPI.vbs \"" + textToSpeak + "\"";
 
+        try {
+            Process process = Runtime.getRuntime().exec(command);
+            int exitCode = process.waitFor();
+
+            if (exitCode == 0) {
+                //System.out.println("Text spoken successfully.");
+            } else {
+                System.err.println("Error occurred while speaking the text.");
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    public void speakerTextOutput(ActionEvent event){
+        TextToSpeech(outputText.getText());
+    }
+    public void speakerTextInput(ActionEvent event){
+        TextToSpeech(inputText.getText());
     }
 
     public void  switchToMain(ActionEvent event) throws IOException {
