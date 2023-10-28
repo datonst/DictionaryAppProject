@@ -42,3 +42,13 @@
     -fx-background-radius: 10px;
 }
 
+.gameProcess {
+    -fx-font-family: "Arial";
+    -fx-font-size: 20px;
+    -fx-text-fill:rgb(99, 122, 242);
+    -fx-font-weight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-accent: green;
+}
+
