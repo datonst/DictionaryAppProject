@@ -21,6 +21,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 import javafx.scene.Node;
@@ -162,7 +164,7 @@ public class MainScreenController {
             if (selectedValue != null) {
                 // Handle the selected item here
                 try {
-                    FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/ResultSearch.fxml"));
+                    FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/MainScreen.fxml"));
                     root = Loader.load();
                     ResultSearchController controller = Loader.getController();
                     DBRepository search = new DBRepository();
@@ -188,6 +190,9 @@ public class MainScreenController {
     }
 
     public void addSaveWord(String newValue) {
+
+
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/data/saveWord.txt", true))) {
             // Append the new word to the file
             if(!checkUnique.contains(newValue)) {

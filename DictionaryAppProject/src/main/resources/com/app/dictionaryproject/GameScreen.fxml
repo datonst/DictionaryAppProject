@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane onKeyPressed="#handleKeyPress" prefHeight="650.0" prefWidth="736.0" stylesheets="@../../../Style/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.dictionaryproject.Controller.GameScreenController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="174.0" layoutY="29.0" prefHeight="108.0" prefWidth="388.0" styleClass="mainTitle" stylesheets="@../../../Style/style.css" text="Find Word" />
-      <TextField fx:id="inputWord" layoutX="166.0" layoutY="219.0" prefHeight="36.0" prefWidth="430.0" />
-      <ProgressBar fx:id="progressBar" layoutX="132.0" layoutY="152.0" prefHeight="36.0" prefWidth="497.0" progress="0.0" styleClass="gameProcess" stylesheets="@../../../Style/ButtonStyles.css" />
+      <TextField fx:id="inputWord" layoutX="156.0" layoutY="212.0" prefHeight="36.0" prefWidth="430.0" />
+      <ProgressBar fx:id="progressBar" layoutX="119.0" layoutY="157.0" prefHeight="36.0" prefWidth="497.0" progress="0.0" styleClass="gameProcess" stylesheets="@../../../Style/ButtonStyles.css" />
       <Button layoutX="41.0" layoutY="40.0" mnemonicParsing="false" onAction="#switchToMain" styleClass="submit" stylesheets="@../../../Style/ButtonStyles.css" text="Back" />
       <Button layoutX="328.0" layoutY="602.0" mnemonicParsing="false" onAction="#increaseProgress" prefHeight="42.0" prefWidth="86.0" styleClass="submit" stylesheets="@../../../Style/ButtonStyles.css" text="Check" />
-      <ScrollPane fx:id="explain" layoutX="136.0" layoutY="278.0" prefHeight="316.0" prefWidth="490.0">
+      <ScrollPane fx:id="explain" layoutX="113.0" layoutY="264.0" prefHeight="331.0" prefWidth="516.0">
          <content>
-            <Label fx:id="temp" alignment="CENTER" contentDisplay="CENTER" prefHeight="313.0" prefWidth="486.0" styleClass="explain" stylesheets="@../../../Style/style.css" text="Label" />
+            <Label fx:id="temp" alignment="CENTER" contentDisplay="CENTER" prefHeight="328.0" prefWidth="513.0" styleClass="explain" stylesheets="@../../../Style/style.css" text="Label" />
          </content></ScrollPane>
+      <Button layoutX="595.0" layoutY="214.0" mnemonicParsing="false" onAction="#speech" opacity="0.48" prefHeight="30.0" prefWidth="42.0" styleClass="background" stylesheets="@../../../Style/ButtonStyles.css">
+         <graphic>
+            <ImageView fitHeight="28.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Style/sound.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

@@ -7,14 +7,14 @@
 <AnchorPane prefHeight="650.0" prefWidth="736.0" styleClass="background" stylesheets="@../../../Style/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.dictionaryproject.Controller.APIScreenController">
    <children>
       <Button layoutX="33.0" layoutY="38.0" mnemonicParsing="false" onAction="#switchToMain" styleClass="submit" stylesheets="@../../../Style/ButtonStyles.css" text="Back" />
-      <Label layoutX="161.0" layoutY="64.0" styleClass="mainTitle" stylesheets="@../../../Style/style.css" text="Translate API" />
-      <Label fx:id="inputLanguage" alignment="CENTER" layoutX="32.0" layoutY="169.0" prefHeight="23.0" prefWidth="130.0" styleClass="word" stylesheets="@../../../Style/style.css" text="Vietnamese" />
-      <Label fx:id="outputLanguage" alignment="CENTER" layoutX="33.0" layoutY="421.0" prefHeight="23.0" prefWidth="130.0" styleClass="word" text="English" />
-      <Button layoutX="309.0" layoutY="415.0" mnemonicParsing="false" onAction="#translate" prefHeight="36.0" prefWidth="123.0" styleClass="explain" text="Translate" />
-      <TextArea fx:id="outputText" layoutX="33.0" layoutY="459.0" prefHeight="183.0" prefWidth="676.0" styleClass="explain" />
-      <TextArea fx:id="inputText" layoutX="33.0" layoutY="218.0" prefHeight="183.0" prefWidth="676.0" styleClass="explain" />
-      <Button fx:id="switchLanguage" layoutX="609.0" layoutY="415.0" mnemonicParsing="false" onAction="#switchLang" styleClass="explain" text="Switch" />
-      <Button layoutX="648.0" layoutY="351.0" mnemonicParsing="false" onAction="#speakerTextInput" prefHeight="41.0" prefWidth="27.0" styleClass="speaker" stylesheets="@../../../Style/ButtonStyles.css">
+      <Label layoutX="147.0" layoutY="50.0" styleClass="mainTitle" stylesheets="@../../../Style/style.css" text="Translate API" />
+      <Label fx:id="inputLanguage" alignment="CENTER" layoutX="32.0" layoutY="146.0" prefHeight="23.0" prefWidth="130.0" styleClass="word" stylesheets="@../../../Style/style.css" text="Vietnamese" />
+      <Label fx:id="outputLanguage" alignment="CENTER" layoutX="32.0" layoutY="381.0" prefHeight="23.0" prefWidth="130.0" styleClass="word" text="English" />
+      <Button layoutX="306.0" layoutY="375.0" mnemonicParsing="false" onAction="#translate" prefHeight="36.0" prefWidth="123.0" styleClass="explain" text="Translate" />
+      <TextArea fx:id="outputText" layoutX="30.0" layoutY="425.0" prefHeight="183.0" prefWidth="676.0" styleClass="explain" />
+      <TextArea fx:id="inputText" layoutX="33.0" layoutY="181.0" prefHeight="183.0" prefWidth="676.0" styleClass="explain" />
+      <Button fx:id="switchLanguage" layoutX="609.0" layoutY="375.0" mnemonicParsing="false" onAction="#switchLang" styleClass="explain" text="Switch" />
+      <Button layoutX="655.0" layoutY="314.0" mnemonicParsing="false" onAction="#speakerTextInput" prefHeight="41.0" prefWidth="27.0" styleClass="speaker" stylesheets="@../../../Style/ButtonStyles.css">
          <graphic>
             <ImageView fitHeight="23.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -22,7 +22,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button layoutX="655.0" layoutY="600.0" mnemonicParsing="false" onAction="#speakerTextOutput" prefHeight="41.0" prefWidth="27.0" styleClass="speaker" stylesheets="@../../../Style/ButtonStyles.css">
+      <Button layoutX="648.0" layoutY="557.0" mnemonicParsing="false" onAction="#speakerTextOutput" prefHeight="41.0" prefWidth="27.0" styleClass="speaker" stylesheets="@../../../Style/ButtonStyles.css">
          <graphic>
             <ImageView fitHeight="23.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
