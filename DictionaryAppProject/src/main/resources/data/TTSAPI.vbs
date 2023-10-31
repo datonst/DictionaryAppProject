@@ -8,11 +8,11 @@
 ' End If 
 Set args = Wscript.Arguments
 Set voice = CreateObject("SAPI.SpVoice")
-voice.Rate = 0.1
+voice.Rate = 0.5
 voice.Volume = 90
-
+'Microsoft Zira Desktop - English (United States)
 For Each objVoice in voice.GetVoices
-    If objVoice.GetDescription = "Microsoft Zira Desktop - English (United States)" Then
+    If objVoice.GetDescription = "Microsoft Zira Desktop - English (United Kingdom)" Then
         Set voice.Voice = objVoice
         Exit For
     End If

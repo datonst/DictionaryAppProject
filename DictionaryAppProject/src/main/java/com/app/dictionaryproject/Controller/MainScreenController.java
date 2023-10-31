@@ -17,8 +17,12 @@ import javafx.scene.control.TextField;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 import javafx.scene.Node;
@@ -45,6 +49,7 @@ public class MainScreenController {
     @FXML
     public Button searchButton = new Button();
 
+    private static Set<String> checkUnique = new HashSet<>();
     //Các biến để chuyển đổi qua lịa các màn hình
     public Scene scene;
     public Stage stage;
@@ -92,8 +97,16 @@ public class MainScreenController {
 
                 ResultSearchController controller = Loader.getController();
                 DBRepository search = new DBRepository();
-
-                controller.initialize(search.searchWord(name));
+                ArrayList<String> listWordFound = search.searchListWord(name);
+                if(search.searchWord(name).getDefinitionWord().equals("not found") && !listWordFound.isEmpty()) {
+                    controller.initialize(search.searchWord(listWordFound.get(0)));
+                    addSaveWord(listWordFound.get(0));
+                } else {
+                    controller.initialize(search.searchWord(name));
+                }
+                if(!search.searchWord(name).getDefinitionWord().equals("not found")){
+                    addSaveWord(name);
+                }
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
@@ -151,7 +164,7 @@ public class MainScreenController {
             if (selectedValue != null) {
                 // Handle the selected item here
                 try {
-                    FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/ResultSearch.fxml"));
+                    FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/MainScreen.fxml"));
                     root = Loader.load();
                     ResultSearchController controller = Loader.getController();
                     DBRepository search = new DBRepository();
@@ -169,25 +182,28 @@ public class MainScreenController {
 
         //Lưu các từ đã tìm vào file
 //    ------------------------------------------------
-//        listWord.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-//            // Handle selection change here
-////            try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/data/saveWord.txt", true))) {
-////                // Append the new word to the file
-////                writer.write(newValue);
-////                writer.newLine();
-////            } catch (IOException e) {
-////                System.out.println("Error: " + e.getMessage());
-////            }
-//            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//            alert.setTitle("Items");
-//            alert.setHeaderText("Result search: ");
-//            alert.setContentText("Item name: " + newValue);
-//            alert.show();
-//
-//        });
+        listWord.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            // Handle selection change here
+            addSaveWord(newValue);
+
+        });
     }
 
+    public void addSaveWord(String newValue) {
 
+
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/data/saveWord.txt", true))) {
+            // Append the new word to the file
+            if(!checkUnique.contains(newValue)) {
+                writer.write(newValue);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        checkUnique.add(newValue);
+    }
     public void handleKeyPress(KeyEvent event) throws IOException {
         if (event.getCode() == KeyCode.ENTER) {
             SubmitEnter(event);
