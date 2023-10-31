@@ -7,6 +7,8 @@ module com.app.dictionaryproject {
     requires org.apache.httpcomponents.httpclient;
     requires org.apache.httpcomponents.httpcore;
     requires org.json;
+    requires httpmime;
+    requires java.desktop;
 
     opens com.app.dictionaryproject to javafx.fxml;
     exports com.app.dictionaryproject;
