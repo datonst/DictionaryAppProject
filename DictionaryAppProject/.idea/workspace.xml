@@ -6,14 +6,22 @@
   <component name="ChangeListManager">
     <list default="true" id="1cdb1d42-53e6-4109-a5ce-54bbf035c186" name="Changes" comment="change database">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_22_2023_10_53_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_22_2023_10_53_PM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Controller/APIScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Controller/APIScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Controller/EditScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Controller/EditScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Controller/GameScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Controller/GameScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Controller/MainScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Controller/MainScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Controller/ResultSearchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Controller/ResultSearchController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/MainScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/MainScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Models/TextToText.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Models/TextToText.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/service/DBRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/service/DBRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/service/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/service/DatabaseConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/service/TranslateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/service/TranslateService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/app/dictionaryproject/APIScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/app/dictionaryproject/APIScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Style/ButtonStyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Style/ButtonStyles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Style/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Style/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/app/dictionaryproject/EditScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/app/dictionaryproject/EditScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/data/saveWord.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data/saveWord.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,26 +54,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Programming/OOP/OASIS&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/DictionaryAppProject/DictionaryAppProject",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\java_project\JavaFX_learn\DictionaryAppProject\src\main\resources\data" />
@@ -79,13 +87,26 @@
       <recent name="com.app.dictionaryproject" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.MainScreen">
     <configuration name="MainScreen" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.app.dictionaryproject.MainScreen" />
       <module name="DictionaryProject" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.app.dictionaryproject.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TranslateService" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.app.dictionaryproject.service.TranslateService" />
+      <module name="DictionaryProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.app.dictionaryproject.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -109,6 +130,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainScreen" />
+        <item itemvalue="Application.TranslateService" />
       </list>
     </recent_temporary>
   </component>
@@ -176,15 +198,37 @@
       <workItem from="1698034699381" duration="4846000" />
       <workItem from="1698045251789" duration="99000" />
       <workItem from="1698050104920" duration="26000" />
-      <workItem from="1698165628895" duration="1116000" />
-      <workItem from="1698213472990" duration="28000" />
-      <workItem from="1698220135163" duration="1679000" />
-      <workItem from="1698224523951" duration="2000" />
-      <workItem from="1698225810294" duration="587000" />
-      <workItem from="1698226402209" duration="61000" />
-      <workItem from="1698249082487" duration="11000" />
-      <workItem from="1698284598395" duration="2000" />
-      <workItem from="1698771466251" duration="324000" />
+      <workItem from="1698074941830" duration="5637000" />
+      <workItem from="1698140206913" duration="5181000" />
+      <workItem from="1698161003821" duration="6159000" />
+      <workItem from="1698205714514" duration="1521000" />
+      <workItem from="1698216967656" duration="519000" />
+      <workItem from="1698220913313" duration="317000" />
+      <workItem from="1698221369023" duration="123000" />
+      <workItem from="1698225219267" duration="24000" />
+      <workItem from="1698247863633" duration="468000" />
+      <workItem from="1698248348736" duration="1113000" />
+      <workItem from="1698249570719" duration="746000" />
+      <workItem from="1698287797552" duration="61000" />
+      <workItem from="1698292128886" duration="3528000" />
+      <workItem from="1698308748550" duration="3216000" />
+      <workItem from="1698407772984" duration="432000" />
+      <workItem from="1698486551363" duration="882000" />
+      <workItem from="1698638486559" duration="30000" />
+      <workItem from="1698641192459" duration="7359000" />
+      <workItem from="1698757111930" duration="2411000" />
+      <workItem from="1698764339583" duration="27000" />
+      <workItem from="1698764852753" duration="4208000" />
+      <workItem from="1698819376946" duration="1859000" />
+      <workItem from="1698837694641" duration="2727000" />
+      <workItem from="1698846467333" duration="1551000" />
+      <workItem from="1698848310367" duration="5828000" />
+      <workItem from="1698891072371" duration="530000" />
+      <workItem from="1698891644318" duration="287000" />
+      <workItem from="1698894568524" duration="2414000" />
+      <workItem from="1698910024513" duration="1040000" />
+      <workItem from="1698927903699" duration="34000" />
+      <workItem from="1699022381081" duration="596000" />
     </task>
     <task id="LOCAL-00001" summary="update database">
       <option name="closed" value="true" />
