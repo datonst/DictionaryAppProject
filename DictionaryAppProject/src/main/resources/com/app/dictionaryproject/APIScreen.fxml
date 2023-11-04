@@ -31,5 +31,7 @@
             </ImageView>
          </graphic>
       </Button>
+      <Button layoutX="254.0" layoutY="194.0" mnemonicParsing="false" onAction="#voiceToText" text="yeah" />
+      <Button fx:id="recordButton" layoutX="228.0" layoutY="248.0" mnemonicParsing="false" text="Start" />
    </children>
 </AnchorPane>
