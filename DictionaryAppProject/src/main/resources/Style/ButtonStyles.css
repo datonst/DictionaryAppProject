@@ -27,7 +27,15 @@
     -fx-font-size: 15px;
     -fx-font-weight: bold;
     -fx-background-radius: 10px;
+}
 
+.edit {
+    -fx-background-color: rgb(99, 122, 242);
+    -fx-text-fill: white;
+    -fx-padding: 10px 15px;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
 }
 .showWordEx {
     -fx-background-color: white;

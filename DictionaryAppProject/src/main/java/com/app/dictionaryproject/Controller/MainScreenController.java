@@ -85,6 +85,7 @@ public class MainScreenController {
                 }
             }
 
+
     }
     public void SubmitEnter(KeyEvent event) {
         String name = Height.getText();
@@ -164,7 +165,7 @@ public class MainScreenController {
             if (selectedValue != null) {
                 // Handle the selected item here
                 try {
-                    FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/MainScreen.fxml"));
+                    FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/ResultSearch.fxml"));
                     root = Loader.load();
                     ResultSearchController controller = Loader.getController();
                     DBRepository search = new DBRepository();
@@ -192,7 +193,6 @@ public class MainScreenController {
     public void addSaveWord(String newValue) {
 
 
-
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/data/saveWord.txt", true))) {
             // Append the new word to the file
             if(!checkUnique.contains(newValue)) {
@@ -204,11 +204,7 @@ public class MainScreenController {
         }
         checkUnique.add(newValue);
     }
-    public void handleKeyPress(KeyEvent event) throws IOException {
-        if (event.getCode() == KeyCode.ENTER) {
-            SubmitEnter(event);
-        }
-    }
+
 
     // chuyển sang các option khác
     public void switchToGame(ActionEvent event) throws IOException {
