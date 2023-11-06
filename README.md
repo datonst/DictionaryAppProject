@@ -1,4 +1,4 @@
-# OOP Class Major Assignment: English-Vietnamese Dictionary
+# Major Assignment: English-Vietnamese Dictionary
 
 Welcome to our major assignment in the Object-Oriented Programming (OOP) class (INT2204 - 25) at the University of Engineering and Technology (UET). In this project, we have developed an English-Vietnamese dictionary application using Java programming language, with various features to enhance language learning and exploration.
 
