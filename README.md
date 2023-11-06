@@ -37,9 +37,16 @@ This dictionary application is designed to provide users with a seamless experie
 To run the application locally and explore its features, follow these steps:
 
 1. Clone the repository to your local machine:
+   
+`git clone <https://github.com/datonst/DictionaryAppProject>`
 
 2. Compile and run the Java program:
+   
+`cd DictionaryAppProject`
 
+`javac MainScreen.java`
+
+`java MainScreen`
 
 3. Access the application through the command line interface.
 
@@ -51,7 +58,7 @@ This project was created by the following students as a part of their major assi
 |:----------:|:-------------------|:-------------------------------------|
 |  22028200  | Vương Nguyệt Bình  | <https://github.com/nguyetbinh>      |
 |  22028251  | Nguyễn Thành Long  | <https://github.com/longsobad>       |
-|  22028249  |Nguyễn Văn Nhất     | <https://github.com/nvnhat04>        |
+|  22028249  | Nguyễn Văn Nhất    | <https://github.com/nvnhat04>        |
 |  22028000  | Trần Văn Sơn       | <https://github.com/datonst>         |
 
 
