@@ -59,7 +59,7 @@ This project was created by the following students as a part of their major assi
 |  22028329  | Vương Nguyệt Bình  | <https://github.com/nguyetbinh>      |
 |  22028251  | Nguyễn Thành Long  | <https://github.com/longsobad>       |
 |  22028249  | Nguyễn Văn Nhất    | <https://github.com/nvnhat04>        |
-|  22028000  | Trần Văn Sơn       | <https://github.com/datonst>         |
+|  22028245  | Trần Văn Sơn       | <https://github.com/datonst>         |
 
 
 ## Feedback and Support
