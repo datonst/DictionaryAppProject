@@ -13,10 +13,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import com.app.dictionaryproject.service.TranslateService;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -25,36 +30,34 @@ public class APIScreenController implements Initializable {
     public Scene scene;
     public Stage stage;
     public Parent root;
-
     @FXML
     public Button recordButton;
-
     public Button back = new Button();
     public TextArea inputText = new TextArea();
     public TextArea outputText = new TextArea();
+    public ImageView imageView = new ImageView();
     TranslateService translateService = new TranslateService();
     public Button switchLanguage = new Button();
     public Label inputLanguage = new Label();
     public Label outputLanguage = new Label();
+    Image voiceIcon;
+    Image waveIcon;
     String vi = "Vietnamese";
     String eng = "English";
 
-    AnimationTimer animator = new AnimationTimer() {
-        @Override
-        public void handle(long arg0) {
-
-        }
-    };
     String path = System.getProperty("user.dir")
             + "\\src\\main\\resources\\recorder\\talk.wav";
     RecorderService recorderService;
     public void switchLang(ActionEvent event) {
+
         if (inputLanguage.getText().equals(vi)){
             inputLanguage.setText(eng);
             outputLanguage.setText(vi);
+            imageView.setImage(voiceIcon);
         } else {
             inputLanguage.setText(vi);
             outputLanguage.setText(eng);
+            imageView.setImage(null);
         }
     }
     public void translateViToEng(ActionEvent event) {
@@ -73,7 +76,6 @@ public class APIScreenController implements Initializable {
     }
 
     public void  switchToMain(ActionEvent event) throws IOException {
-
         FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/MainScreen.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(Loader.load());
@@ -112,6 +114,7 @@ public class APIScreenController implements Initializable {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
+
     }
     public void speakerTextOutput(ActionEvent event){
         TextToSpeech(outputText.getText());
@@ -132,26 +135,57 @@ public class APIScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        InputStream voiceIconInput = getClass().getResourceAsStream("/Style/google-voice.png");
+        InputStream waveIconInput = getClass().getResourceAsStream("/Style/wave-sound.png");
+        voiceIcon = new Image(voiceIconInput);
+        waveIcon = new Image(waveIconInput);
+//        imageView.setImage(voiceIcon);
+        AnimationTimer animator = new AnimationTimer() {
+            @Override
+            public void handle(long arg0) {
+
+            }
+        };
         recordButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                if (recordButton.getText().equals("Start")) {
+                if (imageView.getImage() == null) {
+                    return;
+                }
+                else if (imageView.getImage().equals(voiceIcon)) {
+                    System.out.println("voicimage");
+                    imageView.setImage(waveIcon);
                     animator.start();
-                    recordButton.setText("Stop");
-
+//                    recordButton.setText("Stop");
                     recorderService = new RecorderService(path);
                     recorderService.startRecording();
                 }
-                else {
+                else if (imageView.getImage().equals(waveIcon)){
                     recorderService.stopRecording();
+//                    String abc ="hello";
+//                    inputText.setText(abc);
 //                    try {
-//                        String text = callTranslateAPI();
-//                        outputText.setText(text);
+//                        outputText.setText(translateService.getVietnameseText(abc));
 //                    } catch (IOException e) {
 //                        throw new RuntimeException(e);
 //                    }
+//                    recordButton.setText("Stop");
+                    System.out.println("waveIcon");
+                    try {
+                        Thread.sleep(2);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    try {
+                        String text = callTranslateAPI();
+                        inputText.setText(text);
+                        outputText.setText(translateService.getVietnameseText(text));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                     animator.stop();
-                    recordButton.setText("Start");
+//                    recordButton.setText("Start");
+                    imageView.setImage(voiceIcon);
                 }
             }
         });
