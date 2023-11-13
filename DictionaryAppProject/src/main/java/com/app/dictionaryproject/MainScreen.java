@@ -22,9 +22,12 @@ public class MainScreen extends Application {
                 + "\\src\\main\\resources\\Style\\icon.png";
         Image icon = new Image(iconPath);
         primaryStage.getIcons().add(icon);
+
         Scene scene = new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
         primaryStage.setTitle("");
         primaryStage.setScene(scene);
+//        primaryStage.setMaxWidth(750); // Kích thước tối đa theo chiều rộng
+//        primaryStage.setMaxHeight(670);
         primaryStage.show();
     }
 
@@ -32,4 +35,4 @@ public class MainScreen extends Application {
         launch(args);
     }
 }
-//  Color blue = Color.rgb(99,122,242); đây là màu nền chủ đạo
+

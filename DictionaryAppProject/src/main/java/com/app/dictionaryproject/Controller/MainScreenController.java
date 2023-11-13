@@ -35,9 +35,12 @@ import javafx.scene.input.MouseEvent;
 
 public class MainScreenController {
     @FXML
-    public TextField Height;
+    public TextField  wordSearch;
     @FXML
     public ListView<String> listWord;
+    public ListView<String> listWordArchive = new ListView<>();
+    public ArrayList<String> words_list = new ArrayList<>();
+    public AnchorPane archivePane = new AnchorPane();
     public AnchorPane mainPane = new AnchorPane();
     
     @FXML public Button editWord = new Button();
@@ -46,8 +49,10 @@ public class MainScreenController {
     public Button game = new Button();
     @FXML
     public Button API = new Button();
+    public Button pratice = new Button();
     @FXML
     public Button searchButton = new Button();
+    public Button archiveWord = new Button();
 
     private static Set<String> checkUnique = new HashSet<>();
     //Các biến để chuyển đổi qua lịa các màn hình
@@ -55,11 +60,39 @@ public class MainScreenController {
     public Stage stage;
     public Parent root;
 
-    String[] array = {"hello", "apple", "orange", "window", "car", "mountain", "anxiety", "ant"};
+    public void actionQA(ActionEvent event) {
+        String name =  wordSearch.getText();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Name");
+        alert.setContentText("Your name: " + name);
+        alert.show();
+    }
+
+    public void showArchive(MouseEvent event) {
+        archivePane.setVisible(!archivePane.isVisible());
+    }
+    private void  insertFromFile(String filePath) {
+        Path path = Path.of(filePath);
+
+        try {
+            List<String> lines = Files.readAllLines(path);
+
+            words_list.addAll(lines);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            //e.printStackTrace();
+        }
+    }
+
+    public void showArchive() {
+        // Convert array to ObservableList
+        insertFromFile("src/main/resources/data/saveWord.txt");
+        listWordArchive.getItems().setAll(words_list);
+    }
 
     // chuyển khi chọn nút tìm kiếm
     public void Submit(ActionEvent event) {
-        String name = Height.getText();
+        String name = wordSearch.getText().trim();
             if (!name.isEmpty()) {
 
                 // Handle the selected item here
@@ -88,7 +121,7 @@ public class MainScreenController {
 
     }
     public void SubmitEnter(KeyEvent event) {
-        String name = Height.getText();
+        String name = wordSearch.getText().trim();
 
         if (!name.isEmpty() && event.getCode() == KeyCode.ENTER ) {
             // Handle the selected item here
@@ -119,29 +152,22 @@ public class MainScreenController {
 
 
     }
-    public void actionQA(ActionEvent event) {
-        String name = Height.getText();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Name");
-        alert.setContentText("Your name: " + name);
-        alert.show();
-    }
 
     // show list word
     public void showSearch() {
         // Convert array to ObservableList
         DBRepository wordListSQL = new DBRepository();
         ArrayList<String> listSearch = new ArrayList<>();
-        String startWord = Height.getText();
+        String startWord =  wordSearch.getText().trim();
         ArrayList<String> listWordFound = wordListSQL.searchListWord(startWord);
         BooleanBinding isInputEmpty = new BooleanBinding() {
             {
-                super.bind(Height.textProperty());
+                super.bind( wordSearch.textProperty());
             }
 
             @Override
             protected boolean computeValue() {
-                String text = Height.getText();
+                String text =  wordSearch.getText();
                 return text == null || text.trim().isEmpty();
             }
         };
@@ -157,11 +183,25 @@ public class MainScreenController {
 
     //chuyển screen khi chọn từ trong listword
     public void initialize() {
+        showArchive();
+        wordSearch.textProperty().addListener((observable, oldValue, newValue) -> showSearch());
 
-        Height.textProperty().addListener((observable, oldValue, newValue) -> showSearch());
+        returnExplain(listWord);
 
-        listWord.setOnMouseClicked(event -> {
-            String selectedValue = listWord.getSelectionModel().getSelectedItem();
+        returnExplain(listWordArchive);
+
+        //Lưu các từ đã tìm vào file
+//    ------------------------------------------------
+        listWord.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            // Handle selection change here
+            addSaveWord(newValue);
+
+        });
+    }
+
+    private void returnExplain(ListView<String> list) {
+        list.setOnMouseClicked(event -> {
+            String selectedValue = list.getSelectionModel().getSelectedItem();
             if (selectedValue != null) {
                 // Handle the selected item here
                 try {
@@ -178,15 +218,6 @@ public class MainScreenController {
                     throw new RuntimeException(e);
                 }
             }
-        });
-
-
-        //Lưu các từ đã tìm vào file
-//    ------------------------------------------------
-        listWord.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            // Handle selection change here
-            addSaveWord(newValue);
-
         });
     }
 
@@ -207,7 +238,7 @@ public class MainScreenController {
 
 
     // chuyển sang các option khác
-    public void switchToGame(ActionEvent event) throws IOException {
+    public void switchToGame(MouseEvent event) throws IOException {
 
         FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/GameScreen.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -216,35 +247,18 @@ public class MainScreenController {
         stage.show();
     }
 
-
     @FXML
-    public void handleMouseEntered(MouseEvent event) {
+    public void handleMouseEnteredGame(MouseEvent event) {
         // Xử lý sự kiện khi chuột đi vào
-        game.setStyle("-fx-background-color:white; " +
-                "-fx-text-fill: rgb(99, 122, 242); " +
-                "-fx-padding: 10px 15px; " +
-                "-fx-text-transform: uppercase; " +
-                "-fx-letter-spacing: 4px; " +
-                "-fx-font-weight: bold; " +
-                "-fx-font-size: 20px; " +
-                "-fx-effect: dropshadow(three-pass-box, #03e9f4, 10, 0, 0, 0);" +
-                "-fx-background-radius: 25px;");
+        handleMouseEntered(game);
     }
 
     @FXML
-    public void handleMouseExit(MouseEvent event) {
+    public void handleMouseExitGame(MouseEvent event) {
         // Xử lý sự kiện khi chuột đi vào
-        game.setStyle("-fx-background-color: rgb(99, 122, 242); " +
-                "-fx-text-fill:white; " +
-                "-fx-padding: 10px 15px; " +
-                "-fx-text-transform: uppercase; " +
-                "-fx-letter-spacing: 4px; " +
-                "-fx-font-weight: bold; " +
-                "-fx-font-size: 20px; " +
-                "-fx-effect: dropshadow(three-pass-box, #03e9f4, 10, 0, 0, 0);" +
-                "-fx-background-radius: 25px;");
+        handleMouseExit(game);
     }
-    public void switchToEdit(ActionEvent event) throws IOException {
+    public void switchToEdit(MouseEvent event) throws IOException {
         FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/EditScreen.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(Loader.load());
@@ -255,31 +269,15 @@ public class MainScreenController {
     @FXML
     public void handleMouseEnteredEdit(MouseEvent event) {
         // Xử lý sự kiện khi chuột đi vào
-        editWord.setStyle("-fx-background-color:white; " +
-                "-fx-text-fill: rgb(99, 122, 242); " +
-                "-fx-padding: 10px 15px; " +
-                "-fx-text-transform: uppercase; " +
-                "-fx-letter-spacing: 4px; " +
-                "-fx-font-weight: bold; " +
-                "-fx-font-size: 20px; " +
-                "-fx-effect: dropshadow(three-pass-box, #03e9f4, 10, 0, 0, 0);" +
-                "-fx-background-radius: 25px;");
+        handleMouseEntered((editWord));
     }
 
     @FXML
     public void handleMouseExitEdit(MouseEvent event) {
         // Xử lý sự kiện khi chuột đi vào
-        editWord.setStyle("-fx-background-color: rgb(99, 122, 242); " +
-                "-fx-text-fill:white; " +
-                "-fx-padding: 10px 15px; " +
-                "-fx-text-transform: uppercase; " +
-                "-fx-letter-spacing: 4px; " +
-                "-fx-font-weight: bold; " +
-                "-fx-font-size: 20px; " +
-                "-fx-effect: dropshadow(three-pass-box, #03e9f4, 10, 0, 0, 0);" +
-                "-fx-background-radius: 25px;");
+        handleMouseExit(editWord);
     }
-    public void switchToAPI(ActionEvent event) throws IOException {
+    public void switchToAPI(MouseEvent event) throws IOException {
         FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/APIScreen.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(Loader.load());
@@ -289,29 +287,32 @@ public class MainScreenController {
     @FXML
     public void handleMouseEnteredAPI(MouseEvent event) {
         // Xử lý sự kiện khi chuột đi vào
-        API.setStyle("-fx-background-color:white; " +
-                "-fx-text-fill: rgb(99, 122, 242); " +
-                "-fx-padding: 10px 15px; " +
-                "-fx-text-transform: uppercase; " +
-                "-fx-letter-spacing: 4px; " +
-                "-fx-font-weight: bold; " +
-                "-fx-font-size: 20px; " +
-                "-fx-effect: dropshadow(three-pass-box, #03e9f4, 10, 0, 0, 0);" +
-                "-fx-background-radius: 25px;");
+        handleMouseEntered(API);
     }
 
     @FXML
     public void handleMouseExitAPI(MouseEvent event) {
         // Xử lý sự kiện khi chuột đi vào
-        API.setStyle("-fx-background-color: rgb(99, 122, 242); " +
-                "-fx-text-fill:white; " +
-                "-fx-padding: 10px 15px; " +
-                "-fx-text-transform: uppercase; " +
-                "-fx-letter-spacing: 4px; " +
-                "-fx-font-weight: bold; " +
-                "-fx-font-size: 20px; " +
-                "-fx-effect: dropshadow(three-pass-box, #03e9f4, 10, 0, 0, 0);" +
-                "-fx-background-radius: 25px;");
+        handleMouseExit(API);
+    }
+
+    public  void handleMouseEnteredPractice(MouseEvent event) {
+        handleMouseEntered(pratice);
+    }
+
+    public void handleMouseExitPractice(MouseEvent event){
+        handleMouseExit(pratice);
+    }
+    @FXML
+    public void handleMouseExit(Button button) {
+        // Xử lý sự kiện khi chuột đi vào
+        button.setStyle("-fx-background-color: rgb(99, 122, 242); " +
+                "-fx-text-fill:white; " );
+    }
+    private void handleMouseEntered(Button button){
+        button.setStyle("-fx-background-color:white; " +
+                "-fx-text-fill: rgb(99, 122, 242); "
+                );
     }
 
 }
