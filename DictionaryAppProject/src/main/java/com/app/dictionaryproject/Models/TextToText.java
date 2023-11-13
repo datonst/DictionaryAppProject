@@ -32,14 +32,18 @@ public class TextToText {
         try {
             JSONArray jsonArray = new JSONArray(response);
             // System.out.println(jsonArray.toString());
-            JSONArray translationArray = jsonArray.getJSONArray(0);
+            if (!jsonArray.isEmpty()) {
+                JSONArray translationArray = jsonArray.getJSONArray(0);
 
-            StringBuilder translatedTextBuilder = new StringBuilder();
-            for (int i = 0; i < translationArray.length(); i++) {
-                String translationSegment = translationArray.getJSONArray(i).getString(0);
-                translatedTextBuilder.append(translationSegment);
+                StringBuilder translatedTextBuilder = new StringBuilder();
+                for (int i = 0; i < translationArray.length(); i++) {
+                    String translationSegment = translationArray.getJSONArray(i).getString(0);
+                    translatedTextBuilder.append(translationSegment);
+                }
+                return translatedTextBuilder.toString();
+            } else {
+                return "Error: Empty JSON array in the translation response.";
             }
-            return translatedTextBuilder.toString();
         } catch (JSONException e) {
             e.printStackTrace();
             return "Error: Unable to parse the translation response.";

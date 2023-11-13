@@ -25,7 +25,7 @@
                   <Circle blendMode="SRC_ATOP" cache="true" fill="DODGERBLUE" layoutX="532.0" layoutY="308.0" opacity="0.07" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
                       <Button fx:id="game" layoutX="232.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#switchToGame" onMouseEntered="#handleMouseEnteredGame" onMouseExited="#handleMouseExitGame" prefHeight="55.0" prefWidth="300.0" styleClass="gameStyle" stylesheets="@../../../Style/ButtonStyles.css" text="Practice" />
                       <Button fx:id="API" layoutX="232.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#switchToAPI" onMouseEntered="#handleMouseEnteredAPI" onMouseExited="#handleMouseExitAPI" prefHeight="55.0" prefWidth="300.0" styleClass="gameStyle" stylesheets="@../../../Style/ButtonStyles.css" text="Quick Translate" />
-                      <Button fx:id="editWord" layoutX="232.0" layoutY="54.0" mnemonicParsing="false" onMouseClicked="#switchToEdit" onMouseEntered="#handleMouseEnteredEdit" onMouseExited="#handleMouseExitEdit" prefHeight="55.0" prefWidth="300.0" styleClass="gameStyle" stylesheets="@../../../Style/ButtonStyles.css" text="Upate Dictionary" />
+                      <Button fx:id="editWord" layoutX="232.0" layoutY="54.0" mnemonicParsing="false" onMouseClicked="#switchToEdit" onMouseEntered="#handleMouseEnteredEdit" onMouseExited="#handleMouseExitEdit" prefHeight="55.0" prefWidth="300.0" styleClass="gameStyle" stylesheets="@../../../Style/ButtonStyles.css" text="Update Dictionary" />
                </children>
             </AnchorPane>
             </children></Pane>

@@ -94,9 +94,9 @@ public class DBRepository {
             throw new RuntimeException(e);
         }
         if (word.isEmpty()){
-            return new Word(wordToSearch, phonetic,wordType, synonym, antonym, definitionWord);
+            return new Word(wordToSearch, phonetic, wordType, definitionWord, synonym, antonym);
         }
-        return new Word(word, phonetic,wordType, synonym, antonym, definitionWord);
+        return new Word(word, phonetic,wordType,  definitionWord, synonym, antonym);
     }
 
     public void updateWord(Word wordToUpdate) {
@@ -118,13 +118,8 @@ public class DBRepository {
             psUpdate.setString(5, antonym);
             psUpdate.setString(6, word);
 
-            int rowsAffected = psUpdate.executeUpdate();
-            if (rowsAffected == 0) {
-                System.out.println("Word not found in the database: " + wordToUpdate.getWord_target());
-                // Handle the case where the word is not found in the database
-            } else {
-                System.out.println("Word updated successfully: " + wordToUpdate.getWord_target());
-            }
+            psUpdate.executeUpdate();
+
 
         } catch (SQLException e) {
             // Handle database update errors
