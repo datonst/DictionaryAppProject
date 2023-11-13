@@ -61,8 +61,7 @@ public class Word {
         this.phonetic = phonetic;
         this.definitionWord = definitionWord;
     }
-    public Word(String word_target, String phonetic, String wordType,
-                String synonym, String antonym, String definitionWord) {
+    public Word(String word_target, String phonetic, String wordType, String definitionWord, String synonym, String antonym) {
         this.word_target = word_target;
         this.phonetic = phonetic;
         this.wordType = wordType;

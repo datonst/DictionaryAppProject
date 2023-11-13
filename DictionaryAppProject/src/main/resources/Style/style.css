@@ -2,8 +2,13 @@
 .background {
     -fx-background-color: rgb(99, 122, 242);
 }
-.tab-pane .tab-header-area .tab-header-background  {
+.tab-pane .tab-header-background  {
     -fx-text-fill:rgb(99, 122, 242);
+    -fx-background-color: rgb(99, 122, 242);
+    -fx-alignment: center;
+}
+.tab-header-area {
+    -fx-text-fill:white;
     -fx-background-color: rgb(99, 122, 242);
     -fx-alignment: center;
 }
@@ -64,4 +69,5 @@
     -fx-font-weight: bold;
     -fx-background-color: white;
     -fx-background-radius: 10px;
+    -fx-alignment: center;
 }
