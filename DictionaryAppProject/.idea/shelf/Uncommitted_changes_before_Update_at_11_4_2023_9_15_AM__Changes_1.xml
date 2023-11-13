@@ -1,9 +1,0 @@
-<changelist name="Uncommitted_changes_before_Update_at_11_4_2023_9_15_AM_[Changes]1" date="1699064210534" recycled="true" deleted="true">
-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_4_2023_9_15_AM_[Changes]1/shelved.patch" />
-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 11/4/2023 9:15 AM [Changes]" />
-  <binary>
-    <option name="BEFORE_PATH" />
-    <option name="AFTER_PATH" value="src/main/resources/recorder/talk.wav" />
-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_4_2023_9_15_AM_[Changes]1/talk.wav" />
-  </binary>
-</changelist>

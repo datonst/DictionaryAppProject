@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1cdb1d42-53e6-4109-a5ce-54bbf035c186" name="Changes" comment="change database">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Style/google-voice.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Style/wave-sound.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_4_2023_9_15_AM_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_4_2023_9_15_AM_[Changes]1/talk.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_4_2023_9_15_AM__Changes_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Controller/APIScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/app/dictionaryproject/Controller/APIScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/app/dictionaryproject/APIScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/app/dictionaryproject/APIScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/data/saveWord.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data/saveWord.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/recorder/talk.wav" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/recorder/talk.wav" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,6 +223,9 @@
       <workItem from="1699071972296" duration="3730000" />
       <workItem from="1699088504520" duration="1218000" />
       <workItem from="1699277779950" duration="14000" />
+      <workItem from="1699429870741" duration="567000" />
+      <workItem from="1699455457389" duration="599000" />
+      <workItem from="1699706376142" duration="1599000" />
     </task>
     <task id="LOCAL-00001" summary="update database">
       <option name="closed" value="true" />
