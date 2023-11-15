@@ -7,13 +7,21 @@
 
 <AnchorPane prefHeight="650.0" prefWidth="736.0" stylesheets="@../../../Style/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.dictionaryproject.Controller.ResultSearchController">
    <children>
-      <Button layoutX="23.0" layoutY="40.0" mnemonicParsing="false" onAction="#switchToMain" prefHeight="42.0" prefWidth="64.0" styleClass="submit" stylesheets="@../../../Style/ButtonStyles.css" text="Back" />
-      <AnchorPane layoutY="263.0" prefHeight="393.0" prefWidth="747.0" styleClass="explain" stylesheets="@../../../Style/style.css">
-         <children>
-            <ScrollPane fx:id="explain" layoutX="28.0" layoutY="19.0" prefHeight="354.0" prefWidth="691.0" styleClass="explain" stylesheets="@../../../Style/style.css" />
-         </children>
-      </AnchorPane>
-      <Button layoutX="668.0" layoutY="190.0" mnemonicParsing="false" onAction="#speech" prefHeight="48.0" prefWidth="31.0" styleClass="background" stylesheets="@../../../Style/style.css">
+      <Button layoutX="23.0" layoutY="40.0" mnemonicParsing="false" onAction="#switchToMain" prefHeight="42.0" prefWidth="76.0" styleClass="submit" stylesheets="@../../../Style/ButtonStyles.css" text="Home" />
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="43.0" layoutY="264.0" prefHeight="354.0" prefWidth="650.0" styleClass="bgChildren" stylesheets="@../../../CSS/ExplainScreen.css" vbarPolicy="NEVER">
+     </ScrollPane>
+      <Label fx:id="words" alignment="CENTER" layoutX="43.0" layoutY="145.0" prefHeight="51.0" prefWidth="244.0" styleClass="showWordEx">
+         <stylesheets>
+            <URL value="@../../../Style/style.css" />
+            <URL value="@../../../Style/ButtonStyles.css" />
+         </stylesheets></Label>
+      <Label fx:id="phonetic" alignment="CENTER" layoutX="43.0" layoutY="204.0" prefHeight="51.0" prefWidth="318.0" styleClass="showWordEx">
+         <stylesheets>
+            <URL value="@../../../Style/style.css" />
+            <URL value="@../../../Style/ButtonStyles.css" />
+         </stylesheets>
+      </Label>
+      <Button layoutX="628.0" layoutY="197.0" mnemonicParsing="false" onAction="#speech" prefHeight="48.0" prefWidth="31.0" styleClass="background" stylesheets="@../../../Style/style.css">
          <graphic>
             <ImageView fitHeight="33.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -21,18 +29,14 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Label fx:id="words" layoutX="55.0" layoutY="188.0" prefHeight="51.0" prefWidth="369.0" styleClass="showWordEx">
-         <stylesheets>
-            <URL value="@../../../Style/style.css" />
-            <URL value="@../../../Style/ButtonStyles.css" />
-         </stylesheets></Label>
-      <Label alignment="CENTER" layoutX="138.0" layoutY="61.0" prefHeight="59.0" prefWidth="470.0" styleClass="mainTitle" stylesheets="@../../../Style/style.css" text="Explain" textAlignment="CENTER" />
-      <Label fx:id="phonetic" alignment="CENTER_RIGHT" layoutX="405.0" layoutY="188.0" prefHeight="51.0" prefWidth="264.0" styleClass="showWordEx">
-         <stylesheets>
-            <URL value="@../../../Style/style.css" />
-            <URL value="@../../../Style/ButtonStyles.css" />
-         </stylesheets>
-      </Label>
+      <Button layoutX="559.0" layoutY="204.0" mnemonicParsing="false">
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Style/remove.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
 
    </children>
 </AnchorPane>

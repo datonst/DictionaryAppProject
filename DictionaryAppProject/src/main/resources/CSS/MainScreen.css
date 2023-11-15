@@ -1,0 +1,37 @@
+.buttonOption {
+    -fx-background-color: #8aaaff;
+    -fx-text-fill:white;
+    -fx-padding: 10px 15px;
+    -fx-text-transform: uppercase;
+    -fx-letter-spacing: 4px;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-effect: dropshadow(three-pass-box, #8aaae5, 10, 0, 0, 0);
+    -fx-background-radius: 25px;
+}
+.bgChildren {
+    -fx-background-color: white;
+    -fx-background-radius: 15px;
+}
+.bgMain {
+    -fx-background-color: #8aaaff;
+}
+.searchBar {
+    -fx-background-color: white;
+    -fx-text-fill:#8aaaff;
+    -fx-padding: 10px 15px;
+    -fx-letter-spacing: 4px;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-background-radius: 10px;
+}
+.practiceButton {
+    -fx-font-family: "Arial";
+    -fx-font-size: 12px;
+    -fx-text-fill:#8aaaff;
+    -fx-font-weight: bold;
+    -fx-background-color: #fbeaeb;
+    -fx-background-radius: 10px;
+}
+/*#faf8bf, #234e70*/
+/*#8aaae5, white*/
