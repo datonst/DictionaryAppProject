@@ -1,58 +1,16 @@
-/*.bgChildren {*/
-/*    -fx-background-color: white;*/
-/*    -fx-background-radius: 15px;*/
-/*}*/
-/*.bgMain {*/
-/*    -fx-background-color: #8aaaff;*/
-/*}*/
-/*.gameProcess {*/
-/*    -fx-accent: #56E3DD;*/
-/*}*/
-/*.submit {*/
-/*    -fx-background-color: white;*/
-/*    -fx-text-fill:#8aaaff;*/
-/*    -fx-font-size: 12px;*/
-/*    -fx-font-weight: bold;*/
-/*    -fx-background-radius: 10px;*/
-/*}*/
-/*.word {*/
-/*    -fx-font-family: "Arial";*/
-/*    -fx-font-size: 15px;*/
-/*    -fx-text-fill:#8aaaff;*/
-/*    -fx-font-weight: bold;*/
-/*    -fx-background-color: white;*/
-/*    -fx-background-radius: 10px;*/
-/*}*/
-
-/*.textAreaStyle {*/
-/*    -fx-font-family: "Arial";*/
-/*    -fx-font-size: 20px;*/
-/*    -fx-text-fill: #8aaaff;*/
-/*    -fx-font-weight: bold;*/
-/*    -fx-background-color: white;*/
-/*    -fx-alignment: center; !* Horizontal alignment *!*/
-/*    -fx-accent: #56E3DD;*/
-/*}*/
-/*.mainTitle {*/
-/*    -fx-font-family: "Arial";*/
-/*    -fx-font-size: 70px;*/
-/*    -fx-text-fill: White;*/
-/*    -fx-font-weight: 700;*/
-/*}*/
-
 .bgChildren {
-    -fx-background-color: #01539d;
+    -fx-background-color: white;
     -fx-background-radius: 15px;
 }
 .bgMain {
-    -fx-background-color: #eea475;
+    -fx-background-color: #8aaaff;
 }
 .gameProcess {
-    -fx-accent: #01539d;
+    -fx-accent: #56E3DD;
 }
 .submit {
     -fx-background-color: white;
-    -fx-text-fill:#01539d;
+    -fx-text-fill:#8aaaff;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
     -fx-background-radius: 10px;
@@ -60,7 +18,7 @@
 .word {
     -fx-font-family: "Arial";
     -fx-font-size: 15px;
-    -fx-text-fill:#01539d;
+    -fx-text-fill:#8aaaff;
     -fx-font-weight: bold;
     -fx-background-color: white;
     -fx-background-radius: 10px;
@@ -69,7 +27,7 @@
 .textAreaStyle {
     -fx-font-family: "Arial";
     -fx-font-size: 20px;
-    -fx-text-fill: #01539d;
+    -fx-text-fill: #8aaaff;
     -fx-font-weight: bold;
     -fx-background-color: white;
     -fx-alignment: center; /* Horizontal alignment */
@@ -78,6 +36,48 @@
 .mainTitle {
     -fx-font-family: "Arial";
     -fx-font-size: 70px;
-    -fx-text-fill: #01539d;
+    -fx-text-fill: White;
     -fx-font-weight: 700;
 }
+
+/*.bgChildren {*/
+/*    -fx-background-color: #01539d;*/
+/*    -fx-background-radius: 15px;*/
+/*}*/
+/*.bgMain {*/
+/*    -fx-background-color: #eea475;*/
+/*}*/
+/*.gameProcess {*/
+/*    -fx-accent: #01539d;*/
+/*}*/
+/*.submit {*/
+/*    -fx-background-color: white;*/
+/*    -fx-text-fill:#01539d;*/
+/*    -fx-font-size: 12px;*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-background-radius: 10px;*/
+/*}*/
+/*.word {*/
+/*    -fx-font-family: "Arial";*/
+/*    -fx-font-size: 15px;*/
+/*    -fx-text-fill:#01539d;*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-background-color: white;*/
+/*    -fx-background-radius: 10px;*/
+/*}*/
+
+/*.textAreaStyle {*/
+/*    -fx-font-family: "Arial";*/
+/*    -fx-font-size: 20px;*/
+/*    -fx-text-fill: #01539d;*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-background-color: white;*/
+/*    -fx-alignment: center; !* Horizontal alignment *!*/
+/*    -fx-accent: #56E3DD;*/
+/*}*/
+/*.mainTitle {*/
+/*    -fx-font-family: "Arial";*/
+/*    -fx-font-size: 70px;*/
+/*    -fx-text-fill: #01539d;*/
+/*    -fx-font-weight: 700;*/
+/*}*/
