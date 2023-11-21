@@ -4,6 +4,7 @@ package com.app.dictionaryproject.Controller;
 
 //import com.app.dictionaryproject.Controller.ResultSearchController;
 import com.app.dictionaryproject.Models.Word;
+import com.app.dictionaryproject.service.DBRepo;
 import com.app.dictionaryproject.service.DBRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -69,7 +70,17 @@ public class MainScreenController {
     }
 
     public void showArchive(MouseEvent event) {
-        archivePane.setVisible(!archivePane.isVisible());
+
+       archivePane.setVisible(!archivePane.isVisible());
+    }
+
+    private boolean isInsideNode(double x, double y, AnchorPane node) {
+        double nodeMinX = node.getBoundsInParent().getMinX();
+        double nodeMinY = node.getBoundsInParent().getMinY();
+        double nodeMaxX = node.getBoundsInParent().getMaxX();
+        double nodeMaxY = node.getBoundsInParent().getMaxY();
+
+        return x >= nodeMinX && x <= nodeMaxX && y >= nodeMinY && y <= nodeMaxY;
     }
     private void  insertFromFile(String filePath) {
         Path path = Path.of(filePath);
@@ -87,6 +98,10 @@ public class MainScreenController {
     public void showArchive() {
         // Convert array to ObservableList
         insertFromFile("src/main/resources/data/saveWord.txt");
+//        for (int i = 0; i < words_list.size(); i++) {
+//            words_list.set(i, (i + 1) + ". " + words_list.get(i));
+//        }
+        // Set the modified list to listWordArchive
         listWordArchive.getItems().setAll(words_list);
     }
 
@@ -102,7 +117,9 @@ public class MainScreenController {
 
 
                     ResultSearchController controller = Loader.getController();
-                    DBRepository search = new DBRepository();
+//                    DBRepository search = new DBRepository();
+//                    controller.initialize(search.searchWord(name));
+                    DBRepo search = new DBRepo();
                     controller.initialize(search.searchWord(name));
 
                     // Lấy từ khi search
@@ -130,15 +147,16 @@ public class MainScreenController {
                 root = Loader.load();
 
                 ResultSearchController controller = Loader.getController();
-                DBRepository search = new DBRepository();
-                ArrayList<String> listWordFound = search.searchListWord(name);
-                if(search.searchWord(name).getDefinitionWord().equals("not found") && !listWordFound.isEmpty()) {
-                    controller.initialize(search.searchWord(listWordFound.get(0)));
+                //DBRepository search = new DBRepository();
+                DBRepo dbRepo = new DBRepo();
+                ArrayList<String> listWordFound = dbRepo.searchListWord(name);
+                if(dbRepo.searchWord(name).getTextDescription().equals("This word does not have meaning") && !listWordFound.isEmpty()) {
+                    controller.initialize(dbRepo.searchWord(listWordFound.get(0)));
                     addSaveWord(listWordFound.get(0));
                 } else {
-                    controller.initialize(search.searchWord(name));
+                    controller.initialize(dbRepo.searchWord(name));
                 }
-                if(!search.searchWord(name).getDefinitionWord().equals("not found")){
+                if(!dbRepo.searchWord(name).getTextDescription().equals("This word does not have meaning")){
                     addSaveWord(name);
                 }
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -156,7 +174,7 @@ public class MainScreenController {
     // show list word
     public void showSearch() {
         // Convert array to ObservableList
-        DBRepository wordListSQL = new DBRepository();
+        DBRepo wordListSQL = new DBRepo();
         ArrayList<String> listSearch = new ArrayList<>();
         String startWord =  wordSearch.getText().trim();
         ArrayList<String> listWordFound = wordListSQL.searchListWord(startWord);
@@ -183,7 +201,9 @@ public class MainScreenController {
 
     //chuyển screen khi chọn từ trong listword
     public void initialize() {
+
         showArchive();
+
         wordSearch.textProperty().addListener((observable, oldValue, newValue) -> showSearch());
 
         returnExplain(listWord);
@@ -199,6 +219,10 @@ public class MainScreenController {
         });
     }
 
+
+    /**
+     * Chuyển sang màn hình explain khi chọn 1 từ trong listView
+     * */
     private void returnExplain(ListView<String> list) {
         list.setOnMouseClicked(event -> {
             String selectedValue = list.getSelectionModel().getSelectedItem();
@@ -208,8 +232,9 @@ public class MainScreenController {
                     FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/ResultSearch.fxml"));
                     root = Loader.load();
                     ResultSearchController controller = Loader.getController();
-                    DBRepository search = new DBRepository();
-                    controller.initialize(search.searchWord(selectedValue));
+                    //DBRepository search = new DBRepository();
+                    DBRepo dbRepo = new DBRepo();
+                    controller.initialize(dbRepo.searchWord(selectedValue));
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     scene = new Scene(root);
                     stage.setScene(scene);
@@ -221,6 +246,9 @@ public class MainScreenController {
         });
     }
 
+    /**
+     * Hàm lưu từ vào file.
+     * */
     public void addSaveWord(String newValue) {
 
 
@@ -306,12 +334,12 @@ public class MainScreenController {
     @FXML
     public void handleMouseExit(Button button) {
         // Xử lý sự kiện khi chuột đi vào
-        button.setStyle("-fx-background-color: rgb(99, 122, 242); " +
+        button.setStyle("-fx-background-color: #8aaaff; " +
                 "-fx-text-fill:white; " );
     }
     private void handleMouseEntered(Button button){
         button.setStyle("-fx-background-color:white; " +
-                "-fx-text-fill: rgb(99, 122, 242); "
+                "-fx-text-fill: #8aaaff; "
                 );
     }
 

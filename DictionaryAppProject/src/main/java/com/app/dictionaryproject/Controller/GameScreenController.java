@@ -30,12 +30,11 @@ public class GameScreenController {
     public Stage stage;
     public Parent root;
     public TextField inputWord;
-    public TextArea temp = new TextArea();
+    public  Label temp = new Label();
     public int index = 0;
     public ProgressBar progressBar;
     public double process = 0;
     public ScrollPane explain = new ScrollPane();
-
     public Button sound = new Button();
     public Button archiveWord = new Button();
     public static ArrayList<String> words_list = new ArrayList<>();
@@ -67,10 +66,10 @@ public class GameScreenController {
             increaseProgress();
         }
     }
-
-    public void showArchive(MouseEvent event) {
-        temp.setVisible(!temp.isVisible());
-    }
+//
+//    public void showArchive(MouseEvent event) {
+//        temp.setVisible(!temp.isVisible());
+//    }
 
     /**
      * This method is responsible for advancing the progress in a game or learning application.
@@ -95,7 +94,7 @@ public class GameScreenController {
             } else {
                 index = 0;
             }
-            temp.setText(findExplain(words_list.get(index)));
+            temp.setText(getExplain());
             inputWord.deleteText(0, word.length());
             progressBar.setProgress(process);
         if(process > 0.99){
@@ -109,12 +108,17 @@ public class GameScreenController {
         progressBar.setProgress(0);
     }
 
-
+    private String getExplain(){
+        String str = findExplain(words_list.get(index));
+        int newlineIndex = str.indexOf('\n');
+        return (newlineIndex != -1) ? str.substring(1, newlineIndex) : str;
+    }
     public void initialize () {
 
         insertFromFile("src/main/resources/data/saveWord.txt");
-        temp.setText(findExplain(words_list.get(index)));
-        explain.setContent(temp);
+        String result = getExplain();
+        temp.setText(result);
+        //explain.setContent(temp);
        // Platform.runLater(() -> playSound("src/main/resources/data/sound.wav"));
 
     }
@@ -230,13 +234,7 @@ public class GameScreenController {
         textToSpeech(words_list.get(index));
     }
 
-    public void switchToMain(ActionEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/MainScreen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(Loader.load());
-        stage.setScene(scene);
-        stage.show();
-    }
+
 
     public void switchToMain() {
         try {
@@ -273,11 +271,11 @@ public class GameScreenController {
         );
 
         alert.getDialogPane().setContent(contentLabel);
-        alert.getDialogPane().setPrefWidth(300);
+        alert.getDialogPane().setPrefWidth(450);
         alert.getDialogPane().setStyle(
                         "-fx-alignment: center;"+
                         "-fx-font-weight: bold;"+
-                        "-fx-background-color: linear-gradient(to top right, #ad84f0, #f196f4, #ad84f0);"
+                        "-fx-background-color: #32C446;"
 
         );
 
@@ -290,7 +288,7 @@ public class GameScreenController {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Result");
 
-        Label headerLabel = new Label("\nWrong answer");
+        Label headerLabel = new Label("\nWrong answer" );
         headerLabel.setStyle("-fx-alignment: center;" +
                             "-fx-font-size: 30px;" +
                             "-fx-text-fill: white;"
@@ -307,12 +305,12 @@ public class GameScreenController {
         );
 
         alert.getDialogPane().setContent(contentLabel);
-        alert.getDialogPane().setPrefWidth(300);
+        alert.getDialogPane().setPrefWidth(450);
         alert.getDialogPane().setStyle(
                         "-fx-font-family: Arial;"+
                         "-fx-alignment: center;"+
                         "-fx-font-weight: bold;"+
-                        "-fx-background-color: linear-gradient(to top right, #ad84f0, #f196f4, #ad84f0);"
+                        "-fx-background-color: #C93333;"
 
         );
         alert.show();
@@ -338,5 +336,23 @@ public class GameScreenController {
 
         alert.getDialogPane().setContent(contentLabel);
         alert.show();
+    }
+    private void switchToScene(String fxmlPath, ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToAPI(ActionEvent event) throws IOException {
+        switchToScene("/com/app/dictionaryproject/APIScreen.fxml", event);
+    }
+
+    public void switchToEdit(ActionEvent event) throws IOException {
+        switchToScene("/com/app/dictionaryproject/EditScreen.fxml", event);
+    }
+    public void switchToMain(ActionEvent event) throws IOException {
+        switchToScene("/com/app/dictionaryproject/MainScreen.fxml", event);
     }
 }

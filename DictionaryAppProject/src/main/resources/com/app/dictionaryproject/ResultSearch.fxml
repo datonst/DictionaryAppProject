@@ -1,42 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
 
-<AnchorPane prefHeight="650.0" prefWidth="736.0" stylesheets="@../../../Style/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.dictionaryproject.Controller.ResultSearchController">
+<AnchorPane prefHeight="650.0" prefWidth="736.0" styleClass="bgMain" stylesheets="@../../../CSS/ExplainScreen.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.dictionaryproject.Controller.ResultSearchController">
    <children>
-      <Button layoutX="23.0" layoutY="40.0" mnemonicParsing="false" onAction="#switchToMain" prefHeight="42.0" prefWidth="76.0" styleClass="submit" stylesheets="@../../../Style/ButtonStyles.css" text="Home" />
-      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="43.0" layoutY="264.0" prefHeight="354.0" prefWidth="650.0" styleClass="bgChildren" stylesheets="@../../../CSS/ExplainScreen.css" vbarPolicy="NEVER">
-     </ScrollPane>
-      <Label fx:id="words" alignment="CENTER" layoutX="43.0" layoutY="145.0" prefHeight="51.0" prefWidth="244.0" styleClass="showWordEx">
+      <Label fx:id="words" alignment="CENTER" layoutX="480.0" layoutY="61.0" prefHeight="51.0" prefWidth="244.0" styleClass="showWordEx" text="Word" visible="false">
          <stylesheets>
             <URL value="@../../../Style/style.css" />
             <URL value="@../../../Style/ButtonStyles.css" />
          </stylesheets></Label>
-      <Label fx:id="phonetic" alignment="CENTER" layoutX="43.0" layoutY="204.0" prefHeight="51.0" prefWidth="318.0" styleClass="showWordEx">
-         <stylesheets>
-            <URL value="@../../../Style/style.css" />
-            <URL value="@../../../Style/ButtonStyles.css" />
-         </stylesheets>
-      </Label>
-      <Button layoutX="628.0" layoutY="197.0" mnemonicParsing="false" onAction="#speech" prefHeight="48.0" prefWidth="31.0" styleClass="background" stylesheets="@../../../Style/style.css">
+      <WebView fx:id="webView" layoutX="127.0" layoutY="112.0" prefHeight="553.0" prefWidth="620.0" stylesheets="@../../../CSS/ExplainScreen.css" />
+      <VBox alignment="CENTER" prefHeight="663.0" prefWidth="63.0" spacing="80.0" styleClass="bgChildren">
+         <children>
+            <Button mnemonicParsing="false" onAction="#switchToMain" prefHeight="42.0" prefWidth="76.0" styleClass="bgChildren">
+               <graphic>
+                  <ImageView fitHeight="54.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Style/icons8-home-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button mnemonicParsing="false" onAction="#switchToEdit" styleClass="bgChildren">
+               <graphic>
+                  <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Style/icons8_edit_64px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#switchToGame" styleClass="bgChildren" stylesheets="@../../../CSS/ExplainScreen.css">
+               <graphic>
+                  <ImageView fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Style/icons8-game-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#switchToAPI" styleClass="bgChildren">
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Style/icons8_google_translate_64px.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+         </children>
+         <padding>
+            <Insets top="10.0" />
+         </padding></VBox>
+      <Button layoutX="654.0" layoutY="125.0" mnemonicParsing="false" onAction="#speech" prefHeight="48.0" prefWidth="31.0" styleClass="bgChildren" stylesheets="@../../../CSS/ExplainScreen.css">
          <graphic>
-            <ImageView fitHeight="33.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="46.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../Style/sound.png" />
+                  <Image url="@../../../Style/icons8_speaker_64px.png" />
                </image>
             </ImageView>
-         </graphic></Button>
-      <Button layoutX="559.0" layoutY="204.0" mnemonicParsing="false">
-         <graphic>
-            <ImageView fitHeight="26.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../Style/remove.png" />
-               </image>
-            </ImageView>
-         </graphic></Button>
+         </graphic>
+      </Button>
+      <Label alignment="CENTER" layoutX="209.0" layoutY="17.0" prefHeight="55.0" prefWidth="455.0" styleClass="title" stylesheets="@../../../CSS/ExplainScreen.css" text="Explain" />
 
    </children>
 </AnchorPane>

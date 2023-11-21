@@ -7,33 +7,37 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="736.0" styleClass="background" stylesheets="@../../../Style/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.dictionaryproject.Controller.MainScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="736.0" styleClass="bgMain" stylesheets="@../../../CSS/MainScreen.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.dictionaryproject.Controller.MainScreenController">
 
     <children>
-        <Label alignment="TOP_CENTER" layoutX="163.0" layoutY="39.0" prefHeight="108.0" prefWidth="410.0" styleClass="mainTitle" stylesheets="@../../../Style/style.css" text="Dictionary" textAlignment="CENTER" textFill="WHITE">
+        <Label alignment="TOP_CENTER" layoutX="163.0" layoutY="39.0" prefHeight="108.0" prefWidth="410.0" text="Dictionary" textAlignment="CENTER" textFill="#fbeaeb">
             <font>
-                <Font size="62.0" />
+                <Font name="Calibri Bold Italic" size="85.0" />
             </font></Label>
-        <TextField fx:id="wordSearch" layoutX="85.0" layoutY="184.0" onAction="#initialize" onKeyPressed="#SubmitEnter" prefHeight="52.0" prefWidth="631.0" styleClass="search" stylesheets="@../../../Style/ButtonStyles.css" />
+        <TextField fx:id="wordSearch" layoutX="85.0" layoutY="184.0" onAction="#initialize" onKeyPressed="#SubmitEnter" prefHeight="52.0" prefWidth="631.0" styleClass="searchBar" stylesheets="@../../../CSS/MainScreen.css" />
         <Pane blendMode="SRC_ATOP" layoutX="-6.0" layoutY="269.0" prefHeight="391.0" prefWidth="748.0" styleClass="background1" stylesheets="@../../../Style/style.css">
             <children>
-            <AnchorPane layoutX="2.0" layoutY="-8.0" prefHeight="408.0" prefWidth="679.0" styleClass="background1" stylesheets="@../../../Style/style.css">
+            <AnchorPane layoutX="2.0" layoutY="-8.0" prefHeight="408.0" prefWidth="679.0" styleClass="bgChildren" stylesheets="@../../../Style/style.css">
                <children>
                   <Circle fill="DODGERBLUE" layoutX="48.0" layoutY="299.0" opacity="0.09" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
                   <Circle blendMode="SRC_ATOP" cache="true" fill="DODGERBLUE" layoutX="691.0" layoutY="64.0" opacity="0.07" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle blendMode="SRC_ATOP" cache="true" fill="DODGERBLUE" layoutX="184.0" layoutY="41.0" opacity="0.07" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle blendMode="SRC_ATOP" cache="true" fill="DODGERBLUE" layoutX="248.0" layoutY="100.0" opacity="0.07" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
                   <Circle blendMode="SRC_ATOP" cache="true" fill="DODGERBLUE" layoutX="532.0" layoutY="308.0" opacity="0.07" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
-                      <Button fx:id="game" layoutX="232.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#switchToGame" onMouseEntered="#handleMouseEnteredGame" onMouseExited="#handleMouseExitGame" prefHeight="55.0" prefWidth="300.0" styleClass="gameStyle" stylesheets="@../../../Style/ButtonStyles.css" text="Practice" />
-                      <Button fx:id="API" layoutX="232.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#switchToAPI" onMouseEntered="#handleMouseEnteredAPI" onMouseExited="#handleMouseExitAPI" prefHeight="55.0" prefWidth="300.0" styleClass="gameStyle" stylesheets="@../../../Style/ButtonStyles.css" text="Quick Translate" />
-                      <Button fx:id="editWord" layoutX="232.0" layoutY="54.0" mnemonicParsing="false" onMouseClicked="#switchToEdit" onMouseEntered="#handleMouseEnteredEdit" onMouseExited="#handleMouseExitEdit" prefHeight="55.0" prefWidth="300.0" styleClass="gameStyle" stylesheets="@../../../Style/ButtonStyles.css" text="Update Dictionary" />
+                      <Button fx:id="game" layoutX="232.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#switchToGame" onMouseEntered="#handleMouseEnteredGame" onMouseExited="#handleMouseExitGame" prefHeight="55.0" prefWidth="300.0" styleClass="buttonOption" stylesheets="@../../../CSS/MainScreen.css" text="Practice" />
+                      <Button fx:id="API" layoutX="232.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#switchToAPI" onMouseEntered="#handleMouseEnteredAPI" onMouseExited="#handleMouseExitAPI" prefHeight="55.0" prefWidth="300.0" styleClass="buttonOption" stylesheets="@../../../CSS/MainScreen.css" text="Quick Translate" />
+                      <Button fx:id="editWord" layoutX="232.0" layoutY="54.0" mnemonicParsing="false" onMouseClicked="#switchToEdit" onMouseEntered="#handleMouseEnteredEdit" onMouseExited="#handleMouseExitEdit" prefHeight="55.0" prefWidth="300.0" styleClass="buttonOption" text="Update Dictionary">
+                     <stylesheets>
+                        <URL value="@../../../Style/ButtonStyles.css" />
+                        <URL value="@../../../CSS/MainScreen.css" />
+                     </stylesheets></Button>
                </children>
             </AnchorPane>
             </children></Pane>
-        <Button layoutX="14.0" layoutY="184.0" mnemonicParsing="false" onAction="#Submit" prefHeight="51.0" prefWidth="59.0" styleClass="search" stylesheets="@../../../Style/ButtonStyles.css">
+        <Button layoutX="14.0" layoutY="180.0" mnemonicParsing="false" onAction="#Submit" prefHeight="38.0" prefWidth="45.0" styleClass="search" stylesheets="@../../../Style/ButtonStyles.css">
          <graphic>
-                <ImageView fitHeight="30.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="34.0" fitWidth="36.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../../Style/searchIcon.png" />
+                        <Image url="@../../../Style/icons8_search_64px.png" />
                     </image>
                 </ImageView>
          </graphic></Button>
@@ -42,31 +46,34 @@
             <URL value="@../../../Style/style.css" />
             <URL value="@../../../Style/style.css" />
          </stylesheets></ListView>
-        <Button blendMode="COLOR_BURN" layoutX="647.0" layoutY="33.0" mnemonicParsing="false" onAction="#actionQA" opacity="0.59" prefHeight="42.0" prefWidth="57.0" styleClass="submit" stylesheets="@../../../Style/ButtonStyles.css">
+        <Button blendMode="COLOR_BURN" layoutX="651.0" layoutY="39.0" mnemonicParsing="false" onAction="#actionQA" prefHeight="67.0" prefWidth="72.0" styleClass="submit" stylesheets="@../../../Style/ButtonStyles.css">
             <graphic>
-                <ImageView fitHeight="40.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="52.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../../Style/option.png" />
+                        <Image url="@../../../Style/icons8-faq-64.png" />
                     </image>
                 </ImageView>
             </graphic></Button>
-        <Button fx:id="archiveWord" layoutX="661.0" layoutY="103.0" mnemonicParsing="false" onMouseClicked="#showArchive" prefHeight="42.0" prefWidth="34.0" styleClass="background">
+        <Button fx:id="archiveWord" layoutX="661.0" layoutY="103.0" mnemonicParsing="false" onMouseClicked="#showArchive" prefHeight="42.0" prefWidth="34.0" styleClass="bgMain">
             <graphic>
-                <ImageView fitHeight="35.0" fitWidth="30.0" opacity="0.76" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="47.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../../Style/archive.png" />
+                        <Image url="@../../../Style/icons8_edit_property_64px.png" />
                     </image>
                 </ImageView>
             </graphic></Button>
-      <AnchorPane fx:id="archivePane" layoutX="158.0" layoutY="147.0" prefHeight="472.0" prefWidth="430.0" styleClass="editword" stylesheets="@../../../Style/ButtonStyles.css" visible="false">
+      <AnchorPane fx:id="archivePane" layoutX="158.0" layoutY="147.0" prefHeight="472.0" prefWidth="430.0" styleClass="practiceButton" stylesheets="@../../../CSS/MainScreen.css" visible="false">
          <children>
             <ListView fx:id="listWordArchive" layoutX="26.0" layoutY="71.0" prefHeight="346.0" prefWidth="386.0" styleClass="submit">
                <stylesheets>
                   <URL value="@../../../Style/ButtonStyles.css" />
                   <URL value="@../../../Style/style.css" />
                </stylesheets></ListView>
-            <Label alignment="CENTER" layoutX="89.0" layoutY="23.0" prefHeight="29.0" prefWidth="251.0" styleClass="explain" text="Your words" />
-            <Button fx:id="pratice" layoutX="191.0" layoutY="434.0" mnemonicParsing="false" onMouseClicked="#switchToGame" onMouseEntered="#handleMouseEnteredPractice" onMouseExited="#handleMouseExitPractice" styleClass="editword" stylesheets="@../../../Style/ButtonStyles.css" text="Practice" />
+            <Label alignment="CENTER" layoutX="89.0" layoutY="23.0" prefHeight="29.0" prefWidth="251.0" text="Your words" textFill="#8aaaff">
+               <font>
+                  <Font name="Times New Roman Bold Italic" size="33.0" />
+               </font></Label>
+            <Button fx:id="pratice" layoutX="187.0" layoutY="428.0" mnemonicParsing="false" onMouseClicked="#switchToGame" onMouseEntered="#handleMouseExitPractice" onMouseExited="#handleMouseEnteredPractice" styleClass="practiceButton" stylesheets="@../../../CSS/MainScreen.css" text="Practice" />
          </children></AnchorPane>
     </children>
 </AnchorPane>

@@ -40,3 +40,6 @@
     -fx-font-weight: bold;
     -fx-background-radius: 10px;
 }
+.bgChildren1 {
+    -fx-background-color: white;
+}

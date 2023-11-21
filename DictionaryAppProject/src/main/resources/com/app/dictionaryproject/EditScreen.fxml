@@ -1,75 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="650.0" prefWidth="736.0" stylesheets="@../../../Style/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.dictionaryproject.Controller.EditScreenController">
+<AnchorPane prefHeight="650.0" prefWidth="736.0" styleClass="bgMain" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.dictionaryproject.Controller.EditScreenController">
    <children>
-      <Button layoutX="35.0" layoutY="42.0" mnemonicParsing="false" onAction="#switchToMain" styleClass="submit" stylesheets="@../../../Style/ButtonStyles.css" text="Home" />
-      <Label layoutX="168.0" layoutY="44.0" styleClass="mainTitle" text="UpdateWord " />
-      <TabPane fx:id="tabPane" layoutX="41.0" layoutY="224.0" prefHeight="408.0" prefWidth="654.0" tabClosingPolicy="UNAVAILABLE">
+      <Label layoutX="221.0" layoutY="22.0" styleClass="mainTitle" text="UpdateWord " AnchorPane.leftAnchor="221.0" AnchorPane.rightAnchor="79.0" AnchorPane.topAnchor="22.0" />
+      <TabPane fx:id="tabPane" layoutX="99.0" layoutY="225.0" prefHeight="408.0" prefWidth="634.0" stylesheets="@../../../CSS/EditWord.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="99.0" AnchorPane.rightAnchor="2.6000000000000227" AnchorPane.topAnchor="225.0">
         <tabs>
-          <Tab fx:id="addWordTab" styleClass="word" text="Add word">
+          <Tab fx:id="addWordTab" closable="false" styleClass="word" text="Add word">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="402.0" prefWidth="616.0">
-                     <children>
-                        <TextField fx:id="addPhonetic" layoutX="97.0" layoutY="14.0" prefHeight="38.0" prefWidth="522.0" styleClass="editword" stylesheets="@../../../Style/style.css" />
-                        <TextField fx:id="addType" layoutX="98.0" layoutY="60.0" prefHeight="38.0" prefWidth="522.0" styleClass="editword" />
-                        <TextArea fx:id="addExplain" layoutX="98.0" layoutY="105.0" prefHeight="95.0" prefWidth="522.0" styleClass="editword" />
-                        <TextField fx:id="addAntonym" layoutX="98.0" layoutY="259.0" prefHeight="38.0" prefWidth="522.0" styleClass="editword" />
-                        <TextField fx:id="addSynonym" layoutX="97.0" layoutY="210.0" prefHeight="38.0" prefWidth="522.0" styleClass="editword" stylesheets="@../../../Style/style.css" />
-                        <Button layoutX="298.0" layoutY="332.0" mnemonicParsing="false" onAction="#addWord" prefHeight="32.0" prefWidth="58.0" styleClass="editword" text="Add" />
-                        <Label layoutX="12.0" layoutY="13.0" styleClass="edit" stylesheets="@../../../Style/ButtonStyles.css" text="Phonetic" />
-                        <Label layoutX="16.0" layoutY="59.0" styleClass="edit" stylesheets="@../../../Style/ButtonStyles.css" text="Type" />
-                        <Label layoutX="12.0" layoutY="107.0" prefHeight="91.0" prefWidth="81.0" styleClass="edit" stylesheets="@../../../Style/ButtonStyles.css" text="Explain" />
-                        <Label layoutX="9.0" layoutY="209.0" prefHeight="40.0" prefWidth="88.0" styleClass="edit" stylesheets="@../../../Style/ButtonStyles.css" text="Synonym" />
-                        <Label layoutX="9.0" layoutY="258.0" styleClass="edit" stylesheets="@../../../Style/ButtonStyles.css" text="Antonym" />
-                     </children></AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="378.0" prefWidth="643.0">
+                    <children>
+                        <!-- Your existing elements -->
+                        <TextField fx:id="addPhonetic" layoutX="97.0" layoutY="14.0" prefHeight="38.0" prefWidth="502.0" styleClass="editword" AnchorPane.leftAnchor="97.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="14.0" />
+                        <TextField fx:id="addType" layoutX="98.0" layoutY="60.0" prefHeight="38.0" prefWidth="503.0" styleClass="editword" />
+                        <TextArea fx:id="addExplain" layoutX="98.0" layoutY="105.0" prefHeight="135.0" prefWidth="503.0" styleClass="editword" />
+                        <TextField fx:id="addAntonym" layoutX="99.0" layoutY="298.0" prefHeight="38.0" prefWidth="502.0" styleClass="editword" />
+                        <TextField fx:id="addSynonym" layoutX="98.0" layoutY="249.0" prefHeight="38.0" prefWidth="505.0" styleClass="editword" />
+                        <Button layoutX="313.0" layoutY="346.0" mnemonicParsing="false" onAction="#addWord" prefHeight="32.0" prefWidth="58.0" styleClass="editword" text="Submit" />
+                        <Label layoutX="12.0" layoutY="13.0" styleClass="edit" text="Phonetic" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="13.0" />
+                        <Label layoutX="16.0" layoutY="59.0" styleClass="edit" text="Type" />
+                        <Label layoutX="13.0" layoutY="127.0" prefHeight="91.0" prefWidth="81.0" styleClass="edit" text="Explain" />
+                        <Label layoutY="248.0" prefHeight="40.0" prefWidth="88.0" styleClass="edit" text="Synonym" />
+                        <Label layoutX="2.0" layoutY="297.0" styleClass="edit" text="Antonym" />
+                    </children>
+                </AnchorPane>
             </content>
           </Tab>
-          <Tab fx:id="editWordTab" styleClass="word" text="Edit Word">
+          <Tab fx:id="editWordTab" closable="false" styleClass="word" text="Edit Word">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="336.0" prefWidth="633.0">
-                     <children>
-                         <TextField fx:id="editPhonetic" layoutX="97.0" layoutY="14.0" prefHeight="38.0" prefWidth="522.0" styleClass="editword" stylesheets="@../../../Style/style.css" />
-                         <TextField fx:id="editType" layoutX="98.0" layoutY="60.0" prefHeight="38.0" prefWidth="522.0" styleClass="editword" />
-                         <TextArea fx:id="editExplain" layoutX="98.0" layoutY="105.0" prefHeight="95.0" prefWidth="522.0" styleClass="editword" />
-                         <TextField fx:id="editAntonym" layoutX="98.0" layoutY="259.0" prefHeight="38.0" prefWidth="522.0" styleClass="editword" />
-                         <TextField fx:id="editSynonym" layoutX="97.0" layoutY="210.0" prefHeight="38.0" prefWidth="522.0" styleClass="editword" stylesheets="@../../../Style/style.css" />
-                         <Button layoutX="290.0" layoutY="332.0" mnemonicParsing="false" onAction="#update" prefHeight="32.0" prefWidth="74.0" styleClass="editword" text="Update" />
-                         <Label layoutX="12.0" layoutY="13.0" styleClass="edit" stylesheets="@../../../Style/ButtonStyles.css" text="Phonetic" />
-                         <Label layoutX="16.0" layoutY="59.0" styleClass="edit" stylesheets="@../../../Style/ButtonStyles.css" text="Type" />
-                         <Label layoutX="12.0" layoutY="107.0" prefHeight="91.0" prefWidth="81.0" styleClass="edit" stylesheets="@../../../Style/ButtonStyles.css" text="Explain" />
-                         <Label layoutX="9.0" layoutY="209.0" prefHeight="40.0" prefWidth="88.0" styleClass="edit" stylesheets="@../../../Style/ButtonStyles.css" text="Synonmy" />
-                         <Label layoutX="9.0" layoutY="258.0" styleClass="edit" stylesheets="@../../../Style/ButtonStyles.css" text="Antonym" />
-                     </children></AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="378.0" prefWidth="643.0">
+                    <children>
+                        <TextField fx:id="editPhonetic" layoutX="97.0" layoutY="14.0" prefHeight="38.0" prefWidth="502.0" styleClass="editword" stylesheets="@../../../Style/style.css" />
+                        <TextField fx:id="editType" layoutX="98.0" layoutY="60.0" prefHeight="38.0" prefWidth="503.0" styleClass="editword" />
+                        <TextArea fx:id="editExplain" layoutX="98.0" layoutY="105.0" prefHeight="135.0" prefWidth="503.0" styleClass="editword" />
+                        <TextField fx:id="editAntonym" layoutX="99.0" layoutY="298.0" prefHeight="38.0" prefWidth="502.0" styleClass="editword" />
+                        <TextField fx:id="editSynonym" layoutX="98.0" layoutY="249.0" prefHeight="38.0" prefWidth="505.0" styleClass="editword" stylesheets="@../../../Style/style.css" />
+                        <Button layoutX="313.0" layoutY="346.0" mnemonicParsing="false" onAction="#addWord" prefHeight="32.0" prefWidth="58.0" styleClass="editword" text="Submit" />
+                        <Label layoutX="12.0" layoutY="13.0" styleClass="edit" stylesheets="@../../../CSS/EditWord.css" text="Phonetic" />
+                        <Label layoutX="16.0" layoutY="59.0" styleClass="edit" stylesheets="@../../../CSS/EditWord.css" text="Type" />
+                        <Label layoutX="13.0" layoutY="127.0" prefHeight="91.0" prefWidth="81.0" styleClass="edit" stylesheets="@../../../CSS/EditWord.css" text="Explain" />
+                        <Label layoutY="248.0" prefHeight="40.0" prefWidth="88.0" styleClass="edit" stylesheets="@../../../CSS/EditWord.css" text="Synonym" />
+                        <Label layoutX="2.0" layoutY="297.0" styleClass="edit" stylesheets="@../../../CSS/EditWord.css" text="Antonym" />
+                    </children></AnchorPane>
             </content>
           </Tab>
         </tabs>
          <styleClass>
             <String fx:value="tab-header-area" />
             <String fx:value="tab-header-background" />
-            <String fx:value="tab-pane" />
+            <String fx:value="bgMain" />
          </styleClass>
       </TabPane>
-      <TextField fx:id="wordInput" layoutX="125.0" layoutY="146.0" prefHeight="38.0" prefWidth="521.0" styleClass="word" />
-      <Button layoutX="648.0" layoutY="146.0" mnemonicParsing="false" onAction="#deleteWord" opacity="0.3" prefHeight="39.0" prefWidth="47.0" styleClass="background" stylesheets="@../../../Style/ButtonStyles.css">
+      <TextField fx:id="wordInput" layoutX="221.0" layoutY="148.0" prefHeight="38.0" prefWidth="468.0" styleClass="word" AnchorPane.leftAnchor="221.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="148.0" />
+      <Button layoutX="685.0" layoutY="144.0" mnemonicParsing="false" onAction="#deleteWord" prefHeight="39.0" prefWidth="47.0" styleClass="bgMain" stylesheets="@../../../Style/ButtonStyles.css" AnchorPane.rightAnchor="3.799999999999997" AnchorPane.topAnchor="144.0">
          <graphic>
             <ImageView fitHeight="31.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../Style/remove.png" />
+                  <Image url="@../../../Style/icons8_delete_bin_64px.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Label alignment="CENTER" layoutX="56.0" layoutY="149.0" prefHeight="32.0" prefWidth="58.0" text="Word" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="139.0" layoutY="151.0" prefHeight="32.0" prefWidth="58.0" text="Word" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="138.99999999999997" AnchorPane.rightAnchor="538.6" AnchorPane.topAnchor="151.0">
          <font>
             <Font name="Arial Bold Italic" size="19.0" />
          </font>
       </Label>
-      <Button layoutX="330.0" layoutY="200.0" mnemonicParsing="false" onKeyPressed="#enterSaveWord" onMouseClicked="#setTextEditWord" styleClass="editword" stylesheets="@../../../Style/ButtonStyles.css" text="Select word" />
+       <VBox alignment="CENTER" layoutY="1.0" prefHeight="650.0" prefWidth="60.0" spacing="80.0" styleClass="bgChildren1" stylesheets="@../../../CSS/EditWord.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+           <children>
+               <Button mnemonicParsing="false" onAction="#switchToMain" prefHeight="42.0" prefWidth="76.0" styleClass="bgChildren">
+                   <graphic>
+                       <ImageView fitHeight="54.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                               <Image url="@../../../Style/icons8-home-64.png" />
+                           </image>
+                       </ImageView>
+                   </graphic></Button>
+               <Button mnemonicParsing="false" styleClass="bgChildren">
+                   <graphic>
+                       <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                               <Image url="@../../../Style/icons8_edit_64px.png" />
+                           </image>
+                       </ImageView>
+                   </graphic>
+               </Button>
+               <Button mnemonicParsing="false" onAction="#switchToGame" styleClass="bgChildren" stylesheets="@../../../CSS/ExplainScreen.css">
+                   <graphic>
+                       <ImageView fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                               <Image url="@../../../Style/icons8-game-64.png" />
+                           </image>
+                       </ImageView>
+                   </graphic>
+               </Button>
+               <Button mnemonicParsing="false" onAction="#switchToAPI" styleClass="bgChildren">
+                   <graphic>
+                       <ImageView fitHeight="45.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                               <Image url="@../../../Style/icons8_google_translate_64px.png" />
+                           </image>
+                       </ImageView>
+                   </graphic></Button>
+           </children></VBox>
+      <Button layoutX="406.0" layoutY="199.0" mnemonicParsing="false" onKeyPressed="#enterSaveWord" onMouseClicked="#setTextEditWord" prefHeight="12.0" prefWidth="98.0" styleClass="submit" stylesheets="@../../../CSS/EditWord.css" text="Select word" AnchorPane.leftAnchor="406.0" AnchorPane.rightAnchor="231.6" AnchorPane.topAnchor="199.0" />
    </children>
+   <stylesheets>
+      <URL value="@../../../Style/style.css" />
+      <URL value="@../../../CSS/EditWord.css" />
+   </stylesheets>
 </AnchorPane>

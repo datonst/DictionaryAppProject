@@ -3,37 +3,81 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="650.0" prefWidth="736.0" styleClass="background" stylesheets="@../../../Style/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.dictionaryproject.Controller.APIScreenController">
+<AnchorPane prefHeight="650.0" prefWidth="736.0" styleClass="bgMain" stylesheets="@../../../CSS/APIScreen.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.dictionaryproject.Controller.APIScreenController">
    <children>
-      <Button layoutX="33.0" layoutY="38.0" mnemonicParsing="false" onAction="#switchToMain" styleClass="submit" stylesheets="@../../../Style/ButtonStyles.css" text="Back" />
-      <Label layoutX="147.0" layoutY="50.0" styleClass="mainTitle" stylesheets="@../../../Style/style.css" text="Translate API" />
-      <Label fx:id="inputLanguage" alignment="CENTER" layoutX="32.0" layoutY="146.0" prefHeight="23.0" prefWidth="130.0" styleClass="word" stylesheets="@../../../Style/style.css" text="Vietnamese" />
-      <Label fx:id="outputLanguage" alignment="CENTER" layoutX="32.0" layoutY="381.0" prefHeight="23.0" prefWidth="130.0" styleClass="word" text="English" />
-      <Button layoutX="306.0" layoutY="375.0" mnemonicParsing="false" onAction="#translate" prefHeight="36.0" prefWidth="123.0" styleClass="explain" text="Translate" />
-      <TextArea fx:id="outputText" layoutX="30.0" layoutY="425.0" prefHeight="183.0" prefWidth="676.0" styleClass="explain" />
-      <TextArea fx:id="inputText" layoutX="33.0" layoutY="181.0" prefHeight="183.0" prefWidth="676.0" styleClass="explain" />
-      <Button fx:id="switchLanguage" layoutX="609.0" layoutY="375.0" mnemonicParsing="false" onAction="#switchLang" styleClass="explain" text="Switch" />
-      <Button layoutX="655.0" layoutY="314.0" mnemonicParsing="false" onAction="#speakerTextInput" prefHeight="41.0" prefWidth="27.0" styleClass="speaker" stylesheets="@../../../Style/ButtonStyles.css">
+      <Label layoutX="201.0" layoutY="45.0" stylesheets="@../../../Style/style.css" text="Quick Translate " textFill="WHITE">
+         <font>
+            <Font name="System Bold Italic" size="59.0" />
+         </font></Label>
+      <Label fx:id="inputLanguage" alignment="CENTER" layoutX="127.0" layoutY="169.0" prefHeight="36.0" prefWidth="130.0" styleClass="word" stylesheets="@../../../Style/style.css" text="English" />
+      <Label fx:id="outputLanguage" alignment="CENTER" layoutX="591.0" layoutY="169.0" prefHeight="36.0" prefWidth="130.0" styleClass="word" text="Vietnamese" />
+      <Button layoutX="381.0" layoutY="610.0" mnemonicParsing="false" onAction="#translate" prefHeight="36.0" prefWidth="123.0" styleClass="practiceButton" stylesheets="@../../../CSS/APIScreen.css" text="Translate" />
+      <TextArea fx:id="outputText" editable="false" layoutX="127.0" layoutY="409.0" prefHeight="198.0" prefWidth="600.0" styleClass="explain" />
+      <TextArea fx:id="inputText" layoutX="126.0" layoutY="225.0" prefHeight="179.0" prefWidth="600.0" styleClass="explain" />
+      <Button layoutX="669.0" layoutY="351.0" mnemonicParsing="false" onAction="#speakerTextInput" prefHeight="41.0" prefWidth="27.0" styleClass="speaker" stylesheets="@../../../Style/ButtonStyles.css">
          <graphic>
             <ImageView fitHeight="23.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../Style/sound.png" />
+                  <Image url="@../../../Style/icons8_speaker_64px.png" />
                </image>
             </ImageView>
          </graphic></Button>
-      <Button layoutX="648.0" layoutY="557.0" mnemonicParsing="false" onAction="#speakerTextOutput" prefHeight="41.0" prefWidth="27.0" styleClass="speaker" stylesheets="@../../../Style/ButtonStyles.css">
+      <Button layoutX="669.0" layoutY="560.0" mnemonicParsing="false" onAction="#speakerTextOutput" prefHeight="41.0" prefWidth="27.0" styleClass="speaker" stylesheets="@../../../Style/ButtonStyles.css">
          <graphic>
-            <ImageView fitHeight="23.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="25.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../Style/sound.png" />
+                  <Image url="@../../../Style/icons8_speaker_64px.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="recordButton" layoutX="39.0" layoutY="281.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="64.0" styleClass="speaker" stylesheets="@../../../Style/ButtonStyles.css">
+      <Button fx:id="recordButton" layoutX="621.0" layoutY="344.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="54.0" styleClass="speaker" stylesheets="@../../../Style/ButtonStyles.css">
          <graphic>
-            <ImageView fx:id="imageView" fitHeight="57.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageView" fitHeight="34.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" />
          </graphic></Button>
+      <ImageView fitHeight="36.0" fitWidth="46.0" layoutX="408.0" layoutY="169.0" onMouseClicked="#switchLang" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Style/icons8_data_transfer_48px.png" />
+         </image>
+      </ImageView>
+      <VBox fx:id="vBox" alignment="CENTER" prefHeight="651.0" prefWidth="60.0" spacing="80.0" styleClass="bgChildren1" stylesheets="@../../../CSS/APIScreen.css">
+         <children>
+            <Button mnemonicParsing="false" onAction="#switchToMain" prefHeight="42.0" prefWidth="76.0" styleClass="bgChildren" stylesheets="@../../../CSS/APIScreen.css">
+               <graphic>
+                  <ImageView fitHeight="54.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Style/icons8-home-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button mnemonicParsing="false" onAction="#switchToEdit" styleClass="bgChildren">
+               <graphic>
+                  <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Style/icons8_edit_64px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#switchToGame" styleClass="bgChildren" stylesheets="@../../../CSS/ExplainScreen.css">
+               <graphic>
+                  <ImageView fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Style/icons8-game-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#switchToAPI" styleClass="bgChildren">
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Style/icons8_google_translate_64px.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+         </children></VBox>
    </children>
 </AnchorPane>
