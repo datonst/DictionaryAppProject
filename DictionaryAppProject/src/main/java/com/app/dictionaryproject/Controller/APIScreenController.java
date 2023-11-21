@@ -15,6 +15,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import com.app.dictionaryproject.service.TranslateService;
 
@@ -40,15 +42,18 @@ public class APIScreenController implements Initializable {
     public Button switchLanguage = new Button();
     public Label inputLanguage = new Label();
     public Label outputLanguage = new Label();
+    public VBox vBox = new VBox();
     Image voiceIcon;
     Image waveIcon;
-    String vi = "Vietnamese";
-    String eng = "English";
+
 
     String path = System.getProperty("user.dir")
             + "\\src\\main\\resources\\recorder\\talk.wav";
     RecorderService recorderService;
-    public void switchLang(ActionEvent event) {
+    private final String vi = "Vietnamese";
+    private final String eng = "English";
+
+    public void switchLang(MouseEvent event) {
 
         if (inputLanguage.getText().equals(vi)){
             inputLanguage.setText(eng);
@@ -83,7 +88,7 @@ public class APIScreenController implements Initializable {
         stage.show();
     }
 
-    public void translate(ActionEvent event) {
+    public void translate(MouseEvent event) {
         String text = inputText.getText();
         try {
             if(inputLanguage.getText().equals(eng)) {
@@ -135,6 +140,9 @@ public class APIScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        vBox.getChildren().get(3).setStyle("-fx-background-color: #8aaaff");
+
         InputStream voiceIconInput = getClass().getResourceAsStream("/Style/google-voice.png");
         InputStream waveIconInput = getClass().getResourceAsStream("/Style/wave-sound.png");
         voiceIcon = new Image(voiceIconInput);
@@ -189,5 +197,27 @@ public class APIScreenController implements Initializable {
                 }
             }
         });
-    };
+    }
+    public void switchToAPI(ActionEvent event) throws IOException  {
+        FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/APIScreen.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(Loader.load());
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void switchToEdit(ActionEvent event) throws IOException {
+        FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/EditScreen.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(Loader.load());
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void switchToGame(ActionEvent event) throws IOException {
+
+        FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/GameScreen.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(Loader.load());
+        stage.setScene(scene);
+        stage.show();
+    }
 }
