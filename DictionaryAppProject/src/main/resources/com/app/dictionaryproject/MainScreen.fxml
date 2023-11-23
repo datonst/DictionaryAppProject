@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="736.0" styleClass="bgMain" stylesheets="@../../../CSS/MainScreen.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.dictionaryproject.Controller.MainScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#setVisibleArchive" prefHeight="650.0" prefWidth="736.0" styleClass="bgMain" stylesheets="@../../../CSS/MainScreen.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.dictionaryproject.Controller.MainScreenController">
 
     <children>
         <Label alignment="TOP_CENTER" layoutX="163.0" layoutY="39.0" prefHeight="108.0" prefWidth="410.0" text="Dictionary" textAlignment="CENTER" textFill="#fbeaeb">
@@ -62,18 +62,18 @@
                     </image>
                 </ImageView>
             </graphic></Button>
-      <AnchorPane fx:id="archivePane" layoutX="158.0" layoutY="147.0" prefHeight="472.0" prefWidth="430.0" styleClass="practiceButton" stylesheets="@../../../CSS/MainScreen.css" visible="false">
+      <AnchorPane fx:id="archivePane" layoutX="120.0" layoutY="147.0" prefHeight="472.0" prefWidth="508.0" styleClass="practiceButton" stylesheets="@../../../CSS/MainScreen.css" visible="false">
          <children>
-            <ListView fx:id="listWordArchive" layoutX="26.0" layoutY="71.0" prefHeight="346.0" prefWidth="386.0" styleClass="submit">
+            <ListView fx:id="listWordArchive" layoutX="55.0" layoutY="69.0" prefHeight="346.0" prefWidth="427.0" styleClass="submit">
                <stylesheets>
                   <URL value="@../../../Style/ButtonStyles.css" />
                   <URL value="@../../../Style/style.css" />
                </stylesheets></ListView>
-            <Label alignment="CENTER" layoutX="89.0" layoutY="23.0" prefHeight="29.0" prefWidth="251.0" text="Your words" textFill="#8aaaff">
+            <Label alignment="CENTER" layoutX="131.0" layoutY="14.0" prefHeight="29.0" prefWidth="251.0" text="Your words" textFill="#8aaaff">
                <font>
                   <Font name="Times New Roman Bold Italic" size="33.0" />
                </font></Label>
-            <Button fx:id="pratice" layoutX="187.0" layoutY="428.0" mnemonicParsing="false" onMouseClicked="#switchToGame" onMouseEntered="#handleMouseExitPractice" onMouseExited="#handleMouseEnteredPractice" styleClass="practiceButton" stylesheets="@../../../CSS/MainScreen.css" text="Practice" />
+            <Button fx:id="pratice" layoutX="222.0" layoutY="426.0" mnemonicParsing="false" onMouseClicked="#switchToGame" onMouseEntered="#handleMouseExitPractice" onMouseExited="#handleMouseEnteredPractice" styleClass="practiceButton" stylesheets="@../../../CSS/MainScreen.css" text="Practice" />
          </children></AnchorPane>
     </children>
 </AnchorPane>

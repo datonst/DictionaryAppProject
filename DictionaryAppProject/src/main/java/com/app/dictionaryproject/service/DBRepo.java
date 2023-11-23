@@ -108,5 +108,23 @@ public class DBRepo {
             e.printStackTrace();
         }
     }
+    public void updateWord(WordShort wordToUpdate) {
+        try {
+            PreparedStatement psUpdate =
+                    connection.prepareStatement("UPDATE dictionary SET textDescription? htmlDescription? WHERE word=?");
+
+            String word = wordToUpdate.getWord().strip();
+            String textScript = wordToUpdate.getTextDescription();
+            String htmlScript = wordToUpdate.getHTMLDescription();
+
+            psUpdate.setString(1, textScript);
+            psUpdate.setString(2, htmlScript);
+            psUpdate.setString(3, word);
+            psUpdate.executeUpdate();
+        } catch (SQLException e) {
+            // Handle database update errors
+            throw new RuntimeException(e);
+        }
+    }
 
 }

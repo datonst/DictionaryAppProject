@@ -2,10 +2,7 @@ package com.app.dictionaryproject.Controller;
 
 
 
-//import com.app.dictionaryproject.Controller.ResultSearchController;
-import com.app.dictionaryproject.Models.Word;
 import com.app.dictionaryproject.service.DBRepo;
-import com.app.dictionaryproject.service.DBRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,11 +36,14 @@ public class MainScreenController {
     public TextField  wordSearch;
     @FXML
     public ListView<String> listWord;
+    @FXML
     public ListView<String> listWordArchive = new ListView<>();
+    @FXML
+    public ListView<String> listNumber = new ListView<>();
+    @FXML
     public ArrayList<String> words_list = new ArrayList<>();
+    @FXML
     public AnchorPane archivePane = new AnchorPane();
-    public AnchorPane mainPane = new AnchorPane();
-    
     @FXML public Button editWord = new Button();
 
     @FXML
@@ -55,7 +55,7 @@ public class MainScreenController {
     public Button searchButton = new Button();
     public Button archiveWord = new Button();
 
-    private static Set<String> checkUnique = new HashSet<>();
+    private static final Set<String> checkUnique = new HashSet<>();
     //Các biến để chuyển đổi qua lịa các màn hình
     public Scene scene;
     public Stage stage;
@@ -73,8 +73,17 @@ public class MainScreenController {
 
        archivePane.setVisible(!archivePane.isVisible());
     }
+    public void setVisibleArchive(MouseEvent event) {
+        if (!isInsideNode(event.getX(), event.getY(), archivePane)) {
+            System.out.println("outside");
+            archivePane.setVisible(false);
+        } else {
 
-    private boolean isInsideNode(double x, double y, AnchorPane node) {
+            System.out.println("inside");
+        }
+    }
+
+    public static boolean isInsideNode(double x, double y, AnchorPane node) {
         double nodeMinX = node.getBoundsInParent().getMinX();
         double nodeMinY = node.getBoundsInParent().getMinY();
         double nodeMaxX = node.getBoundsInParent().getMaxX();
@@ -82,94 +91,29 @@ public class MainScreenController {
 
         return x >= nodeMinX && x <= nodeMaxX && y >= nodeMinY && y <= nodeMaxY;
     }
-    private void  insertFromFile(String filePath) {
-        Path path = Path.of(filePath);
-
+    public void showListArchive() {
+        // Convert array to ObservableList
+        insertFromFile();
+//        for (int i = 0; i < words_list.size(); i++) {
+//            listNumber.getItems().add(Integer.toString(i + 1));
+//        }
+        // Set the modified list to listWordArchive
+        listWordArchive.getItems().setAll(words_list);
+    }
+    private void  insertFromFile() {
+        Path path = Path.of("src/main/resources/data/saveWord.txt");
         try {
             List<String> lines = Files.readAllLines(path);
 
             words_list.addAll(lines);
+            checkUnique.addAll(lines);
         } catch (IOException e) {
             System.out.println(e.getMessage());
             //e.printStackTrace();
         }
     }
 
-    public void showArchive() {
-        // Convert array to ObservableList
-        insertFromFile("src/main/resources/data/saveWord.txt");
-//        for (int i = 0; i < words_list.size(); i++) {
-//            words_list.set(i, (i + 1) + ". " + words_list.get(i));
-//        }
-        // Set the modified list to listWordArchive
-        listWordArchive.getItems().setAll(words_list);
-    }
 
-    // chuyển khi chọn nút tìm kiếm
-    public void Submit(ActionEvent event) {
-        String name = wordSearch.getText().trim();
-            if (!name.isEmpty()) {
-
-                // Handle the selected item here
-                try {
-                    FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/ResultSearch.fxml"));
-                    root = Loader.load();
-
-
-                    ResultSearchController controller = Loader.getController();
-//                    DBRepository search = new DBRepository();
-//                    controller.initialize(search.searchWord(name));
-                    DBRepo search = new DBRepo();
-                    controller.initialize(search.searchWord(name));
-
-                    // Lấy từ khi search
-//                ResultSearchController controller = Loader.getController();
-//                controller.initialize(new Word(name,"/122/", "nvv"));
-                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.show();
-
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-
-
-    }
-    public void SubmitEnter(KeyEvent event) {
-        String name = wordSearch.getText().trim();
-
-        if (!name.isEmpty() && event.getCode() == KeyCode.ENTER ) {
-            // Handle the selected item here
-            try {
-                FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/ResultSearch.fxml"));
-                root = Loader.load();
-
-                ResultSearchController controller = Loader.getController();
-                //DBRepository search = new DBRepository();
-                DBRepo dbRepo = new DBRepo();
-                ArrayList<String> listWordFound = dbRepo.searchListWord(name);
-                if(dbRepo.searchWord(name).getTextDescription().equals("This word does not have meaning") && !listWordFound.isEmpty()) {
-                    controller.initialize(dbRepo.searchWord(listWordFound.get(0)));
-                    addSaveWord(listWordFound.get(0));
-                } else {
-                    controller.initialize(dbRepo.searchWord(name));
-                }
-                if(!dbRepo.searchWord(name).getTextDescription().equals("This word does not have meaning")){
-                    addSaveWord(name);
-                }
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-
-    }
 
     // show list word
     public void showSearch() {
@@ -202,7 +146,7 @@ public class MainScreenController {
     //chuyển screen khi chọn từ trong listword
     public void initialize() {
 
-        showArchive();
+        showListArchive();
 
         wordSearch.textProperty().addListener((observable, oldValue, newValue) -> showSearch());
 
@@ -246,12 +190,73 @@ public class MainScreenController {
         });
     }
 
+    // chuyển khi chọn nút tìm kiếm
+    public void Submit(ActionEvent event) {
+        String name = wordSearch.getText().trim();
+        if (!name.isEmpty()) {
+
+            // Handle the selected item here
+            try {
+                FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/ResultSearch.fxml"));
+                root = Loader.load();
+
+
+                ResultSearchController controller = Loader.getController();
+//                    DBRepository search = new DBRepository();
+//                    controller.initialize(search.searchWord(name));
+                DBRepo search = new DBRepo();
+                controller.initialize(search.searchWord(name));
+
+                // Lấy từ khi search
+//                ResultSearchController controller = Loader.getController();
+//                controller.initialize(new Word(name,"/122/", "nvv"));
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+
+    }
+    public void SubmitEnter(KeyEvent event) {
+        String name = wordSearch.getText().trim();
+
+        if (!name.isEmpty() && event.getCode() == KeyCode.ENTER ) {
+            // Handle the selected item here
+            try {
+                FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/ResultSearch.fxml"));
+                root = Loader.load();
+
+                ResultSearchController controller = Loader.getController();
+                //DBRepository search = new DBRepository();
+                DBRepo dbRepo = new DBRepo();
+                ArrayList<String> listWordFound = dbRepo.searchListWord(name);
+                if(dbRepo.searchWord(name).getTextDescription().equals("This word does not have meaning") && !listWordFound.isEmpty()) {
+                    controller.initialize(dbRepo.searchWord(listWordFound.get(0)));
+                    addSaveWord(listWordFound.get(0));
+                } else {
+                    controller.initialize(dbRepo.searchWord(name));
+                }
+                if(!dbRepo.searchWord(name).getTextDescription().equals("This word does not have meaning")){
+                    addSaveWord(name);
+                }
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
     /**
      * Hàm lưu từ vào file.
      * */
     public void addSaveWord(String newValue) {
-
-
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/data/saveWord.txt", true))) {
             // Append the new word to the file
             if(!checkUnique.contains(newValue)) {
@@ -267,58 +272,35 @@ public class MainScreenController {
 
     // chuyển sang các option khác
     public void switchToGame(MouseEvent event) throws IOException {
-
-        FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/GameScreen.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(Loader.load());
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
-    public void handleMouseEnteredGame(MouseEvent event) {
-        // Xử lý sự kiện khi chuột đi vào
-        handleMouseEntered(game);
-    }
-
-    @FXML
-    public void handleMouseExitGame(MouseEvent event) {
-        // Xử lý sự kiện khi chuột đi vào
-        handleMouseExit(game);
+        SwitchScreen.switchToScene("/com/app/dictionaryproject/GameScreen.fxml",stage, event);
     }
     public void switchToEdit(MouseEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/EditScreen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(Loader.load());
-        stage.setScene(scene);
-        stage.show();
+        SwitchScreen.switchToScene("/com/app/dictionaryproject/EditScreen.fxml",stage, event);
     }
 
+    public void switchToAPI(MouseEvent event) throws IOException {
+        SwitchScreen.switchToScene("/com/app/dictionaryproject/APIScreen.fxml", stage, event);
+    }
+    // Xử lý sự kiện khi chuột đi vào
     @FXML
+    public void handleMouseEnteredGame(MouseEvent event) {
+
+        handleMouseEntered(game);
+    }
     public void handleMouseEnteredEdit(MouseEvent event) {
-        // Xử lý sự kiện khi chuột đi vào
         handleMouseEntered((editWord));
     }
+    public void handleMouseEnteredAPI(MouseEvent event) {
+        handleMouseEntered(API);
+    }
+    public void handleMouseExitGame(MouseEvent event) {
+        handleMouseExit(game);
+    }
 
-    @FXML
     public void handleMouseExitEdit(MouseEvent event) {
         // Xử lý sự kiện khi chuột đi vào
         handleMouseExit(editWord);
     }
-    public void switchToAPI(MouseEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/APIScreen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(Loader.load());
-        stage.setScene(scene);
-        stage.show();
-    }
-    @FXML
-    public void handleMouseEnteredAPI(MouseEvent event) {
-        // Xử lý sự kiện khi chuột đi vào
-        handleMouseEntered(API);
-    }
-
-    @FXML
     public void handleMouseExitAPI(MouseEvent event) {
         // Xử lý sự kiện khi chuột đi vào
         handleMouseExit(API);
@@ -333,7 +315,6 @@ public class MainScreenController {
     }
     @FXML
     public void handleMouseExit(Button button) {
-        // Xử lý sự kiện khi chuột đi vào
         button.setStyle("-fx-background-color: #8aaaff; " +
                 "-fx-text-fill:white; " );
     }
@@ -342,5 +323,4 @@ public class MainScreenController {
                 "-fx-text-fill: #8aaaff; "
                 );
     }
-
 }

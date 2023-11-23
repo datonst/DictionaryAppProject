@@ -95,14 +95,6 @@ public class EditScreenController {
     }
 
 
-    public void  switchToMain(ActionEvent event) throws IOException {
-
-        FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/MainScreen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(Loader.load());
-        stage.setScene(scene);
-        stage.show();
-    }
 
     public void addWord() {
         String word = wordInput.getText();
@@ -132,23 +124,27 @@ public class EditScreenController {
     public void setTextEditWord(MouseEvent event) {
         String word = wordInput.getText();
         if(!word.isEmpty()) {
-            editPhonetic.setText(database.searchWord(word).getPhonetic());
-            editType.setText(database.searchWord(word).getWordType());
-            editExplain.setText(database.searchWord(word).getDefinitionWord());
-            editSynonym.setText(database.searchWord(word).getSynonym());
-            editAntonym.setText(database.searchWord(word).getAntonym());
+            setWord(word);
+        } else {
+            clearEditWordFields();
         }
     }
 
     public void enterSaveWord(KeyEvent event){
             String word = wordInput.getText();
-            if ( event.getCode() == KeyCode.ENTER ) {
-                editPhonetic.setText(database.searchWord(word).getPhonetic());
-                editType.setText(database.searchWord(word).getWordType());
-                editExplain.setText(database.searchWord(word).getDefinitionWord());
-                editSynonym.setText(database.searchWord(word).getSynonym());
-                editAntonym.setText(database.searchWord(word).getAntonym());
+            if ( event.getCode() == KeyCode.ENTER && !word.isEmpty()) {
+                setWord(word);
+            } else if(word.isEmpty()){
+                clearEditWordFields();
             }
+    }
+
+    private void setWord(String word) {
+        editPhonetic.setText(database.searchWord(word).getPhonetic());
+        editType.setText(database.searchWord(word).getWordType());
+        editExplain.setText(database.searchWord(word).getDefinitionWord());
+        editSynonym.setText(database.searchWord(word).getSynonym());
+        editAntonym.setText(database.searchWord(word).getAntonym());
     }
 
     public void editWord() {
@@ -161,10 +157,17 @@ public class EditScreenController {
         String antonym  = editAntonym.getText();
 
         Word newWord = new Word(word, phonetic, type, explain, synonym, antonym);
-        database.updateWord(newWord);
+
+        String textScript = "Từ: " + word + "\n" + "Phát âm: " + phonetic + "\nLoại từ: " + type +
+                "\nNghĩa" + explain + "\nTừ đồng nghĩa:" + synonym + "\nTừ trái nghĩa" + antonym;
+        String htmlCode = "<h2 class='nameWord'>" + word + "</h2>\n" +
+                "<h3 class='pronounWord'>" + phonetic + "</h3>\n" +
+                "<h4 class='typeWord'>" + type + "</h4>\n" +
+                "<h5 class='meanWord'>" + explain + "</h5>\n";
 
         showAlert(Alert.AlertType.INFORMATION, "Success", "Word updated successfully.");
-
+        database.updateWord(newWord);
+        dbRepo.updateWord(new WordShort(word, textScript, htmlCode));
         // Clear input fields after editing the word
         clearEditWordFields();
     }
@@ -240,7 +243,7 @@ public class EditScreenController {
         }
     }
 
-    public void addWord(ActionEvent event) {
+    public void addWord(MouseEvent event) {
         String word = wordInput.getText();
         if(!word.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -304,19 +307,17 @@ public class EditScreenController {
         alert.setContentText(content);
         alert.showAndWait();
     }
-    public void switchToAPI(ActionEvent event) throws IOException  {
-        FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/APIScreen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(Loader.load());
-        stage.setScene(scene);
-        stage.show();
+    public void switchToGame(MouseEvent event) throws IOException {
+        SwitchScreen.switchToScene("/com/app/dictionaryproject/GameScreen.fxml",stage, event);
     }
-    public void switchToGame(ActionEvent event) throws IOException {
+    public void switchToEdit(MouseEvent event) throws IOException {
+        SwitchScreen.switchToScene("/com/app/dictionaryproject/EditScreen.fxml",stage, event);
+    }
+    public void  switchToMain(MouseEvent event) throws IOException {
+        SwitchScreen.switchToScene("/com/app/dictionaryproject/MainScreen.fxml",stage, event);
 
-        FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/GameScreen.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(Loader.load());
-        stage.setScene(scene);
-        stage.show();
+    }
+    public void switchToAPI(MouseEvent event) throws IOException {
+        SwitchScreen.switchToScene("/com/app/dictionaryproject/APIScreen.fxml", stage, event);
     }
 }

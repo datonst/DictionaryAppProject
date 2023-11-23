@@ -39,6 +39,23 @@
     -fx-text-fill: White;
     -fx-font-weight: 700;
 }
+.chart {
+    -fx-background-color: #f0f0f0; /* Background color */
+}
+
+/* Style for the bars in the BarChart */
+.default-color0.chart-bar {
+    -fx-bar-fill: #4CAF50; /* Color of the bars */
+}
+
+.default-color1.chart-bar {
+    -fx-bar-fill: #F44336; /* Color of the bars for series 1 */
+}
+
+/* Style for the axis labels */
+.chart-axis-label {
+    -fx-text-fill: #333; /* Color of the axis labels */
+}
 
 /*.bgChildren {*/
 /*    -fx-background-color: #01539d;*/

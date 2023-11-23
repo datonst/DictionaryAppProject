@@ -44,7 +44,7 @@
       </ImageView>
       <VBox fx:id="vBox" alignment="CENTER" prefHeight="651.0" prefWidth="60.0" spacing="80.0" styleClass="bgChildren1" stylesheets="@../../../CSS/APIScreen.css">
          <children>
-            <Button mnemonicParsing="false" onAction="#switchToMain" prefHeight="42.0" prefWidth="76.0" styleClass="bgChildren" stylesheets="@../../../CSS/APIScreen.css">
+            <Button mnemonicParsing="false" onMouseClicked="#switchToMain" prefHeight="42.0" prefWidth="76.0" styleClass="bgChildren" stylesheets="@../../../CSS/APIScreen.css">
                <graphic>
                   <ImageView fitHeight="54.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -52,7 +52,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button mnemonicParsing="false" onAction="#switchToEdit" styleClass="bgChildren">
+            <Button mnemonicParsing="false" onMouseClicked="#switchToEdit" styleClass="bgChildren">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -61,7 +61,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onAction="#switchToGame" styleClass="bgChildren" stylesheets="@../../../CSS/ExplainScreen.css">
+            <Button mnemonicParsing="false" onMouseClicked="#switchToGame" styleClass="bgChildren" stylesheets="@../../../CSS/ExplainScreen.css">
                <graphic>
                   <ImageView fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -70,7 +70,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onAction="#switchToAPI" styleClass="bgChildren">
+            <Button mnemonicParsing="false" onMouseClicked="#switchToAPI" styleClass="bgChildren">
                <graphic>
                   <ImageView fitHeight="45.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>

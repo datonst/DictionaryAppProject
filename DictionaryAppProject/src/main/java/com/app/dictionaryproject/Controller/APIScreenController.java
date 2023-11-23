@@ -80,13 +80,7 @@ public class APIScreenController implements Initializable {
 
     }
 
-    public void  switchToMain(ActionEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/MainScreen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(Loader.load());
-        stage.setScene(scene);
-        stage.show();
-    }
+
 
     public void translate(MouseEvent event) {
         String text = inputText.getText();
@@ -141,7 +135,7 @@ public class APIScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        vBox.getChildren().get(3).setStyle("-fx-background-color: #8aaaff");
+        vBox.getChildren().get(3).setStyle("-fx-background-color: #8aaafa;" + "-fx-background-radius : 0px;");
 
         InputStream voiceIconInput = getClass().getResourceAsStream("/Style/google-voice.png");
         InputStream waveIconInput = getClass().getResourceAsStream("/Style/wave-sound.png");
@@ -198,26 +192,17 @@ public class APIScreenController implements Initializable {
             }
         });
     }
-    public void switchToAPI(ActionEvent event) throws IOException  {
-        FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/APIScreen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(Loader.load());
-        stage.setScene(scene);
-        stage.show();
+    public void switchToGame(MouseEvent event) throws IOException {
+        SwitchScreen.switchToScene("/com/app/dictionaryproject/GameScreen.fxml",stage, event);
     }
-    public void switchToEdit(ActionEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/EditScreen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(Loader.load());
-        stage.setScene(scene);
-        stage.show();
+    public void switchToEdit(MouseEvent event) throws IOException {
+        SwitchScreen.switchToScene("/com/app/dictionaryproject/EditScreen.fxml",stage, event);
     }
-    public void switchToGame(ActionEvent event) throws IOException {
+    public void  switchToMain(MouseEvent event) throws IOException {
+        SwitchScreen.switchToScene("/com/app/dictionaryproject/MainScreen.fxml",stage, event);
 
-        FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/GameScreen.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(Loader.load());
-        stage.setScene(scene);
-        stage.show();
+    }
+    public void switchToAPI(MouseEvent event) throws IOException {
+        SwitchScreen.switchToScene("/com/app/dictionaryproject/APIScreen.fxml", stage, event);
     }
 }

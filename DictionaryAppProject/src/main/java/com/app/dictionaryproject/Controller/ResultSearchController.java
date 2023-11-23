@@ -28,22 +28,13 @@ public class ResultSearchController {
     public Stage stage;
     public Parent root;
 
-    public void  switchToMain(ActionEvent event) throws IOException {
 
-        FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/MainScreen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(Loader.load());
-        stage.setScene(scene);
-        stage.show();
-    }
     @FXML
     public Label words = new Label();
     @FXML
     public Label phonetic = new Label();
     public Label type = new Label();
     public Label explain = new Label();
-    public Label synonym = new Label();
-    public Label antonym = new Label();
     public VBox vBox = new VBox();
 
     private static final String resultHTMLTemplate = """
@@ -232,7 +223,7 @@ public class ResultSearchController {
         webView.getEngine().loadContent(fullResult);
     }
 
-    public void textToSpeech(String textToSpeak) {
+    public static void textToSpeech(String textToSpeak) {
         // thay đổi theo từng máy của mọi người
         String command = "cscript.exe /nologo  " + System.getProperty("user.dir") + "\\src\\main\\resources\\data\\TTSAPI.vbs \"" + textToSpeak + "\"";
 
@@ -254,27 +245,18 @@ public class ResultSearchController {
         //word = word.substring(0,word.indexOf("\t"));
         textToSpeech(word);
     }
-    public void switchToAPI(ActionEvent event) throws IOException  {
-        FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/APIScreen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(Loader.load());
-        stage.setScene(scene);
-        stage.show();
+    public void switchToGame(MouseEvent event) throws IOException {
+        SwitchScreen.switchToScene("/com/app/dictionaryproject/GameScreen.fxml",stage, event);
     }
-    public void switchToEdit(ActionEvent event) throws IOException {
-        FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/EditScreen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(Loader.load());
-        stage.setScene(scene);
-        stage.show();
+    public void switchToEdit(MouseEvent event) throws IOException {
+        SwitchScreen.switchToScene("/com/app/dictionaryproject/EditScreen.fxml",stage, event);
     }
-    public void switchToGame(ActionEvent event) throws IOException {
+    public void  switchToMain(MouseEvent event) throws IOException {
+        SwitchScreen.switchToScene("/com/app/dictionaryproject/MainScreen.fxml",stage, event);
 
-        FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/GameScreen.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(Loader.load());
-        stage.setScene(scene);
-        stage.show();
+    }
+    public void switchToAPI(MouseEvent event) throws IOException {
+        SwitchScreen.switchToScene("/com/app/dictionaryproject/APIScreen.fxml", stage, event);
     }
 
 }

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="650.0" prefWidth="736.0" styleClass="bgMain" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.dictionaryproject.Controller.EditScreenController">
+<AnchorPane onKeyPressed="#enterSaveWord" prefHeight="650.0" prefWidth="736.0" styleClass="bgMain" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.dictionaryproject.Controller.EditScreenController">
    <children>
       <Label layoutX="221.0" layoutY="22.0" styleClass="mainTitle" text="UpdateWord " AnchorPane.leftAnchor="221.0" AnchorPane.rightAnchor="79.0" AnchorPane.topAnchor="22.0" />
       <TabPane fx:id="tabPane" layoutX="99.0" layoutY="225.0" prefHeight="408.0" prefWidth="634.0" stylesheets="@../../../CSS/EditWord.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="99.0" AnchorPane.rightAnchor="2.6000000000000227" AnchorPane.topAnchor="225.0">
@@ -41,7 +41,7 @@
                         <TextArea fx:id="editExplain" layoutX="98.0" layoutY="105.0" prefHeight="135.0" prefWidth="503.0" styleClass="editword" />
                         <TextField fx:id="editAntonym" layoutX="99.0" layoutY="298.0" prefHeight="38.0" prefWidth="502.0" styleClass="editword" />
                         <TextField fx:id="editSynonym" layoutX="98.0" layoutY="249.0" prefHeight="38.0" prefWidth="505.0" styleClass="editword" stylesheets="@../../../Style/style.css" />
-                        <Button layoutX="313.0" layoutY="346.0" mnemonicParsing="false" onAction="#addWord" prefHeight="32.0" prefWidth="58.0" styleClass="editword" text="Submit" />
+                        <Button layoutX="258.0" layoutY="346.0" mnemonicParsing="false" onAction="#addWord" prefHeight="32.0" prefWidth="113.0" styleClass="editword" text="Submit" />
                         <Label layoutX="12.0" layoutY="13.0" styleClass="edit" stylesheets="@../../../CSS/EditWord.css" text="Phonetic" />
                         <Label layoutX="16.0" layoutY="59.0" styleClass="edit" stylesheets="@../../../CSS/EditWord.css" text="Type" />
                         <Label layoutX="13.0" layoutY="127.0" prefHeight="91.0" prefWidth="81.0" styleClass="edit" stylesheets="@../../../CSS/EditWord.css" text="Explain" />
@@ -74,7 +74,7 @@
       </Label>
        <VBox alignment="CENTER" layoutY="1.0" prefHeight="650.0" prefWidth="60.0" spacing="80.0" styleClass="bgChildren1" stylesheets="@../../../CSS/EditWord.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
            <children>
-               <Button mnemonicParsing="false" onAction="#switchToMain" prefHeight="42.0" prefWidth="76.0" styleClass="bgChildren">
+               <Button mnemonicParsing="false" onMouseClicked="#switchToMain" prefHeight="42.0" prefWidth="76.0" styleClass="bgChildren">
                    <graphic>
                        <ImageView fitHeight="54.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -91,7 +91,7 @@
                        </ImageView>
                    </graphic>
                </Button>
-               <Button mnemonicParsing="false" onAction="#switchToGame" styleClass="bgChildren" stylesheets="@../../../CSS/ExplainScreen.css">
+               <Button mnemonicParsing="false" onMouseClicked="#switchToGame" styleClass="bgChildren" stylesheets="@../../../CSS/ExplainScreen.css">
                    <graphic>
                        <ImageView fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -100,7 +100,7 @@
                        </ImageView>
                    </graphic>
                </Button>
-               <Button mnemonicParsing="false" onAction="#switchToAPI" styleClass="bgChildren">
+               <Button mnemonicParsing="false" onMouseClicked="#switchToAPI" styleClass="bgChildren">
                    <graphic>
                        <ImageView fitHeight="45.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -109,7 +109,7 @@
                        </ImageView>
                    </graphic></Button>
            </children></VBox>
-      <Button layoutX="406.0" layoutY="199.0" mnemonicParsing="false" onKeyPressed="#enterSaveWord" onMouseClicked="#setTextEditWord" prefHeight="12.0" prefWidth="98.0" styleClass="submit" stylesheets="@../../../CSS/EditWord.css" text="Select word" AnchorPane.leftAnchor="406.0" AnchorPane.rightAnchor="231.6" AnchorPane.topAnchor="199.0" />
+      <Button layoutX="406.0" layoutY="199.0" mnemonicParsing="false" onMouseClicked="#setTextEditWord" prefHeight="12.0" prefWidth="98.0" styleClass="submit" stylesheets="@../../../CSS/EditWord.css" text="Select word" AnchorPane.leftAnchor="406.0" AnchorPane.rightAnchor="231.6" AnchorPane.topAnchor="199.0" />
    </children>
    <stylesheets>
       <URL value="@../../../Style/style.css" />
