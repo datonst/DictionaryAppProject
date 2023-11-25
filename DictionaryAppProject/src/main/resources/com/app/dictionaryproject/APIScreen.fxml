@@ -13,9 +13,9 @@
          </font></Label>
       <Label fx:id="inputLanguage" alignment="CENTER" layoutX="127.0" layoutY="169.0" prefHeight="36.0" prefWidth="130.0" styleClass="word" stylesheets="@../../../Style/style.css" text="English" />
       <Label fx:id="outputLanguage" alignment="CENTER" layoutX="591.0" layoutY="169.0" prefHeight="36.0" prefWidth="130.0" styleClass="word" text="Vietnamese" />
-      <Button layoutX="381.0" layoutY="610.0" mnemonicParsing="false" onAction="#translate" prefHeight="36.0" prefWidth="123.0" styleClass="practiceButton" stylesheets="@../../../CSS/APIScreen.css" text="Translate" />
-      <TextArea fx:id="outputText" editable="false" layoutX="127.0" layoutY="409.0" prefHeight="198.0" prefWidth="600.0" styleClass="explain" />
-      <TextArea fx:id="inputText" layoutX="126.0" layoutY="225.0" prefHeight="179.0" prefWidth="600.0" styleClass="explain" />
+      <Button layoutX="381.0" layoutY="610.0" mnemonicParsing="false" onMouseClicked="#translate" prefHeight="36.0" prefWidth="123.0" styleClass="practiceButton" stylesheets="@../../../CSS/APIScreen.css" text="Translate" />
+      <TextArea fx:id="outputText" editable="false" layoutX="127.0" layoutY="409.0" prefHeight="198.0" prefWidth="600.0" styleClass="word" stylesheets="@../../../CSS/APIScreen.css" />
+      <TextArea fx:id="inputText" layoutX="126.0" layoutY="225.0" prefHeight="179.0" prefWidth="600.0" styleClass="word" stylesheets="@../../../CSS/APIScreen.css" />
       <Button layoutX="669.0" layoutY="351.0" mnemonicParsing="false" onAction="#speakerTextInput" prefHeight="41.0" prefWidth="27.0" styleClass="speaker" stylesheets="@../../../Style/ButtonStyles.css">
          <graphic>
             <ImageView fitHeight="23.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">

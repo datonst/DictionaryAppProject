@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -51,10 +52,10 @@ public class EditScreenController {
 
     public DBRepository database = new DBRepository();
     public DBRepo dbRepo = new DBRepo();
-
+    public VBox vBox = new VBox();
 
     public void initialize() {
-
+        vBox.getChildren().get(1).setStyle("-fx-background-color: #8aaafa;" + "-fx-background-radius : 0px;");
         editWordTab.setStyle("-fx-background-color: #8aaaff; " +
                 "-fx-text-fill:white; " +
                 "-fx-font-size: 15px; " +
@@ -297,7 +298,7 @@ public class EditScreenController {
 
     }
 
-    public void update(ActionEvent event){
+    public void update(MouseEvent event){
         editWord();
     }
     private void showAlert(Alert.AlertType alertType, String title, String content) {

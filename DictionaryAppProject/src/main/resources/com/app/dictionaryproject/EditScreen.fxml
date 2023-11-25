@@ -41,7 +41,7 @@
                         <TextArea fx:id="editExplain" layoutX="98.0" layoutY="105.0" prefHeight="135.0" prefWidth="503.0" styleClass="editword" />
                         <TextField fx:id="editAntonym" layoutX="99.0" layoutY="298.0" prefHeight="38.0" prefWidth="502.0" styleClass="editword" />
                         <TextField fx:id="editSynonym" layoutX="98.0" layoutY="249.0" prefHeight="38.0" prefWidth="505.0" styleClass="editword" stylesheets="@../../../Style/style.css" />
-                        <Button layoutX="258.0" layoutY="346.0" mnemonicParsing="false" onAction="#addWord" prefHeight="32.0" prefWidth="113.0" styleClass="editword" text="Submit" />
+                        <Button layoutX="258.0" layoutY="346.0" mnemonicParsing="false" onMouseClicked="#update" prefHeight="32.0" prefWidth="113.0" styleClass="editword" text="Submit" />
                         <Label layoutX="12.0" layoutY="13.0" styleClass="edit" stylesheets="@../../../CSS/EditWord.css" text="Phonetic" />
                         <Label layoutX="16.0" layoutY="59.0" styleClass="edit" stylesheets="@../../../CSS/EditWord.css" text="Type" />
                         <Label layoutX="13.0" layoutY="127.0" prefHeight="91.0" prefWidth="81.0" styleClass="edit" stylesheets="@../../../CSS/EditWord.css" text="Explain" />
@@ -72,7 +72,7 @@
             <Font name="Arial Bold Italic" size="19.0" />
          </font>
       </Label>
-       <VBox alignment="CENTER" layoutY="1.0" prefHeight="650.0" prefWidth="60.0" spacing="80.0" styleClass="bgChildren1" stylesheets="@../../../CSS/EditWord.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+       <VBox fx:id="vBox" alignment="CENTER" layoutY="1.0" prefHeight="650.0" prefWidth="60.0" spacing="80.0" styleClass="bgChildren1" stylesheets="@../../../CSS/EditWord.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
            <children>
                <Button mnemonicParsing="false" onMouseClicked="#switchToMain" prefHeight="42.0" prefWidth="76.0" styleClass="bgChildren">
                    <graphic>
@@ -84,7 +84,7 @@
                    </graphic></Button>
                <Button mnemonicParsing="false" styleClass="bgChildren">
                    <graphic>
-                       <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                       <ImageView fitHeight="42.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                                <Image url="@../../../Style/icons8_edit_64px.png" />
                            </image>

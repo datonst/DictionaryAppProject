@@ -160,23 +160,16 @@ public class ResultSearchController {
     @FXML
     public void initialize(WordShort currWordResult) {
         String text = currWordResult.getTextDescription();
-        int newlineIndex = text.indexOf("\n");
+        String wordSearch = currWordResult.getWord();
 
         DBRepository dbRepository = new DBRepository();
-        String temp = text.substring(4, newlineIndex);
+
         Word word = new Word("null","null","null","null","","" );
-        if(!temp.isEmpty()) {
-            word = dbRepository.searchWord(temp);
-        }
 
+        word = dbRepository.searchWord(wordSearch);
 
-        // Lấy dòng đầu tiên nếu tìm thấy
-        if (newlineIndex != -1) {
-            String firstLine = text.substring(3, newlineIndex);
-            words.setText(firstLine);
-        } else {
-            System.out.println("Chuỗi không chứa dòng nào.");
-        }
+        words.setText(wordSearch);
+
         if (currWordResult == null) {
             webView.getEngine().loadContent("");
             return;

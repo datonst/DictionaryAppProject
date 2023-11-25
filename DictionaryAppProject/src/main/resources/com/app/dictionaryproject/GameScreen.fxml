@@ -78,7 +78,7 @@
          </children>
        </VBox>
       <ProgressBar fx:id="progressBar" layoutX="178.0" layoutY="170.0" prefHeight="36.0" prefWidth="497.0" progress="0.0" styleClass="gameProcess" stylesheets="@../../../CSS/GameScreen.css" AnchorPane.leftAnchor="178.0" AnchorPane.rightAnchor="60.39999999999998" AnchorPane.topAnchor="170.0" />
-      <LineChart fx:id="chart" layoutX="195.0" layoutY="388.0" prefHeight="228.0" prefWidth="483.0">
+      <LineChart fx:id="chart" layoutX="137.0" layoutY="306.0" prefHeight="228.0" prefWidth="483.0" visible="false">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>

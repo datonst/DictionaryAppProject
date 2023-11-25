@@ -56,7 +56,7 @@ public class DBRepo {
     public  WordShort searchWord(String wordToSearch) {
         String word = "This word does not have meaning";
         String text = "This word does not have meaning";
-        String html = "This word doesnot have meaning";
+        String html = "This word does not have meaning";
         try {
             String sql = "SELECT * FROM dictionary WHERE word = ?" ;
             PreparedStatement psSearch = connection.prepareStatement(sql);
@@ -74,7 +74,7 @@ public class DBRepo {
             throw new RuntimeException(e);
         }
         if (word.isEmpty()){
-            return new WordShort(wordToSearch, text, html);
+            return new WordShort(word, text, html);
         }
         return new WordShort(word, text, html);
     }
@@ -111,7 +111,7 @@ public class DBRepo {
     public void updateWord(WordShort wordToUpdate) {
         try {
             PreparedStatement psUpdate =
-                    connection.prepareStatement("UPDATE dictionary SET textDescription? htmlDescription? WHERE word=?");
+                    connection.prepareStatement("UPDATE dictionary SET textDescription=?, htmlDescription=? WHERE word=?");
 
             String word = wordToUpdate.getWord().strip();
             String textScript = wordToUpdate.getTextDescription();
@@ -126,5 +126,6 @@ public class DBRepo {
             throw new RuntimeException(e);
         }
     }
+
 
 }

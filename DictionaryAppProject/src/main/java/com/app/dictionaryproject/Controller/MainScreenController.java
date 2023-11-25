@@ -62,10 +62,11 @@ public class MainScreenController {
     public Parent root;
 
     public void actionQA(ActionEvent event) {
-        String name =  wordSearch.getText();
+       // String name =  wordSearch.getText();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Name");
-        alert.setContentText("Your name: " + name);
+        alert.setTitle("Frequently Asked Questions");
+        alert.setHeaderText("Question");
+        alert.setContentText("Question 1");
         alert.show();
     }
 
