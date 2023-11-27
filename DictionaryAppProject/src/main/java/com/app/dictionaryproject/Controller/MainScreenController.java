@@ -4,6 +4,7 @@ package com.app.dictionaryproject.Controller;
 
 import com.app.dictionaryproject.service.DBRepo;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -198,14 +199,17 @@ public class MainScreenController {
 
             // Handle the selected item here
             try {
+                DBRepo search = new DBRepo();
+                boolean existWord = search.existWord(name);
+                if (!existWord) {
+                    NotFoundWord(event,name);
+                    return;
+                }
                 FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/ResultSearch.fxml"));
                 root = Loader.load();
-
-
                 ResultSearchController controller = Loader.getController();
 //                    DBRepository search = new DBRepository();
 //                    controller.initialize(search.searchWord(name));
-                DBRepo search = new DBRepo();
                 controller.initialize(search.searchWord(name));
 
                 // Lấy từ khi search
@@ -223,6 +227,22 @@ public class MainScreenController {
 
 
     }
+
+
+    // Nếu không tìm thấy word
+    public void NotFoundWord(Event event, String word) throws IOException {
+        String fxmlPath = "/com/app/dictionaryproject/APIScreen.fxml";
+        FXMLLoader Loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        root = Loader.load();
+        APIScreenController controller = Loader.getController();
+        controller.searchWordFromMain(word);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
     public void SubmitEnter(KeyEvent event) {
         String name = wordSearch.getText().trim();
 
@@ -236,7 +256,11 @@ public class MainScreenController {
                 //DBRepository search = new DBRepository();
                 DBRepo dbRepo = new DBRepo();
                 ArrayList<String> listWordFound = dbRepo.searchListWord(name);
-                if(dbRepo.searchWord(name).getTextDescription().equals("This word does not have meaning") && !listWordFound.isEmpty()) {
+                if (!dbRepo.existWord(name)) {
+                   NotFoundWord(event,name);
+                   return;
+                }
+                else if(dbRepo.searchWord(name).getTextDescription().equals("This word does not have meaning") && !listWordFound.isEmpty()) {
                     controller.initialize(dbRepo.searchWord(listWordFound.get(0)));
                     addSaveWord(listWordFound.get(0));
                 } else {

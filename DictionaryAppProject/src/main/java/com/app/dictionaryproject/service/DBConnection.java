@@ -7,10 +7,10 @@ import java.sql.SQLException;
 public class DBConnection {
     public Connection getConnection() {
         String databaseName ="dictionaryDPeng"; // điền tên scheme
-        String port = "3306";
+        String port = "3309";
         String databaseUser = "root";
 
-        String databasePassword = "04032004";
+        String databasePassword = "12345678";
 
         String url="jdbc:mysql://localhost:"+ port + "/"+databaseName;
         //System.out.println(url);

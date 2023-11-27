@@ -205,4 +205,10 @@ public class APIScreenController implements Initializable {
     public void switchToAPI(MouseEvent event) throws IOException {
         SwitchScreen.switchToScene("/com/app/dictionaryproject/APIScreen.fxml", stage, event);
     }
+
+
+    public void searchWordFromMain(String word) {
+        inputText.setText(word);
+        translate(null);
+    }
 }

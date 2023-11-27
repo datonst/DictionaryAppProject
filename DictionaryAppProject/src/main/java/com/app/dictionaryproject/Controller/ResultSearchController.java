@@ -159,6 +159,10 @@ public class ResultSearchController {
     public WebEngine webEngine = new WebEngine();
     @FXML
     public void initialize(WordShort currWordResult) {
+        if (currWordResult == null) {
+            webView.getEngine().loadContent("");
+            return;
+        }
         String text = currWordResult.getTextDescription();
         String wordSearch = currWordResult.getWord();
 
@@ -169,11 +173,6 @@ public class ResultSearchController {
         word = dbRepository.searchWord(wordSearch);
 
         words.setText(wordSearch);
-
-        if (currWordResult == null) {
-            webView.getEngine().loadContent("");
-            return;
-        }
 
         String extra = "<h7 class = \"extraWord\">\n" +
                 "   <p><em>Từ đồng nghĩa:</em>\n" +
