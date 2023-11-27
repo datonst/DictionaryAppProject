@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -33,10 +34,8 @@ public class EditScreenController {
     public Parent root;
     public TextField wordInput = new TextField();
 
-    public TabPane tabPane = new TabPane();
-    public  Tab editWordTab = new Tab();
-    public Tab addWordTab = new Tab();
-
+    public AnchorPane addWordPane = new AnchorPane();
+    public AnchorPane editWordPane = new AnchorPane();
     public  TextField addPhonetic = new TextField();
     public TextField addType = new TextField();
     public TextArea addExplain = new TextArea();
@@ -56,43 +55,7 @@ public class EditScreenController {
 
     public void initialize() {
         vBox.getChildren().get(1).setStyle("-fx-background-color: #8aaafa;" + "-fx-background-radius : 0px;");
-        editWordTab.setStyle("-fx-background-color: #8aaaff; " +
-                "-fx-text-fill:white; " +
-                "-fx-font-size: 15px; " +
-                "-fx-background-radius: 10px;");
 
-        addWordTab.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                // Apply styles when the tab is selected
-                addWordTab.setStyle("-fx-background-color:white; " +
-                        "-fx-text-fill: #8aaaff; " +
-                        "-fx-font-weight: bold; " +
-                        "-fx-background-radius: 10px;");
-            } else {
-                // Apply styles when the tab is not selected
-                addWordTab.setStyle("-fx-background-color: #8aaaff; " +
-                        "-fx-text-fill:white; " +
-                        "-fx-font-weight: bold; " +
-                        "-fx-background-radius: 10px;");
-            }
-        });
-
-        editWordTab.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                // Apply styles when the tab is selected
-                editWordTab.setStyle("-fx-background-color:white; " +
-                        "-fx-text-fill: #8aaaff; " +
-                        "-fx-font-weight: bold; " +
-                        "-fx-font-size: 15px; " +
-                        "-fx-background-radius: 10px;");
-            } else {
-                // Apply styles when the tab is not selected
-                editWordTab.setStyle("-fx-background-color: #8aaaff; " +
-                        "-fx-text-fill:white; " +
-                        "-fx-font-size: 15px; " +
-                        "-fx-background-radius: 10px;");
-            }
-        });
     }
 
 
@@ -125,7 +88,7 @@ public class EditScreenController {
     public void setTextEditWord(MouseEvent event) {
         String word = wordInput.getText();
         if(!word.isEmpty()) {
-            setWord(word);
+            getChoice(word);
         } else {
             clearEditWordFields();
         }
@@ -134,7 +97,7 @@ public class EditScreenController {
     public void enterSaveWord(KeyEvent event){
             String word = wordInput.getText();
             if ( event.getCode() == KeyCode.ENTER && !word.isEmpty()) {
-                setWord(word);
+                getChoice(word);
             } else if(word.isEmpty()){
                 clearEditWordFields();
             }
@@ -147,7 +110,46 @@ public class EditScreenController {
         editSynonym.setText(database.searchWord(word).getSynonym());
         editAntonym.setText(database.searchWord(word).getAntonym());
     }
+    public void getChoice(String word) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
 
+
+        Label headerLabel = new Label("\nWhat's your choice?");
+
+        alert.getDialogPane().setHeader(headerLabel);
+
+        // Set the content text
+        Label contentLabel = new Label("Let's choose one option");
+
+
+        alert.getDialogPane().setContent(contentLabel);
+
+
+        ButtonType buttonTypeAdd = new ButtonType("Add new word", ButtonBar.ButtonData.YES);
+        ButtonType buttonTypeEdit = new ButtonType("Repair word", ButtonBar.ButtonData.NO);
+        alert.getButtonTypes().setAll(buttonTypeAdd, buttonTypeEdit);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == buttonTypeAdd) {
+                if(database.searchWord(word).getDefinitionWord().equals("not found"))
+                    addWordPane.setVisible(true);
+                else {
+                    showAlert(Alert.AlertType.INFORMATION,"Warning", "Word is existed!");
+                    clearAddWordFields();
+                }
+
+            } else if (response == buttonTypeEdit) {
+                if(!database.searchWord(word).getDefinitionWord().equals("not found")) {
+                    editWordPane.setVisible(true);
+                    setWord(word);
+                } else {
+                    showAlert(Alert.AlertType.INFORMATION,"Warning", "Word is not existed!");
+                    clearEditWordFields();
+                }
+            }
+        });
+    }
     public void editWord() {
 
         String word     = wordInput.getText();
@@ -180,6 +182,7 @@ public class EditScreenController {
         addExplain.clear();
         addSynonym.clear();
         addAntonym.clear();
+        addWordPane.setVisible(false);
     }
 
     private void clearEditWordFields() {
@@ -189,6 +192,7 @@ public class EditScreenController {
         editExplain.clear();
         editSynonym.clear();
         editAntonym.clear();
+        editWordPane.setVisible(false);
     }
     public void deleteWord(ActionEvent event){
         String word = wordInput.getText();

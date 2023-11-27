@@ -15,7 +15,7 @@
             <URL value="@../../../Style/ButtonStyles.css" />
          </stylesheets></Label>
       <WebView fx:id="webView" layoutX="127.0" layoutY="112.0" prefHeight="553.0" prefWidth="620.0" stylesheets="@../../../CSS/ExplainScreen.css" />
-      <VBox alignment="CENTER" prefHeight="663.0" prefWidth="63.0" spacing="80.0" styleClass="bgChildren">
+      <VBox alignment="CENTER" prefHeight="666.0" prefWidth="63.0" spacing="80.0" styleClass="bgChildren">
          <children>
             <Button mnemonicParsing="false" onMouseClicked="#switchToMain" prefHeight="42.0" prefWidth="76.0" styleClass="bgChildren">
                <graphic>
@@ -25,7 +25,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button mnemonicParsing="false" onAction="#switchToEdit" styleClass="bgChildren">
+            <Button mnemonicParsing="false" onMouseClicked="#switchToEdit" styleClass="bgChildren">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -34,7 +34,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onAction="#switchToGame" styleClass="bgChildren" stylesheets="@../../../CSS/ExplainScreen.css">
+            <Button mnemonicParsing="false" onMouseClicked="#switchToGame" styleClass="bgChildren" stylesheets="@../../../CSS/ExplainScreen.css">
                <graphic>
                   <ImageView fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -43,7 +43,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onAction="#switchToAPI" styleClass="bgChildren">
+            <Button mnemonicParsing="false" onMouseClicked="#switchToAPI" styleClass="bgChildren">
                <graphic>
                   <ImageView fitHeight="45.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
