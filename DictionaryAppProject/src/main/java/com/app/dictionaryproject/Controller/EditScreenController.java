@@ -115,7 +115,7 @@ public class EditScreenController {
         alert.setTitle("Confirmation");
 
 
-        Label headerLabel = new Label("\nWhat's your choice?");
+        Label headerLabel = new Label("What's your choice?");
 
         alert.getDialogPane().setHeader(headerLabel);
 
@@ -124,7 +124,7 @@ public class EditScreenController {
 
 
         alert.getDialogPane().setContent(contentLabel);
-
+        alert.getDialogPane().setStyle("-fx-alignment: center");
 
         ButtonType buttonTypeAdd = new ButtonType("Add new word", ButtonBar.ButtonData.YES);
         ButtonType buttonTypeEdit = new ButtonType("Repair word", ButtonBar.ButtonData.NO);
@@ -132,8 +132,10 @@ public class EditScreenController {
 
         alert.showAndWait().ifPresent(response -> {
             if (response == buttonTypeAdd) {
-                if(database.searchWord(word).getDefinitionWord().equals("not found"))
+                if(database.searchWord(word).getDefinitionWord().equals("not found")) {
+                    wordInput.setEditable(false);
                     addWordPane.setVisible(true);
+                }
                 else {
                     showAlert(Alert.AlertType.INFORMATION,"Warning", "Word is existed!");
                     clearAddWordFields();
@@ -141,6 +143,7 @@ public class EditScreenController {
 
             } else if (response == buttonTypeEdit) {
                 if(!database.searchWord(word).getDefinitionWord().equals("not found")) {
+                    wordInput.setEditable(false);
                     editWordPane.setVisible(true);
                     setWord(word);
                 } else {
@@ -183,6 +186,7 @@ public class EditScreenController {
         addSynonym.clear();
         addAntonym.clear();
         addWordPane.setVisible(false);
+        wordInput.setEditable(true);
     }
 
     private void clearEditWordFields() {
@@ -193,6 +197,7 @@ public class EditScreenController {
         editSynonym.clear();
         editAntonym.clear();
         editWordPane.setVisible(false);
+        wordInput.setEditable(true);
     }
     public void deleteWord(ActionEvent event){
         String word = wordInput.getText();
@@ -204,7 +209,7 @@ public class EditScreenController {
             Label headerLabel = new Label("\nRemove word");
             headerLabel.setStyle("-fx-alignment: center;" +
                     "-fx-font-size: 30px;" +
-                    "-fx-text-fill: white;"
+                    "-fx-text-fill: black;"
             );
 
             alert.getDialogPane().setHeader(headerLabel);
@@ -223,7 +228,7 @@ public class EditScreenController {
             alert.getDialogPane().setStyle(
                     "-fx-font-family: Arial;" +
                             "-fx-alignment: center;" +
-                            "-fx-font-weight: bold;" + "-fx-background-color: linear-gradient(to top right, #ad84f0, #f196f4, #ad84f0);"
+                            "-fx-font-weight: bold;"
 
 
             );
@@ -234,11 +239,9 @@ public class EditScreenController {
 
             alert.showAndWait().ifPresent(response -> {
                 if (response == buttonTypePlayAgain) {
-                    // Reset game state and start a new game
                     database.deleteWord(word);
                     dbRepo.deleteWord(word);
                 } else if (response == buttonTypeBackToHome) {
-                    // Switch back to the home screen
 
                 }
             });
@@ -255,29 +258,19 @@ public class EditScreenController {
             alert.setTitle("Confirmation");
 
 
-            Label headerLabel = new Label("\nRemove word");
+            Label headerLabel = new Label("\nAre you want to add a new word?");
             headerLabel.setStyle("-fx-alignment: center;" +
                     "-fx-font-size: 30px;" +
-                    "-fx-text-fill: white;"
+                    "-fx-text-fill: black;"
             );
 
             alert.getDialogPane().setHeader(headerLabel);
 
-            // Set the content text
-            Label contentLabel = new Label("Do you want to delete \"" + word + "\"?");
-            contentLabel.setStyle("-fx-alignment: center;" +
-                    "-fx-font-size: 25px;" +
-                    "-fx-font-weight: bold;" +
-                    "-fx-text-fill: white ;"
-
-            );
-
-            alert.getDialogPane().setContent(contentLabel);
 
             alert.getDialogPane().setStyle(
                     "-fx-font-family: Arial;" +
                             "-fx-alignment: center;" +
-                            "-fx-font-weight: bold;" + "-fx-background-color: linear-gradient(to top right, #ad84f0, #f196f4, #ad84f0);"
+                            "-fx-font-weight: bold;"
 
 
             );
@@ -288,11 +281,8 @@ public class EditScreenController {
 
             alert.showAndWait().ifPresent(response -> {
                 if (response == buttonTypePlayAgain) {
-                    // Reset game state and start a new game
                     addWord();
                 } else if (response == buttonTypeBackToHome) {
-                    // Switch back to the home screen
-
                 }
             });
 

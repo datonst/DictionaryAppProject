@@ -112,9 +112,8 @@ class DictionaryManagement extends Dictionary {
             textToSpeech(word);
         }
     }
-    public void textToSpeech(String textToSpeak) {
-        // thay đổi theo từng máy của mọi người
-        String command = "cscript.exe /nologo  C:\\Users\\Admin\\Documents\\GitHub\\DictionaryAppProject\\DictionaryAppProject\\src\\main\\resources\\data\\TTSAPI.vbs \"" + textToSpeak + "\"";
+    public static void textToSpeech(String textToSpeak) {
+        String command = "cscript.exe /nologo  " + System.getProperty("user.dir") + "\\src\\main\\resources\\data\\TTSAPI.vbs \"" + textToSpeak + "\"";
 
         try {
             Process process = Runtime.getRuntime().exec(command);

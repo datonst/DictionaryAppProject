@@ -11,8 +11,8 @@
          <font>
             <Font name="System Bold Italic" size="59.0" />
          </font></Label>
-      <Label fx:id="inputLanguage" alignment="CENTER" layoutX="127.0" layoutY="169.0" prefHeight="36.0" prefWidth="130.0" styleClass="word" stylesheets="@../../../Style/style.css" text="English" />
-      <Label fx:id="outputLanguage" alignment="CENTER" layoutX="591.0" layoutY="169.0" prefHeight="36.0" prefWidth="130.0" styleClass="word" text="Vietnamese" />
+      <Label fx:id="inputLanguage" alignment="CENTER" layoutX="127.0" layoutY="169.0" prefHeight="36.0" prefWidth="130.0" styleClass="word" stylesheets="@../../../CSS/APIScreen.css" text="English" />
+      <Label fx:id="outputLanguage" alignment="CENTER" layoutX="591.0" layoutY="169.0" prefHeight="36.0" prefWidth="130.0" styleClass="word" stylesheets="@../../../CSS/APIScreen.css" text="Vietnamese" />
       <Button layoutX="381.0" layoutY="610.0" mnemonicParsing="false" onMouseClicked="#translate" prefHeight="36.0" prefWidth="123.0" styleClass="practiceButton" stylesheets="@../../../CSS/APIScreen.css" text="Translate" />
       <TextArea fx:id="outputText" editable="false" layoutX="127.0" layoutY="409.0" prefHeight="198.0" prefWidth="600.0" styleClass="word" stylesheets="@../../../CSS/APIScreen.css" />
       <TextArea fx:id="inputText" layoutX="126.0" layoutY="225.0" prefHeight="179.0" prefWidth="600.0" styleClass="word" stylesheets="@../../../CSS/APIScreen.css" />
@@ -33,9 +33,9 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="recordButton" layoutX="621.0" layoutY="344.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="54.0" styleClass="speaker" stylesheets="@../../../Style/ButtonStyles.css">
+      <Button fx:id="recordButton" layoutX="621.0" layoutY="344.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="speaker" stylesheets="@../../../Style/ButtonStyles.css">
          <graphic>
-            <ImageView fx:id="imageView" fitHeight="34.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageView" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
          </graphic></Button>
       <ImageView fitHeight="36.0" fitWidth="46.0" layoutX="408.0" layoutY="169.0" onMouseClicked="#switchLang" pickOnBounds="true" preserveRatio="true">
          <image>

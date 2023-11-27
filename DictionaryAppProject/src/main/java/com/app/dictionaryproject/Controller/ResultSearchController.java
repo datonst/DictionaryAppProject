@@ -49,7 +49,7 @@ public class ResultSearchController {
                         }
                         .nameWord {
                             font-family: Georgia, 'Times New Roman', Times, serif;
-                            color: black;
+                            color: #8aaaff;
                             font-size: 26px;
                             margin: 0 0 15 0;
                         }
@@ -159,9 +159,12 @@ public class ResultSearchController {
     public WebEngine webEngine = new WebEngine();
     @FXML
     public void initialize(WordShort currWordResult) {
+        if (currWordResult == null) {
+            webView.getEngine().loadContent("");
+            return;
+        }
         String text = currWordResult.getTextDescription();
         String wordSearch = currWordResult.getWord();
-
         DBRepository dbRepository = new DBRepository();
 
         Word word = new Word("null","null","null","null","","" );
@@ -170,10 +173,7 @@ public class ResultSearchController {
 
         words.setText(wordSearch);
 
-        if (currWordResult == null) {
-            webView.getEngine().loadContent("");
-            return;
-        }
+
 
         String extra = "<h7 class = \"extraWord\">\n" +
                 "   <p><em>Từ đồng nghĩa:</em>\n" +
@@ -191,33 +191,7 @@ public class ResultSearchController {
        //displayHTML("/index.html");
     }
 
-    private void displayHTML( String filePath) {
-        // Create a WebView and a WebEngine
-        webEngine =  webView.getEngine();
-
-        // Load the HTML file from the resources folder
-        URL url = getClass().getResource(filePath);
-        if (url != null) {
-            webEngine.load(url.toExternalForm());
-        } else {
-            System.err.println("Could not find HTML file: " + filePath);
-        }
-
-    }
-        public void updateResultView() {
-            DBRepo dbRepo = new DBRepo();
-            WordShort currWordResult = dbRepo.searchWord("");
-        if (currWordResult == null) {
-            webView.getEngine().loadContent("");
-            return;
-        }
-
-        String fullResult= resultHTMLTemplate.replace("<body>", "<body>" + currWordResult.getHTMLDescription());
-        webView.getEngine().loadContent(fullResult);
-    }
-
     public static void textToSpeech(String textToSpeak) {
-        // thay đổi theo từng máy của mọi người
         String command = "cscript.exe /nologo  " + System.getProperty("user.dir") + "\\src\\main\\resources\\data\\TTSAPI.vbs \"" + textToSpeak + "\"";
 
         try {
@@ -235,7 +209,6 @@ public class ResultSearchController {
     }
     public void speech(ActionEvent event) throws IOException {
         String word = words.getText();
-        //word = word.substring(0,word.indexOf("\t"));
         textToSpeech(word);
     }
     public void switchToGame(MouseEvent event) throws IOException {
@@ -251,5 +224,4 @@ public class ResultSearchController {
     public void switchToAPI(MouseEvent event) throws IOException {
         SwitchScreen.switchToScene("/com/app/dictionaryproject/APIScreen.fxml", stage, event);
     }
-
 }

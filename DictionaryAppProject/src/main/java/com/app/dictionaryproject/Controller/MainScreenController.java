@@ -4,6 +4,7 @@ package com.app.dictionaryproject.Controller;
 
 import com.app.dictionaryproject.service.DBRepo;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -62,7 +63,6 @@ public class MainScreenController {
     public Parent root;
 
     public void actionQA(ActionEvent event) {
-       // String name =  wordSearch.getText();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Frequently Asked Questions");
         alert.setHeaderText("Question");
@@ -71,7 +71,6 @@ public class MainScreenController {
     }
 
     public void showArchive(MouseEvent event) {
-
        archivePane.setVisible(!archivePane.isVisible());
     }
     public void setVisibleArchive(MouseEvent event) {
@@ -79,7 +78,6 @@ public class MainScreenController {
             System.out.println("outside");
             archivePane.setVisible(false);
         } else {
-
             System.out.println("inside");
         }
     }
@@ -191,69 +189,56 @@ public class MainScreenController {
         });
     }
 
-    // chuyển khi chọn nút tìm kiếm
+    private void handleSearch(String name, Event event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/ResultSearch.fxml"));
+        root = loader.load();
+
+        ResultSearchController controller = loader.getController();
+        DBRepo dbRepo = new DBRepo();
+        ArrayList<String> listWordFound = dbRepo.searchListWord(name);
+
+        if (dbRepo.searchWord(name).getTextDescription().equals("This word does not have meaning") && !listWordFound.isEmpty()) {
+            controller.initialize(dbRepo.searchWord(listWordFound.get(0)));
+            addSaveWord(listWordFound.get(0));
+        } else if (!dbRepo.existWord(name)) {
+            NotFoundWord(event, name);
+            return;
+        } else {
+            controller.initialize(dbRepo.searchWord(name));
+        }
+
+        if (!dbRepo.searchWord(name).getTextDescription().equals("This word does not have meaning")) {
+            addSaveWord(name);
+        }
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void Submit(ActionEvent event) {
         String name = wordSearch.getText().trim();
         if (!name.isEmpty()) {
-
-            // Handle the selected item here
             try {
-                FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/ResultSearch.fxml"));
-                root = Loader.load();
-
-
-                ResultSearchController controller = Loader.getController();
-//                    DBRepository search = new DBRepository();
-//                    controller.initialize(search.searchWord(name));
-                DBRepo search = new DBRepo();
-                controller.initialize(search.searchWord(name));
-
-                // Lấy từ khi search
-//                ResultSearchController controller = Loader.getController();
-//                controller.initialize(new Word(name,"/122/", "nvv"));
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-
+                handleSearch(name, event);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
-
-
     }
+
     public void SubmitEnter(KeyEvent event) {
         String name = wordSearch.getText().trim();
-
-        if (!name.isEmpty() && event.getCode() == KeyCode.ENTER ) {
-            // Handle the selected item here
+        if (!name.isEmpty() && event.getCode() == KeyCode.ENTER) {
             try {
-                FXMLLoader Loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/ResultSearch.fxml"));
-                root = Loader.load();
-
-                ResultSearchController controller = Loader.getController();
-                //DBRepository search = new DBRepository();
-                DBRepo dbRepo = new DBRepo();
-                ArrayList<String> listWordFound = dbRepo.searchListWord(name);
-                if(dbRepo.searchWord(name).getTextDescription().equals("This word does not have meaning") && !listWordFound.isEmpty()) {
-                    controller.initialize(dbRepo.searchWord(listWordFound.get(0)));
-                    addSaveWord(listWordFound.get(0));
-                } else {
-                    controller.initialize(dbRepo.searchWord(name));
-                }
-                if(!dbRepo.searchWord(name).getTextDescription().equals("This word does not have meaning")){
-                    addSaveWord(name);
-                }
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
+                handleSearch(name, event);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
     }
+
     /**
      * Hàm lưu từ vào file.
      * */
@@ -268,6 +253,17 @@ public class MainScreenController {
             System.out.println("Error: " + e.getMessage());
         }
         checkUnique.add(newValue);
+    }
+    public void NotFoundWord(Event event, String word) throws IOException {
+        String fxmlPath = "/com/app/dictionaryproject/APIScreen.fxml";
+        FXMLLoader Loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        root = Loader.load();
+        APIScreenController controller = Loader.getController();
+        controller.searchWordFromMain(word);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 
