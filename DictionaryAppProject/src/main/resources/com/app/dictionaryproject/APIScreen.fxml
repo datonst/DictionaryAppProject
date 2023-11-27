@@ -54,7 +54,7 @@
                </graphic></Button>
             <Button mnemonicParsing="false" onMouseClicked="#switchToEdit" styleClass="bgChildren">
                <graphic>
-                  <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../Style/icons8_edit_64px.png" />
                      </image>
@@ -72,7 +72,7 @@
             </Button>
             <Button mnemonicParsing="false" onMouseClicked="#switchToAPI" styleClass="bgChildren">
                <graphic>
-                  <ImageView fitHeight="45.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../Style/icons8_google_translate_64px.png" />
                      </image>
