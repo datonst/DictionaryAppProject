@@ -33,6 +33,12 @@
     -fx-background-color: white;
     -fx-background-radius: 10px;
 }
+.attribute{
+    -fx-font-family: "Arial";
+    -fx-font-size: 15px;
+    -fx-text-fill:White;
+    -fx-font-weight: bold;
+}
 .submit {
     -fx-background-color: white;
     -fx-text-fill:#8aaaff;
@@ -42,4 +48,5 @@
 }
 .bgChildren1 {
     -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0);
 }
