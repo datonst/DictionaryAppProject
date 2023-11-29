@@ -86,5 +86,6 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </LineChart>
+      <Label fx:id="timer" layoutX="135.0" layoutY="65.0" text="abc" />
    </children>
 </AnchorPane>

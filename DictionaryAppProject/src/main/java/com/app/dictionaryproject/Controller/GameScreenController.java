@@ -1,6 +1,9 @@
 package com.app.dictionaryproject.Controller;
 
 import com.app.dictionaryproject.service.DBRepository;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +20,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.util.Pair;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -32,6 +37,7 @@ public class GameScreenController {
     public Scene scene;
     public Stage stage;
     public Parent root;
+    public Label timer;
     public TextField inputWord;
     public  Label temp = new Label();
     public int index = 0;
@@ -53,10 +59,30 @@ public class GameScreenController {
     private static final String INSTRUCTION_TITLE = "Instructions";
     private static final String INSTRUCTION_FONT_STYLE = "-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: rgb(99, 122, 242);";
 
-    String mediaFile = "src/main/resources/data/sound.mp3";
-    Media media = new Media(new File(mediaFile).toURI().toString());
-    MediaPlayer mediaPlayer = new MediaPlayer(media);
-    private void  insertFromFile(String filepath) {
+    private static final String mediaFile = "src/main/resources/data/sound.mp3";
+    static Media media = new Media(new File(mediaFile).toURI().toString());
+    static MediaPlayer mediaPlayer = new MediaPlayer(media);
+    private final Timeline animation = new Timeline(new KeyFrame(Duration.seconds(1), e -> countDown()));
+
+    private int minutes;
+    private int seconds ;
+
+    private void countDown() {
+        if (seconds == 0) {
+            minutes--;
+            seconds = 59;
+        } else {
+            seconds--;
+        }
+        if (seconds <= 0 && minutes <= 0) {
+            animation.pause();
+            Platform.runLater(this::finishGame);
+        }
+        timer.setText(String.valueOf(seconds));
+
+    }
+
+    private void insertFromFile(String filepath) {
         Path path = Path.of(filepath);
 
         try {
@@ -128,11 +154,13 @@ public class GameScreenController {
     }
 
     private void resetGame() {
+        resetTime();
         process = 0;
         progressBar.setProgress(0);
         correctCount = 0;
         incorrectCount = 0;
     }
+
 
 
     public void initialize () {
@@ -141,10 +169,18 @@ public class GameScreenController {
         insertFromFile("src/main/resources/data/saveWord.txt");
         String result = getExplain();
         temp.setText(result);
-
-
+        mediaPlayer.pause();
+        resetTime();
     }
 
+
+    private void resetTime() {
+        minutes = 0;
+        seconds = 5;
+        timer.setText(String.valueOf(seconds));
+        animation.setCycleCount(Timeline.INDEFINITE);
+        animation.play();
+    }
     private void updateChart() {
         XYChart.Series series = new XYChart.Series();
         for (Pair roundData : roundData) {
@@ -245,6 +281,7 @@ public class GameScreenController {
 
     public void switchToMain() {
         try {
+            stopSoundWhenExit();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/app/dictionaryproject/MainScreen.fxml"));
             Scene scene = new Scene(loader.load());
             Stage stage = (Stage) inputWord.getScene().getWindow();
@@ -252,6 +289,13 @@ public class GameScreenController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace(); // Handle the exception according to your needs
+        }
+    }
+
+    private void stopSoundWhenExit() {
+        if(sound.getText().equals("On")) {
+            sound.setText("Off");
+            mediaPlayer.pause();
         }
     }
 
@@ -307,17 +351,27 @@ public class GameScreenController {
         alert.getDialogPane().setContent(contentLabel);
         alert.show();
     }
+
+
+
+    public void limitTime() {
+
+    }
     public void switchToGame(MouseEvent event) throws IOException {
+        stopSoundWhenExit();
         SwitchScreen.switchToScene("/com/app/dictionaryproject/GameScreen.fxml",stage, event);
     }
     public void switchToEdit(MouseEvent event) throws IOException {
+        stopSoundWhenExit();
         SwitchScreen.switchToScene("/com/app/dictionaryproject/EditScreen.fxml",stage, event);
     }
     public void  switchToMain(MouseEvent event) throws IOException {
+        stopSoundWhenExit();
         SwitchScreen.switchToScene("/com/app/dictionaryproject/MainScreen.fxml",stage, event);
 
     }
     public void switchToAPI(MouseEvent event) throws IOException {
+        stopSoundWhenExit();
         SwitchScreen.switchToScene("/com/app/dictionaryproject/APIScreen.fxml", stage, event);
     }
 }

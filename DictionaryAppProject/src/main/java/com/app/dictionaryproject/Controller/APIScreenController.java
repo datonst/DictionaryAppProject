@@ -204,8 +204,8 @@ public class APIScreenController implements Initializable {
     }
 
 
-    public void searchWordFromMain(String word) {
-        inputText.setText(word);
-        translate(null);
-    }
+//    public void searchWordFromMain(String word) {
+//        inputText.setText(word);
+//        translate(null);
+//    }
 }

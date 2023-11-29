@@ -29,23 +29,23 @@ public class DBRepo {
     }
 
 
-    public boolean existWord(String word) {
-        String sql = "SELECT word from dictionary WHERE word= ?" ;
-        PreparedStatement psSearch = null;
-        try {
-            psSearch = connection.prepareStatement(sql);
-            psSearch.setString(1, word);
-            ResultSet resultSet = psSearch.executeQuery();
-            String check = null;
-            while(resultSet.next()) {
-                check = resultSet.getString(1);
-            }
-            return check != null;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
+//    public boolean existWord(String word) {
+//        String sql = "SELECT word from dictionary WHERE word= ?" ;
+//        PreparedStatement psSearch = null;
+//        try {
+//            psSearch = connection.prepareStatement(sql);
+//            psSearch.setString(1, word);
+//            ResultSet resultSet = psSearch.executeQuery();
+//            String check = null;
+//            while(resultSet.next()) {
+//                check = resultSet.getString(1);
+//            }
+//            return check != null;
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//    }
     public void insertWord(WordShort wordToInsert) {
         try {
             PreparedStatement psInsert =
