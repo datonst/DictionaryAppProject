@@ -4,11 +4,10 @@ import com.app.dictionaryproject.Models.Word;
 import com.app.dictionaryproject.Models.WordShort;
 import com.app.dictionaryproject.service.DBRepo;
 import com.app.dictionaryproject.service.DBRepository;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+//import org.kordamp.ikonli.fontawesome.FontAwesomeIcon;
+//import org.kordamp.ikonli.javafx.FontIcon;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,12 +19,13 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class EditScreenController {
     @FXML
@@ -52,10 +52,123 @@ public class EditScreenController {
     public DBRepository database = new DBRepository();
     public DBRepo dbRepo = new DBRepo();
     public VBox vBox = new VBox();
+    public VBox currentTypeParentVBox = new VBox();
 
+
+    public void addExplain(MouseEvent event) {
+
+        // Create an HBox for Word Type
+         createLabeledTextArea("Type:", 30, currentTypeParentVBox);
+        // Create an HBox for Explain
+        createLabeledTextArea("Explain:", 60 ,currentTypeParentVBox);
+        //currentTypeParentVBox.getChildren().addAll(phoneticHBox,wordTypeHBox,explainHBox);
+    }
+
+    private void createLabeledTextArea(String labelText,double height, VBox parentVBox) {
+        HBox hBox = new HBox();
+        //hBox.getStylesheets().add("EditWord.css");
+        // Create a Label
+        Label label = new Label();
+        label.setPrefWidth(80);
+        label.setPrefHeight(20);
+        label.setText(labelText);
+        label.getStyleClass().add("attribute");
+        // Create a TextArea
+        TextArea textArea = new TextArea();
+        textArea.setPrefHeight(height);
+        textArea.setPrefWidth(520);
+        textArea.getStyleClass().add("word");
+
+        // Add Label and TextArea to HBox
+        hBox.getChildren().addAll(label, textArea);
+        hBox.setSpacing(10);
+
+        // Add HBox to the parent VBox
+        parentVBox.getChildren().add(hBox);
+
+    }
     public void initialize() {
         vBox.getChildren().get(1).setStyle("-fx-background-color: #8aaafa;" + "-fx-background-radius : 0px;");
+        createLabeledTextArea("Phonetic:",30, currentTypeParentVBox);
+        // Create an HBox for Word Type
+        createLabeledTextArea("Type:", 30, currentTypeParentVBox);
+        // Create an HBox for Explain
+        createLabeledTextArea("Explain:", 60 ,currentTypeParentVBox);
+    }
 
+    public void addCustomWord(MouseEvent event) {
+        String customWord = wordInput.getText();
+        String customPhonetic = "";
+        List<String> customTypes = new ArrayList<>();
+        List<String> customExplains = new ArrayList<>();
+        String customSynonym = ""; // You may modify this according to your actual input
+        String customAntonym = ""; // You may modify this according to your actual input
+
+        // Duyệt qua các phần tử con của VBox
+        for (Node node : currentTypeParentVBox.getChildren()) {
+            if (node instanceof HBox) {
+                HBox hBox = (HBox) node;
+
+                // Duyệt qua các thành phần của HBox
+                for (Node childNode : hBox.getChildren()) {
+                    if (childNode instanceof TextArea) {
+                        // Lấy dữ liệu từ TextField
+                        TextArea textArea = (TextArea) childNode;
+                        String labelText = ((Label) hBox.getChildren().get(0)).getText();
+                        switch (labelText) {
+                            case "Phonetic:":
+                                customPhonetic = textArea.getText();
+                                break;
+                            case "Type:":
+                                customTypes.add(textArea.getText());
+                                break;
+                            case "Explain:":
+                                customExplains.add(textArea.getText());
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+
+        StringBuilder customTextScriptBuilder = new StringBuilder();
+        customTextScriptBuilder.append("Từ: ").append(customWord).append("\n");
+        customTextScriptBuilder.append("Phát âm: ").append(customPhonetic).append("\n");
+
+        // Thêm mỗi loại và giải thích vào customTextScript
+        for (int i = 0; i < Math.max(customTypes.size(), customExplains.size()); i++) {
+            if (i < customTypes.size()) {
+                customTextScriptBuilder.append("Loại từ: ").append(customTypes.get(i)).append("\n");
+            }
+            if (i < customExplains.size()) {
+                customTextScriptBuilder.append("Nghĩa: ").append(customExplains.get(i)).append("\n");
+            }
+        }
+
+        customTextScriptBuilder
+                .append("Từ đồng nghĩa: ").append(customSynonym).append("\n")
+                .append("Từ trái nghĩa: ").append(customAntonym);
+
+        String customTextScript = customTextScriptBuilder.toString();
+
+        String customHtmlCode = "<h2 class='nameWord'>" + customWord + "</h2>\n" +
+                "<h3 class='pronounWord'>" + customPhonetic + "</h3>\n";
+
+        // Thêm mỗi loại và giải thích vào HTML
+        for (int i = 0; i < Math.max(customTypes.size(), customExplains.size()); i++) {
+            if (i < customTypes.size()) {
+                customHtmlCode += "<h4 class='typeWord'>" + customTypes.get(i) + "</h4>\n";
+            }
+            if (i < customExplains.size()) {
+                customHtmlCode += "<h5 class='meanWord'>" + customExplains.get(i) + "</h5>\n";
+            }
+        }
+
+        customHtmlCode += "<h5 class='extraWord'>Từ đồng nghĩa: " + customSynonym + "</h5>\n" +
+                "<h5 class='extraWord'>Từ trái nghĩa: " + customAntonym + "</h5>";
+
+        System.out.println(customTextScript);
+        System.out.println(customHtmlCode);
     }
 
 
