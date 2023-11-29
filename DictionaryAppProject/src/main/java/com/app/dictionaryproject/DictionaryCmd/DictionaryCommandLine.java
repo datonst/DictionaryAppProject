@@ -88,7 +88,9 @@ class DictionaryCommandLine extends DictionaryManagement {
                     break;
                 case "7":
                     if (size < 10) {
-                        insertFromFile("dictionary.txt");
+                        String path = System.getProperty("user.dir")
+                                + "\\src\\main\\resources\\data\\dictionary.txt";
+                        insertFromFile(path);
                     }
                     //System.out.println(size);
                     System.out.println("----Rules of game----");
@@ -138,7 +140,9 @@ class DictionaryCommandLine extends DictionaryManagement {
                     break;
                 case "8":
                     // thay đổi theo từng máy của mọi người
-                    String path = "C:\\Users\\Admin\\Documents\\GitHub\\DictionaryAppProject\\DictionaryAppProject\\src\\main\\resources\\data\\dictionary.txt";
+                    //String path = "C:\\Users\\Admin\\Documents\\GitHub\\DictionaryAppProject\\DictionaryAppProject\\src\\main\\resources\\data\\dictionary.txt";
+                    String path = System.getProperty("user.dir")
+                            + "\\src\\main\\resources\\data\\dictionary.txt";
                     insertFromFile(path);
                     System.out.println("imported successfully!");
 

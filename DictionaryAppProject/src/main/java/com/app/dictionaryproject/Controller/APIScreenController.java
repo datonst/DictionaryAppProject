@@ -137,11 +137,12 @@ public class APIScreenController implements Initializable {
 
         vBox.getChildren().get(3).setStyle("-fx-background-color: #8aaafa;" + "-fx-background-radius : 0px;");
 
-        InputStream voiceIconInput = getClass().getResourceAsStream("/Style/google-voice.png");
-        InputStream waveIconInput = getClass().getResourceAsStream("/Style/wave-sound.png");
+        InputStream voiceIconInput = getClass().getResourceAsStream("/Style/icons8-microphone-64.png");
+        InputStream waveIconInput = getClass().getResourceAsStream("/Style/icons8-chatty-64.png");
         voiceIcon = new Image(voiceIconInput);
         waveIcon = new Image(waveIconInput);
-//        imageView.setImage(voiceIcon);
+        if(inputLanguage.getText().equals(eng))
+            imageView.setImage(voiceIcon);
         AnimationTimer animator = new AnimationTimer() {
             @Override
             public void handle(long arg0) {
@@ -164,14 +165,6 @@ public class APIScreenController implements Initializable {
                 }
                 else if (imageView.getImage().equals(waveIcon)){
                     recorderService.stopRecording();
-//                    String abc ="hello";
-//                    inputText.setText(abc);
-//                    try {
-//                        outputText.setText(translateService.getVietnameseText(abc));
-//                    } catch (IOException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                    recordButton.setText("Stop");
                     System.out.println("waveIcon");
                     try {
                         Thread.sleep(2);
@@ -191,6 +184,10 @@ public class APIScreenController implements Initializable {
                 }
             }
         });
+    }
+    public void searchWordFromMain(String word) {
+        inputText.setText(word);
+        translate(null);
     }
     public void switchToGame(MouseEvent event) throws IOException {
         SwitchScreen.switchToScene("/com/app/dictionaryproject/GameScreen.fxml",stage, event);

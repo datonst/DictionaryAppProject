@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane onKeyPressed="#enterSaveWord" prefHeight="650.0" prefWidth="736.0" styleClass="bgMain" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.dictionaryproject.Controller.EditScreenController">
+<AnchorPane prefHeight="650.0" prefWidth="736.0" styleClass="bgMain" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.dictionaryproject.Controller.EditScreenController">
    <children>
       <Label alignment="CENTER" layoutX="311.0" layoutY="34.0" prefHeight="80.0" prefWidth="266.0" styleClass="mainTitle" text="Update " AnchorPane.leftAnchor="311.0" AnchorPane.rightAnchor="159.0" AnchorPane.topAnchor="34.0" />
 <!--      <TabPane fx:id="tabPane" layoutX="99.0" layoutY="225.0" prefHeight="408.0" prefWidth="634.0" stylesheets="@../../../CSS/EditWord.css" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="99.0" AnchorPane.rightAnchor="2.6000000000000227" AnchorPane.topAnchor="225.0">-->

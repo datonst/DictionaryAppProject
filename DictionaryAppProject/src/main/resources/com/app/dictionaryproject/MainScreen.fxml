@@ -23,13 +23,18 @@
                   <Circle blendMode="SRC_ATOP" cache="true" fill="DODGERBLUE" layoutX="691.0" layoutY="64.0" opacity="0.07" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
                   <Circle blendMode="SRC_ATOP" cache="true" fill="DODGERBLUE" layoutX="248.0" layoutY="100.0" opacity="0.07" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
                   <Circle blendMode="SRC_ATOP" cache="true" fill="DODGERBLUE" layoutX="532.0" layoutY="308.0" opacity="0.07" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
-                      <Button fx:id="game" layoutX="232.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#switchToGame" onMouseEntered="#handleMouseEnteredGame" onMouseExited="#handleMouseExitGame" prefHeight="55.0" prefWidth="300.0" styleClass="buttonOption" stylesheets="@../../../CSS/MainScreen.css" text="Practice" />
-                      <Button fx:id="API" layoutX="232.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#switchToAPI" onMouseEntered="#handleMouseEnteredAPI" onMouseExited="#handleMouseExitAPI" prefHeight="55.0" prefWidth="300.0" styleClass="buttonOption" stylesheets="@../../../CSS/MainScreen.css" text="Quick Translate" />
-                      <Button fx:id="editWord" layoutX="232.0" layoutY="54.0" mnemonicParsing="false" onMouseClicked="#switchToEdit" onMouseEntered="#handleMouseEnteredEdit" onMouseExited="#handleMouseExitEdit" prefHeight="55.0" prefWidth="300.0" styleClass="buttonOption" text="Update Dictionary">
-                     <stylesheets>
-                        <URL value="@../../../Style/ButtonStyles.css" />
-                        <URL value="@../../../CSS/MainScreen.css" />
-                     </stylesheets></Button>
+                  <VBox alignment="CENTER" layoutX="220.0" layoutY="37.0" prefHeight="324.0" prefWidth="350.0" spacing="55.0">
+                     <children>
+                            <Button fx:id="editWord" mnemonicParsing="false" onMouseClicked="#switchToEdit" onMouseEntered="#handleMouseEnteredEdit" onMouseExited="#handleMouseExitEdit" prefHeight="55.0" prefWidth="300.0" styleClass="buttonOption" text="Update Dictionary">
+                           <stylesheets>
+                              <URL value="@../../../Style/ButtonStyles.css" />
+                              <URL value="@../../../CSS/MainScreen.css" />
+                           </stylesheets>
+                        </Button>
+                            <Button fx:id="game" mnemonicParsing="false" onMouseClicked="#switchToGame" onMouseEntered="#handleMouseEnteredGame" onMouseExited="#handleMouseExitGame" prefHeight="55.0" prefWidth="300.0" styleClass="buttonOption" stylesheets="@../../../CSS/MainScreen.css" text="Practice" />
+                            <Button fx:id="API" mnemonicParsing="false" onMouseClicked="#switchToAPI" onMouseEntered="#handleMouseEnteredAPI" onMouseExited="#handleMouseExitAPI" prefHeight="55.0" prefWidth="300.0" styleClass="buttonOption" stylesheets="@../../../CSS/MainScreen.css" text="Quick Translate" />
+                     </children>
+                  </VBox>
                </children>
             </AnchorPane>
             </children></Pane>
