@@ -132,6 +132,9 @@ public class APIScreenController implements Initializable {
     }
 
 
+    public void translateChangeText() throws IOException {
+        translate(null);
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
