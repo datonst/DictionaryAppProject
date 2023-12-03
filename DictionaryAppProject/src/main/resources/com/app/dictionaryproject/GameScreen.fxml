@@ -34,7 +34,7 @@
             <String fx:value="textAreaStyle" />
             <String fx:value="bgChildren" />
          </styleClass></Label>
-      <ImageView fitHeight="34.0" fitWidth="39.0" layoutX="673.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="29.0">
+      <ImageView fitHeight="34.0" fitWidth="39.0" layoutX="673.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.rightAnchor="29.0">
          <image>
             <Image url="@../../../Style/notebook.png" />
          </image>
@@ -86,6 +86,6 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </LineChart>
-      <Label fx:id="timer" layoutX="135.0" layoutY="65.0" text="abc" />
+      <Label fx:id="timer" layoutX="135.0" layoutY="65.0" text="abc" visible="false" />
    </children>
 </AnchorPane>

@@ -40,15 +40,14 @@ public class GameScreenController {
     public Label timer;
     public TextField inputWord;
     public  Label temp = new Label();
-    public int index = 0;
+    private int index = 0;
     private int correctCount = 0;
     private int incorrectCount = 0;
     public ProgressBar progressBar;
-    public double process = 0;
+    private double process = 0;
     public ScrollPane explain = new ScrollPane();
     public Button sound = new Button();
-    public Button archiveWord = new Button();
-    public static ArrayList<String> words_list = new ArrayList<>();
+    public static final ArrayList<String> words_list = new ArrayList<>();
     public VBox vBox = new VBox();
     public LineChart<?, ?> chart ;
     private  List<Pair<Integer, Integer>> roundData = new ArrayList<>();
@@ -179,8 +178,9 @@ public class GameScreenController {
         seconds = 5;
         timer.setText(String.valueOf(seconds));
         animation.setCycleCount(Timeline.INDEFINITE);
-        animation.play();
+        //animation.play();
     }
+
     private void updateChart() {
         XYChart.Series series = new XYChart.Series();
         for (Pair roundData : roundData) {
@@ -204,7 +204,6 @@ public class GameScreenController {
 
         }
     }
-
     private void playSoundCorrected(){
         String mediaFileCorrect = "src/main/resources/data/fish.wav";
         Media mediaCorrect = new Media(new File(mediaFileCorrect).toURI().toString());
@@ -299,7 +298,7 @@ public class GameScreenController {
         }
     }
 
-    private void showAlert(String headerText, String contentText, String backgroundColor) {
+    public static void showAlert(String headerText, String contentText, String backgroundColor) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(TITLE);
 

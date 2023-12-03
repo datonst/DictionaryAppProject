@@ -22,39 +22,43 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EditScreenController {
     @FXML
     public Scene scene;
     public Stage stage;
     public Parent root;
-    public TextField wordInput = new TextField();
+    @FXML
+    public  TextField wordInput = new TextField();
 
-    public AnchorPane addWordPane = new AnchorPane();
+    @FXML
+    public  AnchorPane addWordPane = new AnchorPane();
+    @FXML
     public AnchorPane editWordPane = new AnchorPane();
-    public  TextField addPhonetic = new TextField();
-    public TextField addType = new TextField();
-    public TextArea addExplain = new TextArea();
-    public TextField addSynonym = new TextField();
-    public TextField addAntonym = new TextField();
+    @FXML
 
-    //Edit word
-    public  TextField editPhonetic = new TextField();
-    public TextField editType = new TextField();
-    public TextArea editExplain = new TextArea();
-    public TextField editSynonym = new TextField();
-    public TextField editAntonym = new TextField();
+    public AnchorPane addNewWord = new AnchorPane();
 
     public DBRepository database = new DBRepository();
     public DBRepo dbRepo = new DBRepo();
     public VBox vBox = new VBox();
     public VBox currentTypeParentVBox = new VBox();
 
+    public VBox extraWord = new VBox();
 
+    public TextArea sym = new TextArea();
+    public TextArea anto = new TextArea();
+    public TextArea editArea = new TextArea();
     public void addExplain(MouseEvent event) {
 
         // Create an HBox for Word Type
@@ -64,12 +68,13 @@ public class EditScreenController {
         //currentTypeParentVBox.getChildren().addAll(phoneticHBox,wordTypeHBox,explainHBox);
     }
 
+
     private void createLabeledTextArea(String labelText,double height, VBox parentVBox) {
         HBox hBox = new HBox();
         //hBox.getStylesheets().add("EditWord.css");
         // Create a Label
         Label label = new Label();
-        label.setPrefWidth(80);
+        label.setPrefWidth(100);
         label.setPrefHeight(20);
         label.setText(labelText);
         label.getStyleClass().add("attribute");
@@ -87,6 +92,7 @@ public class EditScreenController {
         parentVBox.getChildren().add(hBox);
 
     }
+
     public void initialize() {
         vBox.getChildren().get(1).setStyle("-fx-background-color: #8aaafa;" + "-fx-background-radius : 0px;");
         createLabeledTextArea("Phonetic:",30, currentTypeParentVBox);
@@ -94,6 +100,7 @@ public class EditScreenController {
         createLabeledTextArea("Type:", 30, currentTypeParentVBox);
         // Create an HBox for Explain
         createLabeledTextArea("Explain:", 60 ,currentTypeParentVBox);
+
     }
 
     public void addCustomWord(MouseEvent event) {
@@ -101,19 +108,17 @@ public class EditScreenController {
         String customPhonetic = "";
         List<String> customTypes = new ArrayList<>();
         List<String> customExplains = new ArrayList<>();
-        String customSynonym = ""; // You may modify this according to your actual input
-        String customAntonym = ""; // You may modify this according to your actual input
+        String customSynonym = sym.getText(); // You may modify this according to your actual input
+        String customAntonym = anto.getText(); // You may modify this according to your actual input
 
         // Duyệt qua các phần tử con của VBox
         for (Node node : currentTypeParentVBox.getChildren()) {
-            if (node instanceof HBox) {
-                HBox hBox = (HBox) node;
+            if (node instanceof HBox hBox) {
 
                 // Duyệt qua các thành phần của HBox
                 for (Node childNode : hBox.getChildren()) {
-                    if (childNode instanceof TextArea) {
+                    if (childNode instanceof TextArea textArea) {
                         // Lấy dữ liệu từ TextField
-                        TextArea textArea = (TextArea) childNode;
                         String labelText = ((Label) hBox.getChildren().get(0)).getText();
                         switch (labelText) {
                             case "Phonetic:":
@@ -164,40 +169,105 @@ public class EditScreenController {
             }
         }
 
-        customHtmlCode += "<h5 class='extraWord'>Từ đồng nghĩa: " + customSynonym + "</h5>\n" +
-                "<h5 class='extraWord'>Từ trái nghĩa: " + customAntonym + "</h5>";
+//        customHtmlCode += "<h5 class='extraWord'>Từ đồng nghĩa: " + customSynonym + "</h5>\n" +
+//                "<h5 class='extraWord'>Từ trái nghĩa: " + customAntonym + "</h5>";
 
         System.out.println(customTextScript);
         System.out.println(customHtmlCode);
-    }
-
-
-
-    public void addWord() {
-        String word = wordInput.getText();
-
-        String phonetic = addPhonetic.getText();
-        String type = addType.getText();
-        String explain = addExplain.getText();
-        String synonym = addSynonym.getText();
-        String antonym = addAntonym.getText();
-        String textScript = "Từ: " + word + "\n" + "Phát âm: " + phonetic + "\nLoại từ: " + type +
-                            "\nNghĩa" + explain + "\nTừ đồng nghĩa:" + synonym + "\nTừ trái nghĩa" + antonym;
-        String htmlCode = "<h2 class='nameWord'>" + word + "</h2>\n" +
-                "<h3 class='pronounWord'>" + phonetic + "</h3>\n" +
-                "<h4 class='typeWord'>" + type + "</h4>\n" +
-                "<h5 class='meanWord'>" + explain + "</h5>\n";
-//                "<h5 class='extraWord'>Từ đồng nghĩa: " + synonym + "</h5>\n" +
-//                "<h5 class='extraWord'>Từ trái nghĩa: " + antonym + "</h5>";
-        Word newWord = new Word(word,phonetic, type, explain, synonym, antonym);
-        WordShort wordShort = new WordShort(word, textScript, htmlCode);
+        WordShort wordShort = new WordShort(customWord, customTextScript, customHtmlCode);
         dbRepo.insertWord(wordShort);
-        database.insertWord(newWord);
+        database.insertWord(new Word(customWord,customPhonetic,"","", customSynonym, customSynonym));
         clearAddWordFields();
         showAlert(Alert.AlertType.INFORMATION, "Success", "Word added successfully.");
-        // Clear input fields after adding the word
-
     }
+
+    public void editCustomWord(MouseEvent event){
+        String edited = editArea.getText();
+        String htmlText = convertStructuredTextToHTML(edited);
+        dbRepo.updateWord(new WordShort(wordInput.getText(), edited, htmlText));
+        clearEditWordFields();
+        showAlert(Alert.AlertType.INFORMATION, "Success", "Word updated successfully.");
+    }
+
+    public static String convertStructuredTextToHTML(String structuredText) {
+        String[] lines = structuredText.split("\n");
+
+        // Initialize variables to store different parts of information
+
+        StringBuilder htmlCode = new StringBuilder();
+        for (String line : lines) {
+            String[] parts = line.split(":", 2);
+            if (parts.length == 2) {
+                String label = parts[0].trim();
+                String value = parts[1].trim();
+
+                switch (label) {
+                    case "Từ":
+                        htmlCode.append("<h2 class='nameWord'>").append(value).append("</h2>\n");
+                        break;
+                    case "Phát âm":
+                        htmlCode.append("<h3 class='pronounWord'>").append(value).append("</h3>\n");
+                        break;
+                    case "Loại":
+                        htmlCode.append("<h4 class='typeWord'>").append(value).append("</h4>\n");
+                        break;
+                    case "Nghĩa":
+                        htmlCode.append("<h5 class='meanWord'>").append(value).append("</h5>\n");
+                        break;
+                }
+            }
+        }
+
+        // Build HTML code
+
+
+
+        return htmlCode.toString();
+    }
+
+
+
+
+    public static String convertHTMLToStructuredText(String htmlCode) {
+        Document document = Jsoup.parse(htmlCode);
+
+        // Get word, phonetic, and type
+        String word = document.select("h2.nameWord").text();
+        String phonetic = document.select("h3.pronounWord").text();
+        String type = document.select("h4.typeWord").text();
+
+        // Get meanings and examples
+        List<String> meanings = new ArrayList<>();
+        Elements meanElements = document.select("h5.meanWord");
+        for (Element meanElement : meanElements) {
+            meanings.add(meanElement.text());
+        }
+
+        List<String> examples = new ArrayList<>();
+        Elements exampleElements = document.select("h6.exampleWord");
+        for (Element exampleElement : exampleElements) {
+            String example = exampleElement.select("p").text();
+            examples.add(example);
+        }
+
+        // Build structured text
+        StringBuilder result = new StringBuilder();
+        result.append("Từ: ").append(word).append("\n");
+        result.append("Phát âm: ").append(phonetic).append("\n");
+        result.append("Loại từ: ").append(type).append("\n");
+        result.append("Nghĩa:\n");
+        for (String meaning : meanings) {
+            result.append("  - ").append(meaning).append("\n");
+        }
+        result.append("Ví dụ:\n");
+        for (String example : examples) {
+            result.append("  - ").append(example).append("\n");
+        }
+
+        return result.toString();
+    }
+
+
     public void setTextEditWord(MouseEvent event) {
         String word = wordInput.getText();
         if(!word.isEmpty()) {
@@ -207,22 +277,6 @@ public class EditScreenController {
         }
     }
 
-    public void enterSaveWord(KeyEvent event){
-            String word = wordInput.getText();
-            if ( event.getCode() == KeyCode.ENTER && !word.isEmpty()) {
-                getChoice(word);
-            } else if(word.isEmpty()){
-                clearEditWordFields();
-            }
-    }
-
-    private void setWord(String word) {
-        editPhonetic.setText(database.searchWord(word).getPhonetic());
-        editType.setText(database.searchWord(word).getWordType());
-        editExplain.setText(database.searchWord(word).getDefinitionWord());
-        editSynonym.setText(database.searchWord(word).getSynonym());
-        editAntonym.setText(database.searchWord(word).getAntonym());
-    }
     public void getChoice(String word) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
@@ -247,7 +301,8 @@ public class EditScreenController {
             if (response == buttonTypeAdd) {
                 if(database.searchWord(word).getDefinitionWord().equals("not found")) {
                     wordInput.setEditable(false);
-                    addWordPane.setVisible(true);
+                   // addWordPane.setVisible(true);
+                    addNewWord.setVisible(true);
                 }
                 else {
                     showAlert(Alert.AlertType.INFORMATION,"Warning", "Word is existed!");
@@ -257,8 +312,12 @@ public class EditScreenController {
             } else if (response == buttonTypeEdit) {
                 if(!database.searchWord(word).getDefinitionWord().equals("not found")) {
                     wordInput.setEditable(false);
+                    String text = dbRepo.searchWord(word).getTextDescription();
+
+                    editArea.setText(text);
+                    System.out.println(convertStructuredTextToHTML(editArea.getText()));
                     editWordPane.setVisible(true);
-                    setWord(word);
+
                 } else {
                     showAlert(Alert.AlertType.INFORMATION,"Warning", "Word is not existed!");
                     clearEditWordFields();
@@ -266,49 +325,18 @@ public class EditScreenController {
             }
         });
     }
-    public void editWord() {
 
-        String word     = wordInput.getText();
-        String phonetic = editPhonetic.getText();
-        String type     = editType.getText();
-        String explain  = editExplain.getText();
-        String synonym  = editSynonym.getText();
-        String antonym  = editAntonym.getText();
-
-        Word newWord = new Word(word, phonetic, type, explain, synonym, antonym);
-
-        String textScript = "Từ: " + word + "\n" + "Phát âm: " + phonetic + "\nLoại từ: " + type +
-                "\nNghĩa" + explain + "\nTừ đồng nghĩa:" + synonym + "\nTừ trái nghĩa" + antonym;
-        String htmlCode = "<h2 class='nameWord'>" + word + "</h2>\n" +
-                "<h3 class='pronounWord'>" + phonetic + "</h3>\n" +
-                "<h4 class='typeWord'>" + type + "</h4>\n" +
-                "<h5 class='meanWord'>" + explain + "</h5>\n";
-
-        showAlert(Alert.AlertType.INFORMATION, "Success", "Word updated successfully.");
-        database.updateWord(newWord);
-        dbRepo.updateWord(new WordShort(word, textScript, htmlCode));
-        // Clear input fields after editing the word
-        clearEditWordFields();
-    }
 
     private void clearAddWordFields() {
         wordInput.clear();
-        addPhonetic.clear();
-        addType.clear();
-        addExplain.clear();
-        addSynonym.clear();
-        addAntonym.clear();
         addWordPane.setVisible(false);
+        addNewWord.setVisible(false);
         wordInput.setEditable(true);
     }
 
     private void clearEditWordFields() {
         wordInput.clear();
-        editPhonetic.clear();
-        editType.clear();
-        editExplain.clear();
-        editSynonym.clear();
-        editAntonym.clear();
+        editArea.clear();
         editWordPane.setVisible(false);
         wordInput.setEditable(true);
     }
@@ -322,7 +350,7 @@ public class EditScreenController {
             Label headerLabel = new Label("\nRemove word");
             headerLabel.setStyle("-fx-alignment: center;" +
                     "-fx-font-size: 30px;" +
-                    "-fx-text-fill: black;"
+                    "-fx-text-fill: #aaaaff;"
             );
 
             alert.getDialogPane().setHeader(headerLabel);
@@ -364,50 +392,6 @@ public class EditScreenController {
         }
     }
 
-    public void addWord(MouseEvent event) {
-        String word = wordInput.getText();
-        if(!word.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation");
-
-
-            Label headerLabel = new Label("\nAre you want to add a new word?");
-            headerLabel.setStyle("-fx-alignment: center;" +
-                    "-fx-font-size: 30px;" +
-                    "-fx-text-fill: black;"
-            );
-
-            alert.getDialogPane().setHeader(headerLabel);
-
-
-            alert.getDialogPane().setStyle(
-                    "-fx-font-family: Arial;" +
-                            "-fx-alignment: center;" +
-                            "-fx-font-weight: bold;"
-
-
-            );
-
-            ButtonType buttonTypePlayAgain = new ButtonType("Yes", ButtonBar.ButtonData.YES);
-            ButtonType buttonTypeBackToHome = new ButtonType("No", ButtonBar.ButtonData.NO);
-            alert.getButtonTypes().setAll(buttonTypePlayAgain, buttonTypeBackToHome);
-
-            alert.showAndWait().ifPresent(response -> {
-                if (response == buttonTypePlayAgain) {
-                    addWord();
-                } else if (response == buttonTypeBackToHome) {
-                }
-            });
-
-
-            clearAddWordFields();
-        }
-
-    }
-
-    public void update(MouseEvent event){
-        editWord();
-    }
     private void showAlert(Alert.AlertType alertType, String title, String content) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);

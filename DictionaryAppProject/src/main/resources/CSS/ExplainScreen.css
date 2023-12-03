@@ -15,6 +15,9 @@
 }
 .bgChildren1 {
     -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0);
+    -fx-background-radius: 10px;
+
 }
 .bgMain {
     -fx-background-color: #8aaaff;

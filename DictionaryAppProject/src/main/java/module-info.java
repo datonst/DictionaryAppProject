@@ -3,12 +3,14 @@ module com.app.dictionaryproject {
     requires javafx.fxml;
     requires javafx.media;
     requires java.sql;
-    requires  javafx.web;
+    requires javafx.web;
+
     requires mysql.connector.j;
     requires playwright;
     requires org.apache.httpcomponents.httpclient;
     requires org.apache.httpcomponents.httpcore;
     requires org.json;
+    requires org.jsoup;
     requires java.desktop;
     requires org.apache.httpcomponents.httpmime;
 

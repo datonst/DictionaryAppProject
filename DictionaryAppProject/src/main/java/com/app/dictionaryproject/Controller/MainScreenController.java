@@ -45,7 +45,8 @@ public class MainScreenController {
     public ArrayList<String> words_list = new ArrayList<>();
     @FXML
     public AnchorPane archivePane = new AnchorPane();
-    @FXML public Button editWord = new Button();
+    @FXML
+    public Button editWord = new Button();
 
     @FXML
     public Button game = new Button();
@@ -57,7 +58,7 @@ public class MainScreenController {
     public Button archiveWord = new Button();
 
     private static final Set<String> checkUnique = new HashSet<>();
-    //Các biến để chuyển đổi qua lịa các màn hình
+    //Các biến để chuyển đổi qua các màn hình
     public Scene scene;
     public Stage stage;
     public Parent root;
@@ -82,7 +83,7 @@ public class MainScreenController {
         }
     }
 
-    public static boolean isInsideNode(double x, double y, AnchorPane node) {
+    private static boolean isInsideNode(double x, double y, AnchorPane node) {
         double nodeMinX = node.getBoundsInParent().getMinX();
         double nodeMinY = node.getBoundsInParent().getMinY();
         double nodeMaxX = node.getBoundsInParent().getMaxX();
@@ -155,11 +156,11 @@ public class MainScreenController {
 
         //Lưu các từ đã tìm vào file
 //    ------------------------------------------------
-        listWord.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            // Handle selection change here
-            addSaveWord(newValue);
-
-        });
+//        listWord.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+//            // Handle selection change here
+//            addSaveWord(newValue);
+//
+//        });
     }
 
 
@@ -199,7 +200,7 @@ public class MainScreenController {
 
         if (dbRepo.searchWord(name).getTextDescription().equals("This word does not have meaning") && !listWordFound.isEmpty()) {
             controller.initialize(dbRepo.searchWord(listWordFound.get(0)));
-            addSaveWord(listWordFound.get(0));
+            //addSaveWord(listWordFound.get(0));
         } else if (!dbRepo.existWord(name)) {
             NotFoundWord(event, name);
             return;
@@ -207,9 +208,7 @@ public class MainScreenController {
             controller.initialize(dbRepo.searchWord(name));
         }
 
-        if (!dbRepo.searchWord(name).getTextDescription().equals("This word does not have meaning")) {
-            addSaveWord(name);
-        }
+
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -242,7 +241,7 @@ public class MainScreenController {
     /**
      * Hàm lưu từ vào file.
      * */
-    public void addSaveWord(String newValue) {
+    public static void addSaveWord(String newValue) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/data/saveWord.txt", true))) {
             // Append the new word to the file
             if(!checkUnique.contains(newValue)) {

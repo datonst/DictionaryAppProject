@@ -1,14 +1,10 @@
 package com.app.dictionaryproject.Controller;
 
-import com.app.dictionaryproject.Controller.MainScreenController;
 import com.app.dictionaryproject.Models.Word;
 import com.app.dictionaryproject.Models.WordShort;
-import com.app.dictionaryproject.service.DBRepo;
 import com.app.dictionaryproject.service.DBRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -17,10 +13,10 @@ import javafx.scene.layout.VBox;;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+import com.app.dictionaryproject.Controller.MainScreenController;
+
+import static com.app.dictionaryproject.Controller.GameScreenController.showAlert;
 
 public class ResultSearchController {
     @FXML
@@ -51,13 +47,16 @@ public class ResultSearchController {
                             font-family: Georgia, 'Times New Roman', Times, serif;
                             color: #8aaaff;
                             font-size: 26px;
+                            font-weight: 600;
+                            font-style: italic;
                             margin: 0 0 15 0;
                         }
                 
                         .pronounWord {
-                            font-size: 20px;
+                            font-family: Georgia;
+                            font-size: 18px;
                             color: #333;
-                            font-weight: 500;
+                            font-weight: 800;
                             margin: 0 0 15 0;
                         }
                 
@@ -94,8 +93,8 @@ public class ResultSearchController {
                         .extraWord {
                             position: relative;
                             color: #7d42f1;
-                            margin: 0 0 0 0;
-                            font-size: 16px;
+                            margin: 0 0 15px 0;
+                            font-size: 18px;
                             font-weight: bold;
                             display: block;
                          
@@ -191,6 +190,10 @@ public class ResultSearchController {
        //displayHTML("/index.html");
     }
 
+    public void addArchiveWord(ActionEvent event){
+            MainScreenController.addSaveWord(words.getText());
+            showAlert("Congratulation", "Add favourite word successfully", "#32C446");
+    }
     public static void textToSpeech(String textToSpeak) {
         String command = "cscript.exe /nologo  " + System.getProperty("user.dir") + "\\src\\main\\resources\\data\\TTSAPI.vbs \"" + textToSpeak + "\"";
 
