@@ -2,7 +2,8 @@ package com.app.dictionaryproject.Controller;
 
 import com.app.dictionaryproject.Models.Word;
 import com.app.dictionaryproject.Models.WordShort;
-import com.app.dictionaryproject.service.DBRepository;
+import com.app.dictionaryproject.Repository.Dict2DAOImpl;
+import com.app.dictionaryproject.Repository.DictDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -14,7 +15,6 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import java.io.IOException;
-import com.app.dictionaryproject.Controller.MainScreenController;
 
 import static com.app.dictionaryproject.Controller.GameScreenController.showAlert;
 
@@ -164,11 +164,11 @@ public class ResultSearchController {
         }
         String text = currWordResult.getTextDescription();
         String wordSearch = currWordResult.getWord();
-        DBRepository dbRepository = new DBRepository();
+        DictDAO dbRepository = new Dict2DAOImpl();
 
         Word word = new Word("null","null","null","null","","" );
 
-        word = dbRepository.searchWord(wordSearch);
+        word = (Word) dbRepository.searchWord(wordSearch);
 
         words.setText(wordSearch);
 

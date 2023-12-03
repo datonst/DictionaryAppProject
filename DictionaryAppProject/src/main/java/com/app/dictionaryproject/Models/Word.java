@@ -1,6 +1,8 @@
 package com.app.dictionaryproject.Models;
 
-public class Word {
+import com.app.dictionaryproject.WordForm.WordRoot;
+
+public class Word extends WordRoot {
     private String word_target;
     private String phonetic;
     private String wordType;

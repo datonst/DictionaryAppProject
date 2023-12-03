@@ -1,6 +1,8 @@
 package com.app.dictionaryproject.Models;
 
-public class WordShort {
+import com.app.dictionaryproject.WordForm.WordRoot;
+
+public class WordShort extends WordRoot {
     private String word;
     private String TextDescription;
     private String HTMLDescription;

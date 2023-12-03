@@ -1,13 +1,14 @@
 package com.app.dictionaryproject.Controller;
 
-import com.app.dictionaryproject.service.DBRepository;
+import com.app.dictionaryproject.Models.Word;
+import com.app.dictionaryproject.Repository.Dict2DAOImpl;
+import com.app.dictionaryproject.Repository.DictDAO;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
@@ -23,7 +24,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.util.Pair;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -78,7 +78,6 @@ public class GameScreenController {
             Platform.runLater(this::finishGame);
         }
         timer.setText(String.valueOf(seconds));
-
     }
 
     private void insertFromFile(String filepath) {
@@ -95,8 +94,9 @@ public class GameScreenController {
     }
 
     private String findExplain(String word) {
-        DBRepository search = new DBRepository();
-        return search.searchWord(word).getDefinitionWord();
+        DictDAO search = new Dict2DAOImpl();
+        Word word1 = (Word) search.searchWord(word);
+        return word1.getDefinitionWord();
     }
 
 

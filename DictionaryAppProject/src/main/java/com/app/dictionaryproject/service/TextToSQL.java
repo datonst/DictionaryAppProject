@@ -1,16 +1,15 @@
 package com.app.dictionaryproject.service;
 
 import com.app.dictionaryproject.Models.Word;
+import com.app.dictionaryproject.Repository.DictDAO;
 import com.microsoft.playwright.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Vector;
 
 public class TextToSQL {
     public String getPronounce(String pronounce) {
@@ -72,7 +71,7 @@ public class TextToSQL {
         return pronounce;
     }
 
-    public void convert(DBRepository dbRepository) {
+    public void convert(DictDAO dbRepository) {
         Path path = Path.of("src/main/resources/data/EnglishData.txt");
         CrawlData crawlData = new CrawlData();
         try {

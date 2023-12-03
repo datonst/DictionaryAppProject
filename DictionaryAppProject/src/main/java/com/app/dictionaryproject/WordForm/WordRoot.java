@@ -10,4 +10,5 @@ public abstract class WordRoot {
     public void setWord(String word) {
         this.word = word;
     }
+
 }

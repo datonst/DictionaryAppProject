@@ -2,7 +2,10 @@ package com.app.dictionaryproject.Controller;
 
 
 
-import com.app.dictionaryproject.service.DBRepo;
+import com.app.dictionaryproject.Models.Word;
+import com.app.dictionaryproject.Models.WordShort;
+import com.app.dictionaryproject.Repository.Dict1DAOImpl;
+import com.app.dictionaryproject.Repository.DictDAO;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -118,7 +121,7 @@ public class MainScreenController {
     // show list word
     public void showSearch() {
         // Convert array to ObservableList
-        DBRepo wordListSQL = new DBRepo();
+        DictDAO wordListSQL = new Dict1DAOImpl();
         ArrayList<String> listSearch = new ArrayList<>();
         String startWord =  wordSearch.getText().trim();
         ArrayList<String> listWordFound = wordListSQL.searchListWord(startWord);
@@ -177,8 +180,8 @@ public class MainScreenController {
                     root = Loader.load();
                     ResultSearchController controller = Loader.getController();
                     //DBRepository search = new DBRepository();
-                    DBRepo dbRepo = new DBRepo();
-                    controller.initialize(dbRepo.searchWord(selectedValue));
+                    DictDAO dbRepo = new Dict1DAOImpl();
+                    controller.initialize((WordShort) dbRepo.searchWord(selectedValue));
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     scene = new Scene(root);
                     stage.setScene(scene);
@@ -195,17 +198,17 @@ public class MainScreenController {
         root = loader.load();
 
         ResultSearchController controller = loader.getController();
-        DBRepo dbRepo = new DBRepo();
+        DictDAO dbRepo = new Dict1DAOImpl();
         ArrayList<String> listWordFound = dbRepo.searchListWord(name);
 
-        if (dbRepo.searchWord(name).getTextDescription().equals("This word does not have meaning") && !listWordFound.isEmpty()) {
-            controller.initialize(dbRepo.searchWord(listWordFound.get(0)));
+        if (((WordShort) dbRepo.searchWord(name)).getTextDescription().equals("This word does not have meaning") && !listWordFound.isEmpty()) {
+            controller.initialize((WordShort) dbRepo.searchWord(listWordFound.get(0)));
             //addSaveWord(listWordFound.get(0));
         } else if (!dbRepo.existWord(name)) {
             NotFoundWord(event, name);
             return;
         } else {
-            controller.initialize(dbRepo.searchWord(name));
+            controller.initialize((WordShort) dbRepo.searchWord(name));
         }
 
 

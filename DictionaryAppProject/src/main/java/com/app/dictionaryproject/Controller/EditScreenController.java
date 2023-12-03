@@ -2,8 +2,7 @@ package com.app.dictionaryproject.Controller;
 
 import com.app.dictionaryproject.Models.Word;
 import com.app.dictionaryproject.Models.WordShort;
-import com.app.dictionaryproject.service.DBRepo;
-import com.app.dictionaryproject.service.DBRepository;
+import com.app.dictionaryproject.Repository.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 //import org.kordamp.ikonli.fontawesome.FontAwesomeIcon;
@@ -15,8 +14,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -29,9 +26,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class EditScreenController {
     @FXML
@@ -49,8 +44,8 @@ public class EditScreenController {
 
     public AnchorPane addNewWord = new AnchorPane();
 
-    public DBRepository database = new DBRepository();
-    public DBRepo dbRepo = new DBRepo();
+    public DictDAO database = new Dict2DAOImpl();
+    public DictDAO dbRepo = new Dict1DAOImpl();
     public VBox vBox = new VBox();
     public VBox currentTypeParentVBox = new VBox();
 
@@ -299,7 +294,7 @@ public class EditScreenController {
 
         alert.showAndWait().ifPresent(response -> {
             if (response == buttonTypeAdd) {
-                if(database.searchWord(word).getDefinitionWord().equals("not found")) {
+                if(((Word) database.searchWord(word)).getDefinitionWord().equals("not found")) {
                     wordInput.setEditable(false);
                    // addWordPane.setVisible(true);
                     addNewWord.setVisible(true);
@@ -310,9 +305,9 @@ public class EditScreenController {
                 }
 
             } else if (response == buttonTypeEdit) {
-                if(!database.searchWord(word).getDefinitionWord().equals("not found")) {
+                if(!((Word)database.searchWord(word)).getDefinitionWord().equals("not found")) {
                     wordInput.setEditable(false);
-                    String text = dbRepo.searchWord(word).getTextDescription();
+                    String text = ((WordShort)dbRepo.searchWord(word)).getTextDescription();
 
                     editArea.setText(text);
                     System.out.println(convertStructuredTextToHTML(editArea.getText()));
